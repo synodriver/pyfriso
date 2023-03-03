@@ -1100,26 +1100,29 @@ struct __pyx_obj_5friso_8backends_6cython_6_friso_Config;
 struct __pyx_obj_5friso_8backends_6cython_6_friso_Task;
 struct __pyx_obj_5friso_8backends_6cython_6_friso_Token;
 struct __pyx_obj_5friso_8backends_6cython_6_friso_Lex;
+struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit;
+struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict;
 struct __pyx_array_obj;
 struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
 
-/* "friso/backends/cython/_friso.pyx":72
+/* "friso/backends/cython/_friso.pyx":81
  * @cython.no_gc
  * @cython.final
  * cdef class Friso:             # <<<<<<<<<<<<<<
- *     cdef friso_t _friso
- *     def __cinit__(self):
+ *     cdef:
+ *         friso_t _friso
  */
 struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso {
   PyObject_HEAD
   struct __pyx_vtabstruct_5friso_8backends_6cython_6_friso_Friso *__pyx_vtab;
   friso_t _friso;
+  PyObject *path_bytes;
 };
 
 
-/* "friso/backends/cython/_friso.pyx":93
+/* "friso/backends/cython/_friso.pyx":122
  * @cython.no_gc
  * @cython.final
  * cdef class Config:             # <<<<<<<<<<<<<<
@@ -1133,21 +1136,22 @@ struct __pyx_obj_5friso_8backends_6cython_6_friso_Config {
 };
 
 
-/* "friso/backends/cython/_friso.pyx":166
+/* "friso/backends/cython/_friso.pyx":198
  * @cython.no_gc
  * @cython.final
  * cdef class Task:             # <<<<<<<<<<<<<<
- *     cdef friso_task_t _task
- *     def __cinit__(self):
+ *     cdef:
+ *         friso_task_t _task
  */
 struct __pyx_obj_5friso_8backends_6cython_6_friso_Task {
   PyObject_HEAD
   struct __pyx_vtabstruct_5friso_8backends_6cython_6_friso_Task *__pyx_vtab;
   friso_task_t _task;
+  __Pyx_memviewslice text_view;
 };
 
 
-/* "friso/backends/cython/_friso.pyx":206
+/* "friso/backends/cython/_friso.pyx":245
  * @cython.final
  * @cython.internal
  * cdef class Token:             # <<<<<<<<<<<<<<
@@ -1161,9 +1165,9 @@ struct __pyx_obj_5friso_8backends_6cython_6_friso_Token {
 };
 
 
-/* "friso/backends/cython/_friso.pyx":242
+/* "friso/backends/cython/_friso.pyx":280
+ * @cython.no_gc
  * @cython.final
- * @cython.internal
  * cdef class Lex:             # <<<<<<<<<<<<<<
  *     cdef lex_entry_t _lex
  *     @staticmethod
@@ -1172,6 +1176,35 @@ struct __pyx_obj_5friso_8backends_6cython_6_friso_Lex {
   PyObject_HEAD
   struct __pyx_vtabstruct_5friso_8backends_6cython_6_friso_Lex *__pyx_vtab;
   lex_entry_t _lex;
+};
+
+
+/* "friso/backends/cython/_friso.pyx":292
+ * @cython.no_gc
+ * @cython.final
+ * cdef class StringSplit:             # <<<<<<<<<<<<<<
+ *     """
+ *     Split bytes
+ */
+struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_5friso_8backends_6cython_6_friso_StringSplit *__pyx_vtab;
+  string_split_t _split;
+  __Pyx_memviewslice delimiter;
+  __Pyx_memviewslice source;
+};
+
+
+/* "friso/backends/cython/_friso.pyx":337
+ * @cython.no_gc
+ * @cython.final
+ * cdef class Dict:             # <<<<<<<<<<<<<<
+ *     cdef friso_dic_t _dic
+ *     def __cinit__(self):
+ */
+struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict {
+  PyObject_HEAD
+  friso_dic_t _dic;
 };
 
 
@@ -1253,22 +1286,26 @@ struct __pyx_memoryviewslice_obj {
 
 
 
-/* "friso/backends/cython/_friso.pyx":72
+/* "friso/backends/cython/_friso.pyx":81
  * @cython.no_gc
  * @cython.final
  * cdef class Friso:             # <<<<<<<<<<<<<<
- *     cdef friso_t _friso
- *     def __cinit__(self):
+ *     cdef:
+ *         friso_t _friso
  */
 
 struct __pyx_vtabstruct_5friso_8backends_6cython_6_friso_Friso {
   int (*init_from_ifile)(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, PyObject *, int __pyx_skip_dispatch);
+  PyObject *(*dic_load)(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, friso_lex_t, PyObject *, uint_t, int __pyx_skip_dispatch);
+  PyObject *(*dic_load_from_ifile)(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, PyObject *, uint_t, int __pyx_skip_dispatch);
 };
 static struct __pyx_vtabstruct_5friso_8backends_6cython_6_friso_Friso *__pyx_vtabptr_5friso_8backends_6cython_6_friso_Friso;
 static CYTHON_INLINE int __pyx_f_5friso_8backends_6cython_6_friso_5Friso_init_from_ifile(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, PyObject *, int __pyx_skip_dispatch);
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_5Friso_dic_load(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, friso_lex_t, PyObject *, uint_t, int __pyx_skip_dispatch);
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_5Friso_dic_load_from_ifile(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, PyObject *, uint_t, int __pyx_skip_dispatch);
 
 
-/* "friso/backends/cython/_friso.pyx":93
+/* "friso/backends/cython/_friso.pyx":122
  * @cython.no_gc
  * @cython.final
  * cdef class Config:             # <<<<<<<<<<<<<<
@@ -1289,12 +1326,12 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
 static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_next_cjk(struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *, int __pyx_skip_dispatch);
 
 
-/* "friso/backends/cython/_friso.pyx":166
+/* "friso/backends/cython/_friso.pyx":198
  * @cython.no_gc
  * @cython.final
  * cdef class Task:             # <<<<<<<<<<<<<<
- *     cdef friso_task_t _task
- *     def __cinit__(self):
+ *     cdef:
+ *         friso_task_t _task
  */
 
 struct __pyx_vtabstruct_5friso_8backends_6cython_6_friso_Task {
@@ -1306,7 +1343,7 @@ static PyObject *__pyx_f_5friso_8backends_6cython_6_friso_4Task_set_text(struct 
 static PyObject *__pyx_f_5friso_8backends_6cython_6_friso_4Task_set_bytes(struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *, __Pyx_memviewslice, int __pyx_skip_dispatch);
 
 
-/* "friso/backends/cython/_friso.pyx":206
+/* "friso/backends/cython/_friso.pyx":245
  * @cython.final
  * @cython.internal
  * cdef class Token:             # <<<<<<<<<<<<<<
@@ -1321,9 +1358,9 @@ static struct __pyx_vtabstruct_5friso_8backends_6cython_6_friso_Token *__pyx_vta
 static CYTHON_INLINE struct __pyx_obj_5friso_8backends_6cython_6_friso_Token *__pyx_f_5friso_8backends_6cython_6_friso_5Token_from_ptr(friso_token_t);
 
 
-/* "friso/backends/cython/_friso.pyx":242
+/* "friso/backends/cython/_friso.pyx":280
+ * @cython.no_gc
  * @cython.final
- * @cython.internal
  * cdef class Lex:             # <<<<<<<<<<<<<<
  *     cdef lex_entry_t _lex
  *     @staticmethod
@@ -1334,6 +1371,27 @@ struct __pyx_vtabstruct_5friso_8backends_6cython_6_friso_Lex {
 };
 static struct __pyx_vtabstruct_5friso_8backends_6cython_6_friso_Lex *__pyx_vtabptr_5friso_8backends_6cython_6_friso_Lex;
 static CYTHON_INLINE struct __pyx_obj_5friso_8backends_6cython_6_friso_Lex *__pyx_f_5friso_8backends_6cython_6_friso_3Lex_from_ptr(lex_entry_t);
+
+
+/* "friso/backends/cython/_friso.pyx":292
+ * @cython.no_gc
+ * @cython.final
+ * cdef class StringSplit:             # <<<<<<<<<<<<<<
+ *     """
+ *     Split bytes
+ */
+
+struct __pyx_vtabstruct_5friso_8backends_6cython_6_friso_StringSplit {
+  PyObject *(*reset)(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *, __Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch);
+  PyObject *(*set_source)(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *, __Pyx_memviewslice, int __pyx_skip_dispatch);
+  PyObject *(*set_delimiter)(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *, __Pyx_memviewslice, int __pyx_skip_dispatch);
+  PyObject *(*split_next)(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *, __Pyx_memviewslice, int __pyx_skip_dispatch);
+};
+static struct __pyx_vtabstruct_5friso_8backends_6cython_6_friso_StringSplit *__pyx_vtabptr_5friso_8backends_6cython_6_friso_StringSplit;
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_reset(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *, __Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch);
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_set_source(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *, __Pyx_memviewslice, int __pyx_skip_dispatch);
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_set_delimiter(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *, __Pyx_memviewslice, int __pyx_skip_dispatch);
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_split_next(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *, __Pyx_memviewslice, int __pyx_skip_dispatch);
 
 
 /* "View.MemoryView":106
@@ -1657,9 +1715,6 @@ static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
         __Pyx__ArgTypeTest(obj, type, name, exact))
 static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *name, int exact);
 
-/* None.proto */
-static CYTHON_INLINE void __Pyx_RaiseUnboundLocalError(const char *varname);
-
 /* MemviewSliceInit.proto */
 #define __Pyx_BUF_MAX_NDIMS %(BUF_MAX_NDIMS)d
 #define __Pyx_MEMVIEW_DIRECT   1
@@ -1685,6 +1740,9 @@ static CYTHON_INLINE int __pyx_sub_acquisition_count_locked(
 #define __PYX_XDEC_MEMVIEW(slice, have_gil) __Pyx_XDEC_MEMVIEW(slice, have_gil, __LINE__)
 static CYTHON_INLINE void __Pyx_INC_MEMVIEW(__Pyx_memviewslice *, int, int);
 static CYTHON_INLINE void __Pyx_XDEC_MEMVIEW(__Pyx_memviewslice *, int, int);
+
+/* None.proto */
+static CYTHON_INLINE void __Pyx_RaiseUnboundLocalError(const char *varname);
 
 /* IncludeStringH.proto */
 #include <string.h>
@@ -2006,6 +2064,9 @@ static int __Pyx_ValidateAndInit_memviewslice(
                 PyObject *original_obj);
 
 /* ObjectToMemviewSlice.proto */
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(PyObject *, int writable_flag);
+
+/* ObjectToMemviewSlice.proto */
 static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t(PyObject *, int writable_flag);
 
 /* MemviewSliceCopyTemplate.proto */
@@ -2020,6 +2081,12 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_friso_mode_t(friso_mode_t value)
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_friso_lex_t(friso_lex_t value);
+
+/* CIntFromPy.proto */
+static CYTHON_INLINE friso_lex_t __Pyx_PyInt_As_friso_lex_t(PyObject *);
+
+/* CIntFromPy.proto */
+static CYTHON_INLINE uint_t __Pyx_PyInt_As_uint_t(PyObject *);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE friso_mode_t __Pyx_PyInt_As_friso_mode_t(PyObject *);
@@ -2058,6 +2125,8 @@ static int __Pyx_check_binary_version(void);
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 static CYTHON_INLINE int __pyx_f_5friso_8backends_6cython_6_friso_5Friso_init_from_ifile(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_config, PyObject *__pyx_v_path, CYTHON_UNUSED int __pyx_skip_dispatch); /* proto*/
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_5Friso_dic_load(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_config, friso_lex_t __pyx_v_lex, PyObject *__pyx_v_lexpath, uint_t __pyx_v_length, CYTHON_UNUSED int __pyx_skip_dispatch); /* proto*/
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_5Friso_dic_load_from_ifile(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_config, PyObject *__pyx_v_lexpath, uint_t __pyx_v_length, CYTHON_UNUSED int __pyx_skip_dispatch); /* proto*/
 static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_init(struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_self, CYTHON_UNUSED int __pyx_skip_dispatch); /* proto*/
 static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_set_mode(struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_self, friso_mode_t __pyx_v_mod, CYTHON_UNUSED int __pyx_skip_dispatch); /* proto*/
 static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_next_token(struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_self, struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_friso, struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *__pyx_v_task, CYTHON_UNUSED int __pyx_skip_dispatch); /* proto*/
@@ -2066,6 +2135,10 @@ static PyObject *__pyx_f_5friso_8backends_6cython_6_friso_4Task_set_text(struct 
 static PyObject *__pyx_f_5friso_8backends_6cython_6_friso_4Task_set_bytes(struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *__pyx_v_self, __Pyx_memviewslice __pyx_v_text, CYTHON_UNUSED int __pyx_skip_dispatch); /* proto*/
 static CYTHON_INLINE struct __pyx_obj_5friso_8backends_6cython_6_friso_Token *__pyx_f_5friso_8backends_6cython_6_friso_5Token_from_ptr(friso_token_t __pyx_v_token); /* proto*/
 static CYTHON_INLINE struct __pyx_obj_5friso_8backends_6cython_6_friso_Lex *__pyx_f_5friso_8backends_6cython_6_friso_3Lex_from_ptr(lex_entry_t __pyx_v_lex); /* proto*/
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_reset(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_delimiter, __Pyx_memviewslice __pyx_v_source, CYTHON_UNUSED int __pyx_skip_dispatch); /* proto*/
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_set_source(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_source, CYTHON_UNUSED int __pyx_skip_dispatch); /* proto*/
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_set_delimiter(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_delimiter, CYTHON_UNUSED int __pyx_skip_dispatch); /* proto*/
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_split_next(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_buffer, CYTHON_UNUSED int __pyx_skip_dispatch); /* proto*/
 static PyObject *__pyx_array_get_memview(struct __pyx_array_obj *__pyx_v_self); /* proto*/
 static char *__pyx_memoryview_get_item_pointer(struct __pyx_memoryview_obj *__pyx_v_self, PyObject *__pyx_v_index); /* proto*/
 static PyObject *__pyx_memoryview_is_slice(struct __pyx_memoryview_obj *__pyx_v_self, PyObject *__pyx_v_obj); /* proto*/
@@ -2095,6 +2168,8 @@ static PyTypeObject *__pyx_ptype_5friso_8backends_6cython_6_friso_Config = 0;
 static PyTypeObject *__pyx_ptype_5friso_8backends_6cython_6_friso_Task = 0;
 static PyTypeObject *__pyx_ptype_5friso_8backends_6cython_6_friso_Token = 0;
 static PyTypeObject *__pyx_ptype_5friso_8backends_6cython_6_friso_Lex = 0;
+static PyTypeObject *__pyx_ptype_5friso_8backends_6cython_6_friso_StringSplit = 0;
+static PyTypeObject *__pyx_ptype_5friso_8backends_6cython_6_friso_Dict = 0;
 static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
@@ -2140,6 +2215,7 @@ static void __pyx_memoryview_refcount_objects_in_slice(char *, Py_ssize_t *, Py_
 static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size_t, void *, int); /*proto*/
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
 static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *, PyObject *); /*proto*/
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn_uint8_t__const__ = { "const uint8_t", NULL, sizeof(uint8_t const ), { 0 }, 0, IS_UNSIGNED(uint8_t const ) ? 'U' : 'I', IS_UNSIGNED(uint8_t const ), 0 };
 static __Pyx_TypeInfo __Pyx_TypeInfo_nn_uint8_t = { "uint8_t", NULL, sizeof(uint8_t), { 0 }, 0, IS_UNSIGNED(uint8_t) ? 'U' : 'I', IS_UNSIGNED(uint8_t), 0 };
 #define __Pyx_MODULE_NAME "friso.backends.cython._friso"
 extern int __pyx_module_is_main_friso__backends__cython___friso;
@@ -2157,9 +2233,12 @@ static PyObject *__pyx_builtin_IndexError;
 static const char __pyx_k_O[] = "O";
 static const char __pyx_k_c[] = "c";
 static const char __pyx_k_id[] = "id";
+static const char __pyx_k_Lex[] = "Lex";
 static const char __pyx_k_doc[] = "__doc__";
+static const char __pyx_k_lex[] = "lex";
 static const char __pyx_k_new[] = "__new__";
 static const char __pyx_k_obj[] = "obj";
+static const char __pyx_k_Dict[] = "Dict";
 static const char __pyx_k_Task[] = "Task";
 static const char __pyx_k_base[] = "base";
 static const char __pyx_k_dict[] = "__dict__";
@@ -2188,14 +2267,17 @@ static const char __pyx_k_config[] = "config";
 static const char __pyx_k_encode[] = "encode";
 static const char __pyx_k_format[] = "format";
 static const char __pyx_k_import[] = "__import__";
+static const char __pyx_k_length[] = "length";
 static const char __pyx_k_module[] = "__module__";
 static const char __pyx_k_name_2[] = "__name__";
 static const char __pyx_k_pickle[] = "pickle";
 static const char __pyx_k_reduce[] = "__reduce__";
+static const char __pyx_k_source[] = "source";
 static const char __pyx_k_struct[] = "struct";
 static const char __pyx_k_unpack[] = "unpack";
 static const char __pyx_k_update[] = "update";
 static const char __pyx_k_fortran[] = "fortran";
+static const char __pyx_k_lexpath[] = "lexpath";
 static const char __pyx_k_memview[] = "memview";
 static const char __pyx_k_prepare[] = "__prepare__";
 static const char __pyx_k_version[] = "version";
@@ -2206,6 +2288,7 @@ static const char __pyx_k_pyx_type[] = "__pyx_type";
 static const char __pyx_k_qualname[] = "__qualname__";
 static const char __pyx_k_setstate[] = "__setstate__";
 static const char __pyx_k_TypeError[] = "TypeError";
+static const char __pyx_k_delimiter[] = "delimiter";
 static const char __pyx_k_enumerate[] = "enumerate";
 static const char __pyx_k_metaclass[] = "__metaclass__";
 static const char __pyx_k_pyx_state[] = "__pyx_state";
@@ -2220,6 +2303,7 @@ static const char __pyx_k_MODE_DETECT[] = "MODE_DETECT";
 static const char __pyx_k_MODE_SIMPLE[] = "MODE_SIMPLE";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_PickleError[] = "PickleError";
+static const char __pyx_k_StringSplit[] = "StringSplit";
 static const char __pyx_k_LEX_CN_LNAME[] = "LEX_CN_LNAME";
 static const char __pyx_k_LEX_CN_SNAME[] = "LEX_CN_SNAME";
 static const char __pyx_k_LEX_EN_WORDS[] = "LEX_EN_WORDS";
@@ -2246,15 +2330,20 @@ static const char __pyx_k_dtype_is_object[] = "dtype_is_object";
 static const char __pyx_k_pyx_PickleError[] = "__pyx_PickleError";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_LEX_UNKNOW_WORDS[] = "LEX_UNKNOW_WORDS";
+static const char __pyx_k_new_friso_t_error[] = "new friso_t error";
 static const char __pyx_k_pyx_unpickle_Enum[] = "__pyx_unpickle_Enum";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_strided_and_direct[] = "<strided and direct>";
 static const char __pyx_k_strided_and_indirect[] = "<strided and indirect>";
 static const char __pyx_k_contiguous_and_direct[] = "<contiguous and direct>";
+static const char __pyx_k_new_friso_dic_t_error[] = "new friso_dic_t error";
 static const char __pyx_k_MemoryView_of_r_object[] = "<MemoryView of %r object>";
+static const char __pyx_k_new_friso_task_t_error[] = "new friso_task_t error";
 static const char __pyx_k_MemoryView_of_r_at_0x_x[] = "<MemoryView of %r at 0x%x>";
 static const char __pyx_k_contiguous_and_indirect[] = "<contiguous and indirect>";
 static const char __pyx_k_Cannot_index_with_type_s[] = "Cannot index with type '%s'";
+static const char __pyx_k_new_friso_config_t_error[] = "new friso_config_t error";
+static const char __pyx_k_new_string_split_t_error[] = "new string_split_t error";
 static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %d: %d.";
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
 static const char __pyx_k_friso_backends_cython__friso[] = "friso.backends.cython._friso";
@@ -2283,6 +2372,7 @@ static PyObject *__pyx_kp_s_Cannot_assign_to_read_only_memor;
 static PyObject *__pyx_kp_s_Cannot_create_writable_memory_vi;
 static PyObject *__pyx_kp_s_Cannot_index_with_type_s;
 static PyObject *__pyx_n_s_Config;
+static PyObject *__pyx_n_s_Dict;
 static PyObject *__pyx_n_s_Ellipsis;
 static PyObject *__pyx_kp_s_Empty_shape_tuple_for_cython_arr;
 static PyObject *__pyx_n_s_Friso;
@@ -2308,6 +2398,7 @@ static PyObject *__pyx_n_s_LEX_OTHER_WORDS;
 static PyObject *__pyx_n_s_LEX_PUNC_WORDS;
 static PyObject *__pyx_n_s_LEX_STOPWORDS;
 static PyObject *__pyx_n_s_LEX_UNKNOW_WORDS;
+static PyObject *__pyx_n_s_Lex;
 static PyObject *__pyx_n_s_MODE_COMPLEX;
 static PyObject *__pyx_n_s_MODE_DETECT;
 static PyObject *__pyx_n_s_MODE_SIMPLE;
@@ -2317,6 +2408,7 @@ static PyObject *__pyx_kp_s_MemoryView_of_r_object;
 static PyObject *__pyx_n_b_O;
 static PyObject *__pyx_kp_s_Out_of_bounds_on_buffer_access_a;
 static PyObject *__pyx_n_s_PickleError;
+static PyObject *__pyx_n_s_StringSplit;
 static PyObject *__pyx_n_s_Task;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_Unable_to_convert_item_to_object;
@@ -2331,6 +2423,7 @@ static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_config;
 static PyObject *__pyx_kp_s_contiguous_and_direct;
 static PyObject *__pyx_kp_s_contiguous_and_indirect;
+static PyObject *__pyx_n_s_delimiter;
 static PyObject *__pyx_n_s_dict;
 static PyObject *__pyx_n_s_doc;
 static PyObject *__pyx_n_s_dtype_is_object;
@@ -2351,6 +2444,9 @@ static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_kp_u_init_error;
 static PyObject *__pyx_n_s_itemsize;
 static PyObject *__pyx_kp_s_itemsize_0_for_cython_array;
+static PyObject *__pyx_n_s_length;
+static PyObject *__pyx_n_s_lex;
+static PyObject *__pyx_n_s_lexpath;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_memview;
 static PyObject *__pyx_n_s_metaclass;
@@ -2360,6 +2456,11 @@ static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_name_2;
 static PyObject *__pyx_n_s_ndim;
 static PyObject *__pyx_n_s_new;
+static PyObject *__pyx_kp_u_new_friso_config_t_error;
+static PyObject *__pyx_kp_u_new_friso_dic_t_error;
+static PyObject *__pyx_kp_u_new_friso_t_error;
+static PyObject *__pyx_kp_u_new_friso_task_t_error;
+static PyObject *__pyx_kp_u_new_string_split_t_error;
 static PyObject *__pyx_kp_s_no_default___reduce___due_to_non;
 static PyObject *__pyx_n_s_obj;
 static PyObject *__pyx_n_s_pack;
@@ -2385,6 +2486,7 @@ static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_n_s_shape;
 static PyObject *__pyx_n_s_size;
+static PyObject *__pyx_n_s_source;
 static PyObject *__pyx_n_s_start;
 static PyObject *__pyx_n_s_step;
 static PyObject *__pyx_n_s_stop;
@@ -2404,8 +2506,10 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_version(CYTHON_UNUSED
 static int __pyx_pf_5friso_8backends_6cython_6_friso_5Friso___cinit__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self); /* proto */
 static void __pyx_pf_5friso_8backends_6cython_6_friso_5Friso_2__dealloc__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_4init_from_ifile(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_config, PyObject *__pyx_v_path); /* proto */
-static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_6dic_load(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_config, friso_lex_t __pyx_v_lex, PyObject *__pyx_v_lexpath, uint_t __pyx_v_length); /* proto */
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_8dic_load_from_ifile(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_config, PyObject *__pyx_v_lexpath, uint_t __pyx_v_length); /* proto */
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_10__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_12__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_5friso_8backends_6cython_6_friso_6Config___cinit__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_self); /* proto */
 static void __pyx_pf_5friso_8backends_6cython_6_friso_6Config_2__dealloc__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_4init(struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_self); /* proto */
@@ -2448,6 +2552,18 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token___reduce_cytho
 static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_2__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Token *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_3Lex___reduce_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Lex *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_3Lex_2__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Lex *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static int __pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit___cinit__(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_delimiter, __Pyx_memviewslice __pyx_v_source); /* proto */
+static void __pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_2__dealloc__(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_4reset(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_delimiter, __Pyx_memviewslice __pyx_v_source); /* proto */
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_6set_source(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_source); /* proto */
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_8set_delimiter(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_delimiter); /* proto */
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_10split_next(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_buffer); /* proto */
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_12__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_14__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static int __pyx_pf_5friso_8backends_6cython_6_friso_4Dict___cinit__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *__pyx_v_self); /* proto */
+static void __pyx_pf_5friso_8backends_6cython_6_friso_4Dict_2__dealloc__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Dict_4__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Dict_6__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(struct __pyx_array_obj *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_array___pyx_pf_15View_dot_MemoryView_5array_4__dealloc__(struct __pyx_array_obj *__pyx_v_self); /* proto */
@@ -2495,6 +2611,8 @@ static PyObject *__pyx_tp_new_5friso_8backends_6cython_6_friso_Config(PyTypeObje
 static PyObject *__pyx_tp_new_5friso_8backends_6cython_6_friso_Task(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_5friso_8backends_6cython_6_friso_Token(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_5friso_8backends_6cython_6_friso_Lex(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_5friso_8backends_6cython_6_friso_StringSplit(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_5friso_8backends_6cython_6_friso_Dict(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_array(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_Enum(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_memoryview(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -2514,7 +2632,7 @@ static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_tuple__7;
 static PyObject *__pyx_tuple__8;
 static PyObject *__pyx_tuple__9;
-static PyObject *__pyx_slice__25;
+static PyObject *__pyx_slice__29;
 static PyObject *__pyx_tuple__10;
 static PyObject *__pyx_tuple__11;
 static PyObject *__pyx_tuple__12;
@@ -2530,21 +2648,25 @@ static PyObject *__pyx_tuple__21;
 static PyObject *__pyx_tuple__22;
 static PyObject *__pyx_tuple__23;
 static PyObject *__pyx_tuple__24;
+static PyObject *__pyx_tuple__25;
 static PyObject *__pyx_tuple__26;
 static PyObject *__pyx_tuple__27;
 static PyObject *__pyx_tuple__28;
-static PyObject *__pyx_tuple__29;
+static PyObject *__pyx_tuple__30;
 static PyObject *__pyx_tuple__31;
 static PyObject *__pyx_tuple__32;
 static PyObject *__pyx_tuple__33;
-static PyObject *__pyx_tuple__34;
 static PyObject *__pyx_tuple__35;
 static PyObject *__pyx_tuple__36;
-static PyObject *__pyx_codeobj__30;
-static PyObject *__pyx_codeobj__37;
+static PyObject *__pyx_tuple__37;
+static PyObject *__pyx_tuple__38;
+static PyObject *__pyx_tuple__39;
+static PyObject *__pyx_tuple__40;
+static PyObject *__pyx_codeobj__34;
+static PyObject *__pyx_codeobj__41;
 /* Late includes */
 
-/* "friso/backends/cython/_friso.pyx":53
+/* "friso/backends/cython/_friso.pyx":62
  * # ---------------------
  * 
  * def version():             # <<<<<<<<<<<<<<
@@ -2577,7 +2699,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_version(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("version", 0);
 
-  /* "friso/backends/cython/_friso.pyx":54
+  /* "friso/backends/cython/_friso.pyx":63
  * 
  * def version():
  *     return (<bytes> friso_version()).decode()             # <<<<<<<<<<<<<<
@@ -2585,20 +2707,20 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_version(CYTHON_UNUSED
  * cdef inline bytes ensure_bytes(object o):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBytes_FromString(friso_version()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 54, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBytes_FromString(friso_version()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_t_1 == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "decode");
-    __PYX_ERR(1, 54, __pyx_L1_error)
+    __PYX_ERR(1, 63, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_decode_bytes(((PyObject*)__pyx_t_1), 0, PY_SSIZE_T_MAX, NULL, NULL, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 54, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_decode_bytes(((PyObject*)__pyx_t_1), 0, PY_SSIZE_T_MAX, NULL, NULL, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":53
+  /* "friso/backends/cython/_friso.pyx":62
  * # ---------------------
  * 
  * def version():             # <<<<<<<<<<<<<<
@@ -2618,7 +2740,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_version(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":56
+/* "friso/backends/cython/_friso.pyx":65
  *     return (<bytes> friso_version()).decode()
  * 
  * cdef inline bytes ensure_bytes(object o):             # <<<<<<<<<<<<<<
@@ -2640,7 +2762,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_ensure_b
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("ensure_bytes", 0);
 
-  /* "friso/backends/cython/_friso.pyx":57
+  /* "friso/backends/cython/_friso.pyx":66
  * 
  * cdef inline bytes ensure_bytes(object o):
  *     if isinstance(o, unicode):             # <<<<<<<<<<<<<<
@@ -2651,7 +2773,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_ensure_b
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "friso/backends/cython/_friso.pyx":58
+    /* "friso/backends/cython/_friso.pyx":67
  * cdef inline bytes ensure_bytes(object o):
  *     if isinstance(o, unicode):
  *         return o.encode()             # <<<<<<<<<<<<<<
@@ -2659,7 +2781,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_ensure_b
  *         return bytes(o)
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_encode); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 58, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_o, __pyx_n_s_encode); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 67, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -2673,15 +2795,15 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_ensure_b
     }
     __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 58, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 67, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (!(likely(PyBytes_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(1, 58, __pyx_L1_error)
+    if (!(likely(PyBytes_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(1, 67, __pyx_L1_error)
     __pyx_r = ((PyObject*)__pyx_t_3);
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "friso/backends/cython/_friso.pyx":57
+    /* "friso/backends/cython/_friso.pyx":66
  * 
  * cdef inline bytes ensure_bytes(object o):
  *     if isinstance(o, unicode):             # <<<<<<<<<<<<<<
@@ -2690,7 +2812,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_ensure_b
  */
   }
 
-  /* "friso/backends/cython/_friso.pyx":59
+  /* "friso/backends/cython/_friso.pyx":68
  *     if isinstance(o, unicode):
  *         return o.encode()
  *     elif isinstance(o, (bytes, bytearray)):             # <<<<<<<<<<<<<<
@@ -2711,7 +2833,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_ensure_b
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "friso/backends/cython/_friso.pyx":60
+    /* "friso/backends/cython/_friso.pyx":69
  *         return o.encode()
  *     elif isinstance(o, (bytes, bytearray)):
  *         return bytes(o)             # <<<<<<<<<<<<<<
@@ -2719,13 +2841,13 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_ensure_b
  *         return o
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyBytes_Type)), __pyx_v_o); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 60, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyBytes_Type)), __pyx_v_o); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 69, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_r = ((PyObject*)__pyx_t_3);
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "friso/backends/cython/_friso.pyx":59
+    /* "friso/backends/cython/_friso.pyx":68
  *     if isinstance(o, unicode):
  *         return o.encode()
  *     elif isinstance(o, (bytes, bytearray)):             # <<<<<<<<<<<<<<
@@ -2734,7 +2856,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_ensure_b
  */
   }
 
-  /* "friso/backends/cython/_friso.pyx":62
+  /* "friso/backends/cython/_friso.pyx":71
  *         return bytes(o)
  *     else:
  *         return o             # <<<<<<<<<<<<<<
@@ -2743,13 +2865,13 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_ensure_b
  */
   /*else*/ {
     __Pyx_XDECREF(__pyx_r);
-    if (!(likely(PyBytes_CheckExact(__pyx_v_o))||((__pyx_v_o) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_v_o)->tp_name), 0))) __PYX_ERR(1, 62, __pyx_L1_error)
+    if (!(likely(PyBytes_CheckExact(__pyx_v_o))||((__pyx_v_o) == Py_None)||((void)PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_v_o)->tp_name), 0))) __PYX_ERR(1, 71, __pyx_L1_error)
     __Pyx_INCREF(__pyx_v_o);
     __pyx_r = ((PyObject*)__pyx_v_o);
     goto __pyx_L0;
   }
 
-  /* "friso/backends/cython/_friso.pyx":56
+  /* "friso/backends/cython/_friso.pyx":65
  *     return (<bytes> friso_version()).decode()
  * 
  * cdef inline bytes ensure_bytes(object o):             # <<<<<<<<<<<<<<
@@ -2770,12 +2892,12 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_ensure_b
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":74
- * cdef class Friso:
- *     cdef friso_t _friso
+/* "friso/backends/cython/_friso.pyx":85
+ *         friso_t _friso
+ *         bytes path_bytes
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
  *         self._friso = friso_new()
- * 
+ *         if not self._friso:
  */
 
 /* Python wrapper */
@@ -2797,37 +2919,99 @@ static int __pyx_pw_5friso_8backends_6cython_6_friso_5Friso_1__cinit__(PyObject 
 static int __pyx_pf_5friso_8backends_6cython_6_friso_5Friso___cinit__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":75
- *     cdef friso_t _friso
+  /* "friso/backends/cython/_friso.pyx":86
+ *         bytes path_bytes
  *     def __cinit__(self):
  *         self._friso = friso_new()             # <<<<<<<<<<<<<<
- * 
- *     def __dealloc__(self):
+ *         if not self._friso:
+ *             raise FrisoException("new friso_t error")
  */
   __pyx_v_self->_friso = friso_new();
 
-  /* "friso/backends/cython/_friso.pyx":74
- * cdef class Friso:
- *     cdef friso_t _friso
+  /* "friso/backends/cython/_friso.pyx":87
+ *     def __cinit__(self):
+ *         self._friso = friso_new()
+ *         if not self._friso:             # <<<<<<<<<<<<<<
+ *             raise FrisoException("new friso_t error")
+ * 
+ */
+  __pyx_t_1 = ((!(__pyx_v_self->_friso != 0)) != 0);
+  if (unlikely(__pyx_t_1)) {
+
+    /* "friso/backends/cython/_friso.pyx":88
+ *         self._friso = friso_new()
+ *         if not self._friso:
+ *             raise FrisoException("new friso_t error")             # <<<<<<<<<<<<<<
+ * 
+ *     def __dealloc__(self):
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_FrisoException); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 88, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_4 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+      __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+      if (likely(__pyx_t_4)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+        __Pyx_INCREF(__pyx_t_4);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_3, function);
+      }
+    }
+    __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_kp_u_new_friso_t_error) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_kp_u_new_friso_t_error);
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 88, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __PYX_ERR(1, 88, __pyx_L1_error)
+
+    /* "friso/backends/cython/_friso.pyx":87
+ *     def __cinit__(self):
+ *         self._friso = friso_new()
+ *         if not self._friso:             # <<<<<<<<<<<<<<
+ *             raise FrisoException("new friso_t error")
+ * 
+ */
+  }
+
+  /* "friso/backends/cython/_friso.pyx":85
+ *         friso_t _friso
+ *         bytes path_bytes
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
  *         self._friso = friso_new()
- * 
+ *         if not self._friso:
  */
 
   /* function exit code */
   __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("friso.backends.cython._friso.Friso.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":77
- *         self._friso = friso_new()
+/* "friso/backends/cython/_friso.pyx":90
+ *             raise FrisoException("new friso_t error")
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         friso_free(self._friso)
- * 
+ *         if self._friso:
+ *             friso_free(self._friso)
  */
 
 /* Python wrapper */
@@ -2843,31 +3027,51 @@ static void __pyx_pw_5friso_8backends_6cython_6_friso_5Friso_3__dealloc__(PyObje
 
 static void __pyx_pf_5friso_8backends_6cython_6_friso_5Friso_2__dealloc__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":78
+  /* "friso/backends/cython/_friso.pyx":91
  * 
  *     def __dealloc__(self):
- *         friso_free(self._friso)             # <<<<<<<<<<<<<<
+ *         if self._friso:             # <<<<<<<<<<<<<<
+ *             friso_free(self._friso)
+ * 
+ */
+  __pyx_t_1 = (__pyx_v_self->_friso != 0);
+  if (__pyx_t_1) {
+
+    /* "friso/backends/cython/_friso.pyx":92
+ *     def __dealloc__(self):
+ *         if self._friso:
+ *             friso_free(self._friso)             # <<<<<<<<<<<<<<
  * 
  *     cpdef inline int init_from_ifile(self, Config config, object path) except -1:
  */
-  friso_free(__pyx_v_self->_friso);
+    friso_free(__pyx_v_self->_friso);
 
-  /* "friso/backends/cython/_friso.pyx":77
- *         self._friso = friso_new()
+    /* "friso/backends/cython/_friso.pyx":91
+ * 
+ *     def __dealloc__(self):
+ *         if self._friso:             # <<<<<<<<<<<<<<
+ *             friso_free(self._friso)
+ * 
+ */
+  }
+
+  /* "friso/backends/cython/_friso.pyx":90
+ *             raise FrisoException("new friso_t error")
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         friso_free(self._friso)
- * 
+ *         if self._friso:
+ *             friso_free(self._friso)
  */
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-/* "friso/backends/cython/_friso.pyx":80
- *         friso_free(self._friso)
+/* "friso/backends/cython/_friso.pyx":94
+ *             friso_free(self._friso)
  * 
  *     cpdef inline int init_from_ifile(self, Config config, object path) except -1:             # <<<<<<<<<<<<<<
  *         cdef int ret
@@ -2891,35 +3095,48 @@ static CYTHON_INLINE int __pyx_f_5friso_8backends_6cython_6_friso_5Friso_init_fr
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("init_from_ifile", 0);
 
-  /* "friso/backends/cython/_friso.pyx":82
+  /* "friso/backends/cython/_friso.pyx":96
  *     cpdef inline int init_from_ifile(self, Config config, object path) except -1:
  *         cdef int ret
  *         cdef bytes path_bytes = ensure_bytes(path)             # <<<<<<<<<<<<<<
+ *         self.path_bytes = path_bytes
  *         cdef fstring path_ptr = <fstring> path_bytes
- *         with nogil:
  */
-  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_ensure_bytes(__pyx_v_path); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 82, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_ensure_bytes(__pyx_v_path); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 96, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_path_bytes = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":83
+  /* "friso/backends/cython/_friso.pyx":97
  *         cdef int ret
  *         cdef bytes path_bytes = ensure_bytes(path)
+ *         self.path_bytes = path_bytes             # <<<<<<<<<<<<<<
+ *         cdef fstring path_ptr = <fstring> path_bytes
+ *         # print(path_bytes[25:])
+ */
+  __Pyx_INCREF(__pyx_v_path_bytes);
+  __Pyx_GIVEREF(__pyx_v_path_bytes);
+  __Pyx_GOTREF(__pyx_v_self->path_bytes);
+  __Pyx_DECREF(__pyx_v_self->path_bytes);
+  __pyx_v_self->path_bytes = __pyx_v_path_bytes;
+
+  /* "friso/backends/cython/_friso.pyx":98
+ *         cdef bytes path_bytes = ensure_bytes(path)
+ *         self.path_bytes = path_bytes
  *         cdef fstring path_ptr = <fstring> path_bytes             # <<<<<<<<<<<<<<
+ *         # print(path_bytes[25:])
  *         with nogil:
- *             ret = friso_init_from_ifile(self._friso, config._config, path_ptr)
  */
   if (unlikely(__pyx_v_path_bytes == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-    __PYX_ERR(1, 83, __pyx_L1_error)
+    __PYX_ERR(1, 98, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_PyBytes_AsWritableString(__pyx_v_path_bytes); if (unlikely((__pyx_t_2 == ((fstring)NULL)) && PyErr_Occurred())) __PYX_ERR(1, 83, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyBytes_AsWritableString(__pyx_v_path_bytes); if (unlikely((__pyx_t_2 == ((fstring)NULL)) && PyErr_Occurred())) __PYX_ERR(1, 98, __pyx_L1_error)
   __pyx_v_path_ptr = ((fstring)__pyx_t_2);
 
-  /* "friso/backends/cython/_friso.pyx":84
- *         cdef bytes path_bytes = ensure_bytes(path)
+  /* "friso/backends/cython/_friso.pyx":100
  *         cdef fstring path_ptr = <fstring> path_bytes
+ *         # print(path_bytes[25:])
  *         with nogil:             # <<<<<<<<<<<<<<
  *             ret = friso_init_from_ifile(self._friso, config._config, path_ptr)
  *         if ret != 1:
@@ -2932,8 +3149,8 @@ static CYTHON_INLINE int __pyx_f_5friso_8backends_6cython_6_friso_5Friso_init_fr
       #endif
       /*try:*/ {
 
-        /* "friso/backends/cython/_friso.pyx":85
- *         cdef fstring path_ptr = <fstring> path_bytes
+        /* "friso/backends/cython/_friso.pyx":101
+ *         # print(path_bytes[25:])
  *         with nogil:
  *             ret = friso_init_from_ifile(self._friso, config._config, path_ptr)             # <<<<<<<<<<<<<<
  *         if ret != 1:
@@ -2942,9 +3159,9 @@ static CYTHON_INLINE int __pyx_f_5friso_8backends_6cython_6_friso_5Friso_init_fr
         __pyx_v_ret = friso_init_from_ifile(__pyx_v_self->_friso, __pyx_v_config->_config, __pyx_v_path_ptr);
       }
 
-      /* "friso/backends/cython/_friso.pyx":84
- *         cdef bytes path_bytes = ensure_bytes(path)
+      /* "friso/backends/cython/_friso.pyx":100
  *         cdef fstring path_ptr = <fstring> path_bytes
+ *         # print(path_bytes[25:])
  *         with nogil:             # <<<<<<<<<<<<<<
  *             ret = friso_init_from_ifile(self._friso, config._config, path_ptr)
  *         if ret != 1:
@@ -2961,7 +3178,7 @@ static CYTHON_INLINE int __pyx_f_5friso_8backends_6cython_6_friso_5Friso_init_fr
       }
   }
 
-  /* "friso/backends/cython/_friso.pyx":86
+  /* "friso/backends/cython/_friso.pyx":102
  *         with nogil:
  *             ret = friso_init_from_ifile(self._friso, config._config, path_ptr)
  *         if ret != 1:             # <<<<<<<<<<<<<<
@@ -2971,14 +3188,14 @@ static CYTHON_INLINE int __pyx_f_5friso_8backends_6cython_6_friso_5Friso_init_fr
   __pyx_t_3 = ((__pyx_v_ret != 1) != 0);
   if (unlikely(__pyx_t_3)) {
 
-    /* "friso/backends/cython/_friso.pyx":87
+    /* "friso/backends/cython/_friso.pyx":103
  *             ret = friso_init_from_ifile(self._friso, config._config, path_ptr)
  *         if ret != 1:
  *             raise FrisoException("init error")             # <<<<<<<<<<<<<<
  *         return ret
  * 
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_FrisoException); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 87, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_FrisoException); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 103, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -2992,14 +3209,14 @@ static CYTHON_INLINE int __pyx_f_5friso_8backends_6cython_6_friso_5Friso_init_fr
     }
     __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_kp_u_init_error) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_kp_u_init_error);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 87, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 103, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 87, __pyx_L1_error)
+    __PYX_ERR(1, 103, __pyx_L1_error)
 
-    /* "friso/backends/cython/_friso.pyx":86
+    /* "friso/backends/cython/_friso.pyx":102
  *         with nogil:
  *             ret = friso_init_from_ifile(self._friso, config._config, path_ptr)
  *         if ret != 1:             # <<<<<<<<<<<<<<
@@ -3008,18 +3225,18 @@ static CYTHON_INLINE int __pyx_f_5friso_8backends_6cython_6_friso_5Friso_init_fr
  */
   }
 
-  /* "friso/backends/cython/_friso.pyx":88
+  /* "friso/backends/cython/_friso.pyx":104
  *         if ret != 1:
  *             raise FrisoException("init error")
  *         return ret             # <<<<<<<<<<<<<<
  * 
- * @cython.freelist(8)
+ *     cpdef inline dic_load(self,Config config, friso_lex_t lex, object lexpath, uint_t length):
  */
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":80
- *         friso_free(self._friso)
+  /* "friso/backends/cython/_friso.pyx":94
+ *             friso_free(self._friso)
  * 
  *     cpdef inline int init_from_ifile(self, Config config, object path) except -1:             # <<<<<<<<<<<<<<
  *         cdef int ret
@@ -3074,11 +3291,11 @@ static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_5init_from_ifi
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_path)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("init_from_ifile", 1, 2, 2, 1); __PYX_ERR(1, 80, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("init_from_ifile", 1, 2, 2, 1); __PYX_ERR(1, 94, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "init_from_ifile") < 0)) __PYX_ERR(1, 80, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "init_from_ifile") < 0)) __PYX_ERR(1, 94, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3091,13 +3308,13 @@ static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_5init_from_ifi
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("init_from_ifile", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 80, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("init_from_ifile", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 94, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("friso.backends.cython._friso.Friso.init_from_ifile", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_config), __pyx_ptype_5friso_8backends_6cython_6_friso_Config, 1, "config", 0))) __PYX_ERR(1, 80, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_config), __pyx_ptype_5friso_8backends_6cython_6_friso_Config, 1, "config", 0))) __PYX_ERR(1, 94, __pyx_L1_error)
   __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_5Friso_4init_from_ifile(((struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *)__pyx_v_self), __pyx_v_config, __pyx_v_path);
 
   /* function exit code */
@@ -3119,8 +3336,8 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_4init_from_ifi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("init_from_ifile", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_5Friso_init_from_ifile(__pyx_v_self, __pyx_v_config, __pyx_v_path, 1); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(1, 80, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 80, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_5Friso_init_from_ifile(__pyx_v_self, __pyx_v_config, __pyx_v_path, 1); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(1, 94, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -3137,6 +3354,457 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_4init_from_ifi
   return __pyx_r;
 }
 
+/* "friso/backends/cython/_friso.pyx":106
+ *         return ret
+ * 
+ *     cpdef inline dic_load(self,Config config, friso_lex_t lex, object lexpath, uint_t length):             # <<<<<<<<<<<<<<
+ *         cdef bytes f_bytes = ensure_bytes(lexpath)
+ *         cdef fstring f_ptr = <fstring> f_bytes
+ */
+
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_7dic_load(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_5Friso_dic_load(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_config, friso_lex_t __pyx_v_lex, PyObject *__pyx_v_lexpath, uint_t __pyx_v_length, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  PyObject *__pyx_v_f_bytes = 0;
+  fstring __pyx_v_f_ptr;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  fstring __pyx_t_2;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("dic_load", 0);
+
+  /* "friso/backends/cython/_friso.pyx":107
+ * 
+ *     cpdef inline dic_load(self,Config config, friso_lex_t lex, object lexpath, uint_t length):
+ *         cdef bytes f_bytes = ensure_bytes(lexpath)             # <<<<<<<<<<<<<<
+ *         cdef fstring f_ptr = <fstring> f_bytes
+ *         with nogil:
+ */
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_ensure_bytes(__pyx_v_lexpath); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_f_bytes = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "friso/backends/cython/_friso.pyx":108
+ *     cpdef inline dic_load(self,Config config, friso_lex_t lex, object lexpath, uint_t length):
+ *         cdef bytes f_bytes = ensure_bytes(lexpath)
+ *         cdef fstring f_ptr = <fstring> f_bytes             # <<<<<<<<<<<<<<
+ *         with nogil:
+ *             friso_dic_load(self._friso,  config._config, lex ,f_ptr, length)
+ */
+  if (unlikely(__pyx_v_f_bytes == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
+    __PYX_ERR(1, 108, __pyx_L1_error)
+  }
+  __pyx_t_2 = __Pyx_PyBytes_AsWritableString(__pyx_v_f_bytes); if (unlikely((__pyx_t_2 == ((fstring)NULL)) && PyErr_Occurred())) __PYX_ERR(1, 108, __pyx_L1_error)
+  __pyx_v_f_ptr = ((fstring)__pyx_t_2);
+
+  /* "friso/backends/cython/_friso.pyx":109
+ *         cdef bytes f_bytes = ensure_bytes(lexpath)
+ *         cdef fstring f_ptr = <fstring> f_bytes
+ *         with nogil:             # <<<<<<<<<<<<<<
+ *             friso_dic_load(self._friso,  config._config, lex ,f_ptr, length)
+ * 
+ */
+  {
+      #ifdef WITH_THREAD
+      PyThreadState *_save;
+      Py_UNBLOCK_THREADS
+      __Pyx_FastGIL_Remember();
+      #endif
+      /*try:*/ {
+
+        /* "friso/backends/cython/_friso.pyx":110
+ *         cdef fstring f_ptr = <fstring> f_bytes
+ *         with nogil:
+ *             friso_dic_load(self._friso,  config._config, lex ,f_ptr, length)             # <<<<<<<<<<<<<<
+ * 
+ *     cpdef inline dic_load_from_ifile(self,Config config, object lexpath, uint_t length):
+ */
+        friso_dic_load(__pyx_v_self->_friso, __pyx_v_config->_config, __pyx_v_lex, __pyx_v_f_ptr, __pyx_v_length);
+      }
+
+      /* "friso/backends/cython/_friso.pyx":109
+ *         cdef bytes f_bytes = ensure_bytes(lexpath)
+ *         cdef fstring f_ptr = <fstring> f_bytes
+ *         with nogil:             # <<<<<<<<<<<<<<
+ *             friso_dic_load(self._friso,  config._config, lex ,f_ptr, length)
+ * 
+ */
+      /*finally:*/ {
+        /*normal exit:*/{
+          #ifdef WITH_THREAD
+          __Pyx_FastGIL_Forget();
+          Py_BLOCK_THREADS
+          #endif
+          goto __pyx_L5;
+        }
+        __pyx_L5:;
+      }
+  }
+
+  /* "friso/backends/cython/_friso.pyx":106
+ *         return ret
+ * 
+ *     cpdef inline dic_load(self,Config config, friso_lex_t lex, object lexpath, uint_t length):             # <<<<<<<<<<<<<<
+ *         cdef bytes f_bytes = ensure_bytes(lexpath)
+ *         cdef fstring f_ptr = <fstring> f_bytes
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("friso.backends.cython._friso.Friso.dic_load", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_f_bytes);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_7dic_load(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_5friso_8backends_6cython_6_friso_5Friso_6dic_load[] = "Friso.dic_load(self, Config config, friso_lex_t lex, lexpath, uint_t length)";
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_7dic_load(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_config = 0;
+  friso_lex_t __pyx_v_lex;
+  PyObject *__pyx_v_lexpath = 0;
+  uint_t __pyx_v_length;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("dic_load (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_config,&__pyx_n_s_lex,&__pyx_n_s_lexpath,&__pyx_n_s_length,0};
+    PyObject* values[4] = {0,0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        CYTHON_FALLTHROUGH;
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_config)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_lex)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("dic_load", 1, 4, 4, 1); __PYX_ERR(1, 106, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_lexpath)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("dic_load", 1, 4, 4, 2); __PYX_ERR(1, 106, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  3:
+        if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_length)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("dic_load", 1, 4, 4, 3); __PYX_ERR(1, 106, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "dic_load") < 0)) __PYX_ERR(1, 106, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+      values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+    }
+    __pyx_v_config = ((struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *)values[0]);
+    __pyx_v_lex = ((friso_lex_t)__Pyx_PyInt_As_friso_lex_t(values[1])); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 106, __pyx_L3_error)
+    __pyx_v_lexpath = values[2];
+    __pyx_v_length = __Pyx_PyInt_As_uint_t(values[3]); if (unlikely((__pyx_v_length == ((uint_t)-1)) && PyErr_Occurred())) __PYX_ERR(1, 106, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("dic_load", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 106, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("friso.backends.cython._friso.Friso.dic_load", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_config), __pyx_ptype_5friso_8backends_6cython_6_friso_Config, 1, "config", 0))) __PYX_ERR(1, 106, __pyx_L1_error)
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_5Friso_6dic_load(((struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *)__pyx_v_self), __pyx_v_config, __pyx_v_lex, __pyx_v_lexpath, __pyx_v_length);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_6dic_load(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_config, friso_lex_t __pyx_v_lex, PyObject *__pyx_v_lexpath, uint_t __pyx_v_length) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("dic_load", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_5Friso_dic_load(__pyx_v_self, __pyx_v_config, __pyx_v_lex, __pyx_v_lexpath, __pyx_v_length, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 106, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("friso.backends.cython._friso.Friso.dic_load", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "friso/backends/cython/_friso.pyx":112
+ *             friso_dic_load(self._friso,  config._config, lex ,f_ptr, length)
+ * 
+ *     cpdef inline dic_load_from_ifile(self,Config config, object lexpath, uint_t length):             # <<<<<<<<<<<<<<
+ *         cdef bytes f_bytes = ensure_bytes(lexpath)
+ *         cdef fstring f_ptr = <fstring> f_bytes
+ */
+
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_9dic_load_from_ifile(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_5Friso_dic_load_from_ifile(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_config, PyObject *__pyx_v_lexpath, uint_t __pyx_v_length, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  PyObject *__pyx_v_f_bytes = 0;
+  fstring __pyx_v_f_ptr;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  fstring __pyx_t_2;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("dic_load_from_ifile", 0);
+
+  /* "friso/backends/cython/_friso.pyx":113
+ * 
+ *     cpdef inline dic_load_from_ifile(self,Config config, object lexpath, uint_t length):
+ *         cdef bytes f_bytes = ensure_bytes(lexpath)             # <<<<<<<<<<<<<<
+ *         cdef fstring f_ptr = <fstring> f_bytes
+ *         with nogil:
+ */
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_ensure_bytes(__pyx_v_lexpath); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 113, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_f_bytes = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "friso/backends/cython/_friso.pyx":114
+ *     cpdef inline dic_load_from_ifile(self,Config config, object lexpath, uint_t length):
+ *         cdef bytes f_bytes = ensure_bytes(lexpath)
+ *         cdef fstring f_ptr = <fstring> f_bytes             # <<<<<<<<<<<<<<
+ *         with nogil:
+ *             friso_dic_load_from_ifile(self._friso, config._config,f_ptr,length)
+ */
+  if (unlikely(__pyx_v_f_bytes == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
+    __PYX_ERR(1, 114, __pyx_L1_error)
+  }
+  __pyx_t_2 = __Pyx_PyBytes_AsWritableString(__pyx_v_f_bytes); if (unlikely((__pyx_t_2 == ((fstring)NULL)) && PyErr_Occurred())) __PYX_ERR(1, 114, __pyx_L1_error)
+  __pyx_v_f_ptr = ((fstring)__pyx_t_2);
+
+  /* "friso/backends/cython/_friso.pyx":115
+ *         cdef bytes f_bytes = ensure_bytes(lexpath)
+ *         cdef fstring f_ptr = <fstring> f_bytes
+ *         with nogil:             # <<<<<<<<<<<<<<
+ *             friso_dic_load_from_ifile(self._friso, config._config,f_ptr,length)
+ * 
+ */
+  {
+      #ifdef WITH_THREAD
+      PyThreadState *_save;
+      Py_UNBLOCK_THREADS
+      __Pyx_FastGIL_Remember();
+      #endif
+      /*try:*/ {
+
+        /* "friso/backends/cython/_friso.pyx":116
+ *         cdef fstring f_ptr = <fstring> f_bytes
+ *         with nogil:
+ *             friso_dic_load_from_ifile(self._friso, config._config,f_ptr,length)             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+        friso_dic_load_from_ifile(__pyx_v_self->_friso, __pyx_v_config->_config, __pyx_v_f_ptr, __pyx_v_length);
+      }
+
+      /* "friso/backends/cython/_friso.pyx":115
+ *         cdef bytes f_bytes = ensure_bytes(lexpath)
+ *         cdef fstring f_ptr = <fstring> f_bytes
+ *         with nogil:             # <<<<<<<<<<<<<<
+ *             friso_dic_load_from_ifile(self._friso, config._config,f_ptr,length)
+ * 
+ */
+      /*finally:*/ {
+        /*normal exit:*/{
+          #ifdef WITH_THREAD
+          __Pyx_FastGIL_Forget();
+          Py_BLOCK_THREADS
+          #endif
+          goto __pyx_L5;
+        }
+        __pyx_L5:;
+      }
+  }
+
+  /* "friso/backends/cython/_friso.pyx":112
+ *             friso_dic_load(self._friso,  config._config, lex ,f_ptr, length)
+ * 
+ *     cpdef inline dic_load_from_ifile(self,Config config, object lexpath, uint_t length):             # <<<<<<<<<<<<<<
+ *         cdef bytes f_bytes = ensure_bytes(lexpath)
+ *         cdef fstring f_ptr = <fstring> f_bytes
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("friso.backends.cython._friso.Friso.dic_load_from_ifile", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_f_bytes);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_9dic_load_from_ifile(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_5friso_8backends_6cython_6_friso_5Friso_8dic_load_from_ifile[] = "Friso.dic_load_from_ifile(self, Config config, lexpath, uint_t length)";
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_9dic_load_from_ifile(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_config = 0;
+  PyObject *__pyx_v_lexpath = 0;
+  uint_t __pyx_v_length;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("dic_load_from_ifile (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_config,&__pyx_n_s_lexpath,&__pyx_n_s_length,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_config)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_lexpath)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("dic_load_from_ifile", 1, 3, 3, 1); __PYX_ERR(1, 112, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_length)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("dic_load_from_ifile", 1, 3, 3, 2); __PYX_ERR(1, 112, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "dic_load_from_ifile") < 0)) __PYX_ERR(1, 112, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v_config = ((struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *)values[0]);
+    __pyx_v_lexpath = values[1];
+    __pyx_v_length = __Pyx_PyInt_As_uint_t(values[2]); if (unlikely((__pyx_v_length == ((uint_t)-1)) && PyErr_Occurred())) __PYX_ERR(1, 112, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("dic_load_from_ifile", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 112, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("friso.backends.cython._friso.Friso.dic_load_from_ifile", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_config), __pyx_ptype_5friso_8backends_6cython_6_friso_Config, 1, "config", 0))) __PYX_ERR(1, 112, __pyx_L1_error)
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_5Friso_8dic_load_from_ifile(((struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *)__pyx_v_self), __pyx_v_config, __pyx_v_lexpath, __pyx_v_length);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_8dic_load_from_ifile(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_config, PyObject *__pyx_v_lexpath, uint_t __pyx_v_length) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("dic_load_from_ifile", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_5Friso_dic_load_from_ifile(__pyx_v_self, __pyx_v_config, __pyx_v_lexpath, __pyx_v_length, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 112, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("friso.backends.cython._friso.Friso.dic_load_from_ifile", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
@@ -3144,20 +3812,20 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_4init_from_ifi
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_5friso_8backends_6cython_6_friso_5Friso_6__reduce_cython__[] = "Friso.__reduce_cython__(self)";
-static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_11__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_5friso_8backends_6cython_6_friso_5Friso_10__reduce_cython__[] = "Friso.__reduce_cython__(self)";
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_11__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_5Friso_6__reduce_cython__(((struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *)__pyx_v_self));
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_5Friso_10__reduce_cython__(((struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self) {
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_10__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3202,20 +3870,20 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_6__reduce_cyth
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static char __pyx_doc_5friso_8backends_6cython_6_friso_5Friso_8__setstate_cython__[] = "Friso.__setstate_cython__(self, __pyx_state)";
-static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_13__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static char __pyx_doc_5friso_8backends_6cython_6_friso_5Friso_12__setstate_cython__[] = "Friso.__setstate_cython__(self, __pyx_state)";
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_13__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_5Friso_8__setstate_cython__(((struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_5Friso_12__setstate_cython__(((struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_12__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3252,12 +3920,12 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Friso_8__setstate_cy
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":95
+/* "friso/backends/cython/_friso.pyx":124
  * cdef class Config:
  *     cdef friso_config_t _config
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
  *         self._config = friso_new_config()
- * 
+ *         if not self._config:
  */
 
 /* Python wrapper */
@@ -3279,37 +3947,99 @@ static int __pyx_pw_5friso_8backends_6cython_6_friso_6Config_1__cinit__(PyObject
 static int __pyx_pf_5friso_8backends_6cython_6_friso_6Config___cinit__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":96
+  /* "friso/backends/cython/_friso.pyx":125
  *     cdef friso_config_t _config
  *     def __cinit__(self):
  *         self._config = friso_new_config()             # <<<<<<<<<<<<<<
- * 
- *     def __dealloc__(self):
+ *         if not self._config:
+ *             raise FrisoException("new friso_config_t error")
  */
   __pyx_v_self->_config = friso_new_config();
 
-  /* "friso/backends/cython/_friso.pyx":95
+  /* "friso/backends/cython/_friso.pyx":126
+ *     def __cinit__(self):
+ *         self._config = friso_new_config()
+ *         if not self._config:             # <<<<<<<<<<<<<<
+ *             raise FrisoException("new friso_config_t error")
+ * 
+ */
+  __pyx_t_1 = ((!(__pyx_v_self->_config != 0)) != 0);
+  if (unlikely(__pyx_t_1)) {
+
+    /* "friso/backends/cython/_friso.pyx":127
+ *         self._config = friso_new_config()
+ *         if not self._config:
+ *             raise FrisoException("new friso_config_t error")             # <<<<<<<<<<<<<<
+ * 
+ *     def __dealloc__(self):
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_FrisoException); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 127, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_4 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+      __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+      if (likely(__pyx_t_4)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+        __Pyx_INCREF(__pyx_t_4);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_3, function);
+      }
+    }
+    __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_kp_u_new_friso_config_t_error) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_kp_u_new_friso_config_t_error);
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 127, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __PYX_ERR(1, 127, __pyx_L1_error)
+
+    /* "friso/backends/cython/_friso.pyx":126
+ *     def __cinit__(self):
+ *         self._config = friso_new_config()
+ *         if not self._config:             # <<<<<<<<<<<<<<
+ *             raise FrisoException("new friso_config_t error")
+ * 
+ */
+  }
+
+  /* "friso/backends/cython/_friso.pyx":124
  * cdef class Config:
  *     cdef friso_config_t _config
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
  *         self._config = friso_new_config()
- * 
+ *         if not self._config:
  */
 
   /* function exit code */
   __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("friso.backends.cython._friso.Config.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":98
- *         self._config = friso_new_config()
+/* "friso/backends/cython/_friso.pyx":129
+ *             raise FrisoException("new friso_config_t error")
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         friso_free_config(self._config)
- * 
+ *         if self._config:
+ *             friso_free_config(self._config)
  */
 
 /* Python wrapper */
@@ -3325,31 +4055,51 @@ static void __pyx_pw_5friso_8backends_6cython_6_friso_6Config_3__dealloc__(PyObj
 
 static void __pyx_pf_5friso_8backends_6cython_6_friso_6Config_2__dealloc__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":99
+  /* "friso/backends/cython/_friso.pyx":130
  * 
  *     def __dealloc__(self):
- *         friso_free_config(self._config)             # <<<<<<<<<<<<<<
+ *         if self._config:             # <<<<<<<<<<<<<<
+ *             friso_free_config(self._config)
+ * 
+ */
+  __pyx_t_1 = (__pyx_v_self->_config != 0);
+  if (__pyx_t_1) {
+
+    /* "friso/backends/cython/_friso.pyx":131
+ *     def __dealloc__(self):
+ *         if self._config:
+ *             friso_free_config(self._config)             # <<<<<<<<<<<<<<
  * 
  *     cpdef inline init(self):
  */
-  friso_free_config(__pyx_v_self->_config);
+    friso_free_config(__pyx_v_self->_config);
 
-  /* "friso/backends/cython/_friso.pyx":98
- *         self._config = friso_new_config()
+    /* "friso/backends/cython/_friso.pyx":130
+ * 
+ *     def __dealloc__(self):
+ *         if self._config:             # <<<<<<<<<<<<<<
+ *             friso_free_config(self._config)
+ * 
+ */
+  }
+
+  /* "friso/backends/cython/_friso.pyx":129
+ *             raise FrisoException("new friso_config_t error")
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         friso_free_config(self._config)
- * 
+ *         if self._config:
+ *             friso_free_config(self._config)
  */
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-/* "friso/backends/cython/_friso.pyx":101
- *         friso_free_config(self._config)
+/* "friso/backends/cython/_friso.pyx":133
+ *             friso_free_config(self._config)
  * 
  *     cpdef inline init(self):             # <<<<<<<<<<<<<<
  *         with nogil:
@@ -3362,7 +4112,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("init", 0);
 
-  /* "friso/backends/cython/_friso.pyx":102
+  /* "friso/backends/cython/_friso.pyx":134
  * 
  *     cpdef inline init(self):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3377,7 +4127,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
       #endif
       /*try:*/ {
 
-        /* "friso/backends/cython/_friso.pyx":103
+        /* "friso/backends/cython/_friso.pyx":135
  *     cpdef inline init(self):
  *         with nogil:
  *             friso_init_config(self._config)             # <<<<<<<<<<<<<<
@@ -3387,7 +4137,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
         friso_init_config(__pyx_v_self->_config);
       }
 
-      /* "friso/backends/cython/_friso.pyx":102
+      /* "friso/backends/cython/_friso.pyx":134
  * 
  *     cpdef inline init(self):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3406,8 +4156,8 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
       }
   }
 
-  /* "friso/backends/cython/_friso.pyx":101
- *         friso_free_config(self._config)
+  /* "friso/backends/cython/_friso.pyx":133
+ *             friso_free_config(self._config)
  * 
  *     cpdef inline init(self):             # <<<<<<<<<<<<<<
  *         with nogil:
@@ -3444,7 +4194,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_4init(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("init", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_6Config_init(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 101, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_6Config_init(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3461,7 +4211,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_4init(struct 
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":106
+/* "friso/backends/cython/_friso.pyx":138
  * 
  *     @property
  *     def max_len(self):             # <<<<<<<<<<<<<<
@@ -3491,7 +4241,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7max_len___ge
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":107
+  /* "friso/backends/cython/_friso.pyx":139
  *     @property
  *     def max_len(self):
  *         return self._config.max_len             # <<<<<<<<<<<<<<
@@ -3499,13 +4249,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7max_len___ge
  *     def r_name(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->max_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 107, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->max_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":106
+  /* "friso/backends/cython/_friso.pyx":138
  * 
  *     @property
  *     def max_len(self):             # <<<<<<<<<<<<<<
@@ -3524,7 +4274,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7max_len___ge
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":109
+/* "friso/backends/cython/_friso.pyx":141
  *         return self._config.max_len
  *     @property
  *     def r_name(self):             # <<<<<<<<<<<<<<
@@ -3554,7 +4304,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_6r_name___get
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":110
+  /* "friso/backends/cython/_friso.pyx":142
  *     @property
  *     def r_name(self):
  *         return self._config.r_name             # <<<<<<<<<<<<<<
@@ -3562,13 +4312,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_6r_name___get
  *     def mix_len(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->r_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 110, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->r_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":109
+  /* "friso/backends/cython/_friso.pyx":141
  *         return self._config.max_len
  *     @property
  *     def r_name(self):             # <<<<<<<<<<<<<<
@@ -3587,7 +4337,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_6r_name___get
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":112
+/* "friso/backends/cython/_friso.pyx":144
  *         return self._config.r_name
  *     @property
  *     def mix_len(self):             # <<<<<<<<<<<<<<
@@ -3617,7 +4367,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7mix_len___ge
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":113
+  /* "friso/backends/cython/_friso.pyx":145
  *     @property
  *     def mix_len(self):
  *         return self._config.mix_len             # <<<<<<<<<<<<<<
@@ -3625,13 +4375,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7mix_len___ge
  *     def lna_len(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->mix_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 113, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->mix_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 145, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":112
+  /* "friso/backends/cython/_friso.pyx":144
  *         return self._config.r_name
  *     @property
  *     def mix_len(self):             # <<<<<<<<<<<<<<
@@ -3650,7 +4400,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7mix_len___ge
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":115
+/* "friso/backends/cython/_friso.pyx":147
  *         return self._config.mix_len
  *     @property
  *     def lna_len(self):             # <<<<<<<<<<<<<<
@@ -3680,7 +4430,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7lna_len___ge
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":116
+  /* "friso/backends/cython/_friso.pyx":148
  *     @property
  *     def lna_len(self):
  *         return self._config.lna_len             # <<<<<<<<<<<<<<
@@ -3688,13 +4438,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7lna_len___ge
  *     def add_syn(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->lna_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 116, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->lna_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":115
+  /* "friso/backends/cython/_friso.pyx":147
  *         return self._config.mix_len
  *     @property
  *     def lna_len(self):             # <<<<<<<<<<<<<<
@@ -3713,7 +4463,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7lna_len___ge
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":118
+/* "friso/backends/cython/_friso.pyx":150
  *         return self._config.lna_len
  *     @property
  *     def add_syn(self):             # <<<<<<<<<<<<<<
@@ -3743,7 +4493,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7add_syn___ge
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":119
+  /* "friso/backends/cython/_friso.pyx":151
  *     @property
  *     def add_syn(self):
  *         return self._config.add_syn             # <<<<<<<<<<<<<<
@@ -3751,13 +4501,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7add_syn___ge
  *     def clr_stw(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->add_syn); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 119, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->add_syn); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 151, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":118
+  /* "friso/backends/cython/_friso.pyx":150
  *         return self._config.lna_len
  *     @property
  *     def add_syn(self):             # <<<<<<<<<<<<<<
@@ -3776,7 +4526,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7add_syn___ge
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":121
+/* "friso/backends/cython/_friso.pyx":153
  *         return self._config.add_syn
  *     @property
  *     def clr_stw(self):             # <<<<<<<<<<<<<<
@@ -3806,7 +4556,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7clr_stw___ge
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":122
+  /* "friso/backends/cython/_friso.pyx":154
  *     @property
  *     def clr_stw(self):
  *         return self._config.clr_stw             # <<<<<<<<<<<<<<
@@ -3814,13 +4564,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7clr_stw___ge
  *     def keep_urec(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->clr_stw); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 122, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->clr_stw); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":121
+  /* "friso/backends/cython/_friso.pyx":153
  *         return self._config.add_syn
  *     @property
  *     def clr_stw(self):             # <<<<<<<<<<<<<<
@@ -3839,7 +4589,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7clr_stw___ge
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":124
+/* "friso/backends/cython/_friso.pyx":156
  *         return self._config.clr_stw
  *     @property
  *     def keep_urec(self):             # <<<<<<<<<<<<<<
@@ -3869,7 +4619,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_9keep_urec___
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":125
+  /* "friso/backends/cython/_friso.pyx":157
  *     @property
  *     def keep_urec(self):
  *         return self._config.keep_urec             # <<<<<<<<<<<<<<
@@ -3877,13 +4627,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_9keep_urec___
  *     def spx_out(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->keep_urec); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 125, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->keep_urec); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":124
+  /* "friso/backends/cython/_friso.pyx":156
  *         return self._config.clr_stw
  *     @property
  *     def keep_urec(self):             # <<<<<<<<<<<<<<
@@ -3902,7 +4652,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_9keep_urec___
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":127
+/* "friso/backends/cython/_friso.pyx":159
  *         return self._config.keep_urec
  *     @property
  *     def spx_out(self):             # <<<<<<<<<<<<<<
@@ -3932,7 +4682,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7spx_out___ge
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":128
+  /* "friso/backends/cython/_friso.pyx":160
  *     @property
  *     def spx_out(self):
  *         return self._config.spx_out             # <<<<<<<<<<<<<<
@@ -3940,13 +4690,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7spx_out___ge
  *     def en_sseg(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->spx_out); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 128, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->spx_out); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 160, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":127
+  /* "friso/backends/cython/_friso.pyx":159
  *         return self._config.keep_urec
  *     @property
  *     def spx_out(self):             # <<<<<<<<<<<<<<
@@ -3965,7 +4715,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7spx_out___ge
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":130
+/* "friso/backends/cython/_friso.pyx":162
  *         return self._config.spx_out
  *     @property
  *     def en_sseg(self):             # <<<<<<<<<<<<<<
@@ -3995,7 +4745,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7en_sseg___ge
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":131
+  /* "friso/backends/cython/_friso.pyx":163
  *     @property
  *     def en_sseg(self):
  *         return self._config.en_sseg             # <<<<<<<<<<<<<<
@@ -4003,13 +4753,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7en_sseg___ge
  *     def st_minl(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->en_sseg); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 131, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->en_sseg); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":130
+  /* "friso/backends/cython/_friso.pyx":162
  *         return self._config.spx_out
  *     @property
  *     def en_sseg(self):             # <<<<<<<<<<<<<<
@@ -4028,7 +4778,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7en_sseg___ge
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":133
+/* "friso/backends/cython/_friso.pyx":165
  *         return self._config.en_sseg
  *     @property
  *     def st_minl(self):             # <<<<<<<<<<<<<<
@@ -4058,7 +4808,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7st_minl___ge
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":134
+  /* "friso/backends/cython/_friso.pyx":166
  *     @property
  *     def st_minl(self):
  *         return self._config.st_minl             # <<<<<<<<<<<<<<
@@ -4066,13 +4816,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7st_minl___ge
  *     def nthreshold(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->st_minl); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 134, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_ushort_t(__pyx_v_self->_config->st_minl); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":133
+  /* "friso/backends/cython/_friso.pyx":165
  *         return self._config.en_sseg
  *     @property
  *     def st_minl(self):             # <<<<<<<<<<<<<<
@@ -4091,7 +4841,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_7st_minl___ge
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":136
+/* "friso/backends/cython/_friso.pyx":168
  *         return self._config.st_minl
  *     @property
  *     def nthreshold(self):             # <<<<<<<<<<<<<<
@@ -4121,7 +4871,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_10nthreshold_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":137
+  /* "friso/backends/cython/_friso.pyx":169
  *     @property
  *     def nthreshold(self):
  *         return self._config.nthreshold             # <<<<<<<<<<<<<<
@@ -4129,13 +4879,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_10nthreshold_
  *     def mode(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_uint_t(__pyx_v_self->_config->nthreshold); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 137, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_uint_t(__pyx_v_self->_config->nthreshold); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 169, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":136
+  /* "friso/backends/cython/_friso.pyx":168
  *         return self._config.st_minl
  *     @property
  *     def nthreshold(self):             # <<<<<<<<<<<<<<
@@ -4154,7 +4904,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_10nthreshold_
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":139
+/* "friso/backends/cython/_friso.pyx":171
  *         return self._config.nthreshold
  *     @property
  *     def mode(self):             # <<<<<<<<<<<<<<
@@ -4184,7 +4934,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_4mode___get__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":140
+  /* "friso/backends/cython/_friso.pyx":172
  *     @property
  *     def mode(self):
  *         return self._config.mode             # <<<<<<<<<<<<<<
@@ -4192,13 +4942,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_4mode___get__
  *     cpdef inline set_mode(self, friso_mode_t mod):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_friso_mode_t(__pyx_v_self->_config->mode); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 140, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_mode_t(__pyx_v_self->_config->mode); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":139
+  /* "friso/backends/cython/_friso.pyx":171
  *         return self._config.nthreshold
  *     @property
  *     def mode(self):             # <<<<<<<<<<<<<<
@@ -4217,7 +4967,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_4mode___get__
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":142
+/* "friso/backends/cython/_friso.pyx":174
  *         return self._config.mode
  * 
  *     cpdef inline set_mode(self, friso_mode_t mod):             # <<<<<<<<<<<<<<
@@ -4231,7 +4981,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_mode", 0);
 
-  /* "friso/backends/cython/_friso.pyx":143
+  /* "friso/backends/cython/_friso.pyx":175
  * 
  *     cpdef inline set_mode(self, friso_mode_t mod):
  *         friso_set_mode(self._config, mod)             # <<<<<<<<<<<<<<
@@ -4240,7 +4990,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
  */
   friso_set_mode(__pyx_v_self->_config, __pyx_v_mod);
 
-  /* "friso/backends/cython/_friso.pyx":142
+  /* "friso/backends/cython/_friso.pyx":174
  *         return self._config.mode
  * 
  *     cpdef inline set_mode(self, friso_mode_t mod):             # <<<<<<<<<<<<<<
@@ -4267,7 +5017,7 @@ static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_6Config_7set_mode(PyO
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_mode (wrapper)", 0);
   assert(__pyx_arg_mod); {
-    __pyx_v_mod = ((friso_mode_t)__Pyx_PyInt_As_friso_mode_t(__pyx_arg_mod)); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 142, __pyx_L3_error)
+    __pyx_v_mod = ((friso_mode_t)__Pyx_PyInt_As_friso_mode_t(__pyx_arg_mod)); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 174, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4291,7 +5041,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_6set_mode(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_mode", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_6Config_set_mode(__pyx_v_self, __pyx_v_mod, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 142, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_6Config_set_mode(__pyx_v_self, __pyx_v_mod, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 174, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4308,7 +5058,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_6set_mode(str
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":145
+/* "friso/backends/cython/_friso.pyx":177
  *         friso_set_mode(self._config, mod)
  * 
  *     cpdef inline object next_token(self, Friso friso, Task task):             # <<<<<<<<<<<<<<
@@ -4328,7 +5078,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("next_token", 0);
 
-  /* "friso/backends/cython/_friso.pyx":146
+  /* "friso/backends/cython/_friso.pyx":178
  * 
  *     cpdef inline object next_token(self, Friso friso, Task task):
  *         cdef friso_token_t token = NULL             # <<<<<<<<<<<<<<
@@ -4337,7 +5087,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
  */
   __pyx_v_token = NULL;
 
-  /* "friso/backends/cython/_friso.pyx":147
+  /* "friso/backends/cython/_friso.pyx":179
  *     cpdef inline object next_token(self, Friso friso, Task task):
  *         cdef friso_token_t token = NULL
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4352,7 +5102,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
       #endif
       /*try:*/ {
 
-        /* "friso/backends/cython/_friso.pyx":148
+        /* "friso/backends/cython/_friso.pyx":180
  *         cdef friso_token_t token = NULL
  *         with nogil:
  *             token = self._config.next_token(friso._friso, self._config, task._task)             # <<<<<<<<<<<<<<
@@ -4362,7 +5112,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
         __pyx_v_token = __pyx_v_self->_config->next_token(__pyx_v_friso->_friso, __pyx_v_self->_config, __pyx_v_task->_task);
       }
 
-      /* "friso/backends/cython/_friso.pyx":147
+      /* "friso/backends/cython/_friso.pyx":179
  *     cpdef inline object next_token(self, Friso friso, Task task):
  *         cdef friso_token_t token = NULL
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4381,7 +5131,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
       }
   }
 
-  /* "friso/backends/cython/_friso.pyx":149
+  /* "friso/backends/cython/_friso.pyx":181
  *         with nogil:
  *             token = self._config.next_token(friso._friso, self._config, task._task)
  *         if token != NULL:             # <<<<<<<<<<<<<<
@@ -4391,7 +5141,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
   __pyx_t_1 = ((__pyx_v_token != NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "friso/backends/cython/_friso.pyx":150
+    /* "friso/backends/cython/_friso.pyx":182
  *             token = self._config.next_token(friso._friso, self._config, task._task)
  *         if token != NULL:
  *             return Token.from_ptr(token)             # <<<<<<<<<<<<<<
@@ -4399,13 +5149,13 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
  *             return None
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = ((PyObject *)__pyx_f_5friso_8backends_6cython_6_friso_5Token_from_ptr(__pyx_v_token)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 150, __pyx_L1_error)
+    __pyx_t_2 = ((PyObject *)__pyx_f_5friso_8backends_6cython_6_friso_5Token_from_ptr(__pyx_v_token)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 182, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_r = __pyx_t_2;
     __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "friso/backends/cython/_friso.pyx":149
+    /* "friso/backends/cython/_friso.pyx":181
  *         with nogil:
  *             token = self._config.next_token(friso._friso, self._config, task._task)
  *         if token != NULL:             # <<<<<<<<<<<<<<
@@ -4414,7 +5164,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
  */
   }
 
-  /* "friso/backends/cython/_friso.pyx":152
+  /* "friso/backends/cython/_friso.pyx":184
  *             return Token.from_ptr(token)
  *         else:
  *             return None             # <<<<<<<<<<<<<<
@@ -4427,7 +5177,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
     goto __pyx_L0;
   }
 
-  /* "friso/backends/cython/_friso.pyx":145
+  /* "friso/backends/cython/_friso.pyx":177
  *         friso_set_mode(self._config, mod)
  * 
  *     cpdef inline object next_token(self, Friso friso, Task task):             # <<<<<<<<<<<<<<
@@ -4481,11 +5231,11 @@ static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_6Config_9next_token(P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_task)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("next_token", 1, 2, 2, 1); __PYX_ERR(1, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("next_token", 1, 2, 2, 1); __PYX_ERR(1, 177, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "next_token") < 0)) __PYX_ERR(1, 145, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "next_token") < 0)) __PYX_ERR(1, 177, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -4498,14 +5248,14 @@ static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_6Config_9next_token(P
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("next_token", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 145, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("next_token", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 177, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("friso.backends.cython._friso.Config.next_token", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_friso), __pyx_ptype_5friso_8backends_6cython_6_friso_Friso, 1, "friso", 0))) __PYX_ERR(1, 145, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_task), __pyx_ptype_5friso_8backends_6cython_6_friso_Task, 1, "task", 0))) __PYX_ERR(1, 145, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_friso), __pyx_ptype_5friso_8backends_6cython_6_friso_Friso, 1, "friso", 0))) __PYX_ERR(1, 177, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_task), __pyx_ptype_5friso_8backends_6cython_6_friso_Task, 1, "task", 0))) __PYX_ERR(1, 177, __pyx_L1_error)
   __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_6Config_8next_token(((struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *)__pyx_v_self), __pyx_v_friso, __pyx_v_task);
 
   /* function exit code */
@@ -4526,7 +5276,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_8next_token(s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("next_token", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_6Config_next_token(__pyx_v_self, __pyx_v_friso, __pyx_v_task, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 145, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_6Config_next_token(__pyx_v_self, __pyx_v_friso, __pyx_v_task, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4543,7 +5293,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_8next_token(s
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":154
+/* "friso/backends/cython/_friso.pyx":186
  *             return None
  * 
  *     cpdef inline object next_cjk(self, Friso friso, Task task):             # <<<<<<<<<<<<<<
@@ -4563,7 +5313,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("next_cjk", 0);
 
-  /* "friso/backends/cython/_friso.pyx":155
+  /* "friso/backends/cython/_friso.pyx":187
  * 
  *     cpdef inline object next_cjk(self, Friso friso, Task task):
  *         cdef lex_entry_t lex = NULL             # <<<<<<<<<<<<<<
@@ -4572,7 +5322,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
  */
   __pyx_v_lex = NULL;
 
-  /* "friso/backends/cython/_friso.pyx":156
+  /* "friso/backends/cython/_friso.pyx":188
  *     cpdef inline object next_cjk(self, Friso friso, Task task):
  *         cdef lex_entry_t lex = NULL
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4587,7 +5337,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
       #endif
       /*try:*/ {
 
-        /* "friso/backends/cython/_friso.pyx":157
+        /* "friso/backends/cython/_friso.pyx":189
  *         cdef lex_entry_t lex = NULL
  *         with nogil:
  *             lex = self._config.next_cjk(friso._friso, self._config,task._task)             # <<<<<<<<<<<<<<
@@ -4597,7 +5347,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
         __pyx_v_lex = __pyx_v_self->_config->next_cjk(__pyx_v_friso->_friso, __pyx_v_self->_config, __pyx_v_task->_task);
       }
 
-      /* "friso/backends/cython/_friso.pyx":156
+      /* "friso/backends/cython/_friso.pyx":188
  *     cpdef inline object next_cjk(self, Friso friso, Task task):
  *         cdef lex_entry_t lex = NULL
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4616,7 +5366,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
       }
   }
 
-  /* "friso/backends/cython/_friso.pyx":158
+  /* "friso/backends/cython/_friso.pyx":190
  *         with nogil:
  *             lex = self._config.next_cjk(friso._friso, self._config,task._task)
  *         if lex != NULL:             # <<<<<<<<<<<<<<
@@ -4626,7 +5376,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
   __pyx_t_1 = ((__pyx_v_lex != NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "friso/backends/cython/_friso.pyx":159
+    /* "friso/backends/cython/_friso.pyx":191
  *             lex = self._config.next_cjk(friso._friso, self._config,task._task)
  *         if lex != NULL:
  *             return Lex.from_ptr(lex)             # <<<<<<<<<<<<<<
@@ -4634,13 +5384,13 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
  *             return None
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = ((PyObject *)__pyx_f_5friso_8backends_6cython_6_friso_3Lex_from_ptr(__pyx_v_lex)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 159, __pyx_L1_error)
+    __pyx_t_2 = ((PyObject *)__pyx_f_5friso_8backends_6cython_6_friso_3Lex_from_ptr(__pyx_v_lex)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 191, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_r = __pyx_t_2;
     __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "friso/backends/cython/_friso.pyx":158
+    /* "friso/backends/cython/_friso.pyx":190
  *         with nogil:
  *             lex = self._config.next_cjk(friso._friso, self._config,task._task)
  *         if lex != NULL:             # <<<<<<<<<<<<<<
@@ -4649,7 +5399,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
  */
   }
 
-  /* "friso/backends/cython/_friso.pyx":161
+  /* "friso/backends/cython/_friso.pyx":193
  *             return Lex.from_ptr(lex)
  *         else:
  *             return None             # <<<<<<<<<<<<<<
@@ -4662,7 +5412,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_6Config_
     goto __pyx_L0;
   }
 
-  /* "friso/backends/cython/_friso.pyx":154
+  /* "friso/backends/cython/_friso.pyx":186
  *             return None
  * 
  *     cpdef inline object next_cjk(self, Friso friso, Task task):             # <<<<<<<<<<<<<<
@@ -4716,11 +5466,11 @@ static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_6Config_11next_cjk(Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_task)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("next_cjk", 1, 2, 2, 1); __PYX_ERR(1, 154, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("next_cjk", 1, 2, 2, 1); __PYX_ERR(1, 186, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "next_cjk") < 0)) __PYX_ERR(1, 154, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "next_cjk") < 0)) __PYX_ERR(1, 186, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -4733,14 +5483,14 @@ static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_6Config_11next_cjk(Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("next_cjk", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 154, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("next_cjk", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 186, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("friso.backends.cython._friso.Config.next_cjk", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_friso), __pyx_ptype_5friso_8backends_6cython_6_friso_Friso, 1, "friso", 0))) __PYX_ERR(1, 154, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_task), __pyx_ptype_5friso_8backends_6cython_6_friso_Task, 1, "task", 0))) __PYX_ERR(1, 154, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_friso), __pyx_ptype_5friso_8backends_6cython_6_friso_Friso, 1, "friso", 0))) __PYX_ERR(1, 186, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_task), __pyx_ptype_5friso_8backends_6cython_6_friso_Task, 1, "task", 0))) __PYX_ERR(1, 186, __pyx_L1_error)
   __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_6Config_10next_cjk(((struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *)__pyx_v_self), __pyx_v_friso, __pyx_v_task);
 
   /* function exit code */
@@ -4761,7 +5511,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_10next_cjk(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("next_cjk", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_6Config_next_cjk(__pyx_v_self, __pyx_v_friso, __pyx_v_task, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 154, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_6Config_next_cjk(__pyx_v_self, __pyx_v_friso, __pyx_v_task, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 186, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4893,12 +5643,12 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_6Config_14__setstate_
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":168
- * cdef class Task:
- *     cdef friso_task_t _task
+/* "friso/backends/cython/_friso.pyx":202
+ *         friso_task_t _task
+ *         const uint8_t [::1] text_view # keep a ref to that text
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
  *         self._task = friso_new_task()
- * 
+ *         if not self._task:
  */
 
 /* Python wrapper */
@@ -4920,37 +5670,99 @@ static int __pyx_pw_5friso_8backends_6cython_6_friso_4Task_1__cinit__(PyObject *
 static int __pyx_pf_5friso_8backends_6cython_6_friso_4Task___cinit__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":169
- *     cdef friso_task_t _task
+  /* "friso/backends/cython/_friso.pyx":203
+ *         const uint8_t [::1] text_view # keep a ref to that text
  *     def __cinit__(self):
  *         self._task = friso_new_task()             # <<<<<<<<<<<<<<
- * 
- *     def __dealloc__(self):
+ *         if not self._task:
+ *             raise FrisoException("new friso_task_t error")
  */
   __pyx_v_self->_task = friso_new_task();
 
-  /* "friso/backends/cython/_friso.pyx":168
- * cdef class Task:
- *     cdef friso_task_t _task
+  /* "friso/backends/cython/_friso.pyx":204
+ *     def __cinit__(self):
+ *         self._task = friso_new_task()
+ *         if not self._task:             # <<<<<<<<<<<<<<
+ *             raise FrisoException("new friso_task_t error")
+ * 
+ */
+  __pyx_t_1 = ((!(__pyx_v_self->_task != 0)) != 0);
+  if (unlikely(__pyx_t_1)) {
+
+    /* "friso/backends/cython/_friso.pyx":205
+ *         self._task = friso_new_task()
+ *         if not self._task:
+ *             raise FrisoException("new friso_task_t error")             # <<<<<<<<<<<<<<
+ * 
+ *     def __dealloc__(self):
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_FrisoException); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 205, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_4 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+      __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+      if (likely(__pyx_t_4)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+        __Pyx_INCREF(__pyx_t_4);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_3, function);
+      }
+    }
+    __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_kp_u_new_friso_task_t_error) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_kp_u_new_friso_task_t_error);
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 205, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __PYX_ERR(1, 205, __pyx_L1_error)
+
+    /* "friso/backends/cython/_friso.pyx":204
+ *     def __cinit__(self):
+ *         self._task = friso_new_task()
+ *         if not self._task:             # <<<<<<<<<<<<<<
+ *             raise FrisoException("new friso_task_t error")
+ * 
+ */
+  }
+
+  /* "friso/backends/cython/_friso.pyx":202
+ *         friso_task_t _task
+ *         const uint8_t [::1] text_view # keep a ref to that text
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
  *         self._task = friso_new_task()
- * 
+ *         if not self._task:
  */
 
   /* function exit code */
   __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("friso.backends.cython._friso.Task.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":171
- *         self._task = friso_new_task()
+/* "friso/backends/cython/_friso.pyx":207
+ *             raise FrisoException("new friso_task_t error")
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         friso_free_task(self._task)
- * 
+ *         if self._task:
+ *             friso_free_task(self._task)
  */
 
 /* Python wrapper */
@@ -4966,35 +5778,55 @@ static void __pyx_pw_5friso_8backends_6cython_6_friso_4Task_3__dealloc__(PyObjec
 
 static void __pyx_pf_5friso_8backends_6cython_6_friso_4Task_2__dealloc__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":172
+  /* "friso/backends/cython/_friso.pyx":208
  * 
  *     def __dealloc__(self):
- *         friso_free_task(self._task)             # <<<<<<<<<<<<<<
+ *         if self._task:             # <<<<<<<<<<<<<<
+ *             friso_free_task(self._task)
+ * 
+ */
+  __pyx_t_1 = (__pyx_v_self->_task != 0);
+  if (__pyx_t_1) {
+
+    /* "friso/backends/cython/_friso.pyx":209
+ *     def __dealloc__(self):
+ *         if self._task:
+ *             friso_free_task(self._task)             # <<<<<<<<<<<<<<
  * 
  *     cpdef set_text(self, object text):
  */
-  friso_free_task(__pyx_v_self->_task);
+    friso_free_task(__pyx_v_self->_task);
 
-  /* "friso/backends/cython/_friso.pyx":171
- *         self._task = friso_new_task()
+    /* "friso/backends/cython/_friso.pyx":208
+ * 
+ *     def __dealloc__(self):
+ *         if self._task:             # <<<<<<<<<<<<<<
+ *             friso_free_task(self._task)
+ * 
+ */
+  }
+
+  /* "friso/backends/cython/_friso.pyx":207
+ *             raise FrisoException("new friso_task_t error")
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         friso_free_task(self._task)
- * 
+ *         if self._task:
+ *             friso_free_task(self._task)
  */
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-/* "friso/backends/cython/_friso.pyx":174
- *         friso_free_task(self._task)
+/* "friso/backends/cython/_friso.pyx":211
+ *             friso_free_task(self._task)
  * 
  *     cpdef set_text(self, object text):             # <<<<<<<<<<<<<<
  *         cdef bytes text_bytes = ensure_bytes(text)
- *         cdef fstring text_ptr = <fstring> text_bytes
+ *         self.text_view = text_bytes
  */
 
 static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_4Task_5set_text(PyObject *__pyx_v_self, PyObject *__pyx_v_text); /*proto*/
@@ -5004,53 +5836,67 @@ static PyObject *__pyx_f_5friso_8backends_6cython_6_friso_4Task_set_text(struct 
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  fstring __pyx_t_2;
+  __Pyx_memviewslice __pyx_t_2 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  fstring __pyx_t_3;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_text", 0);
 
-  /* "friso/backends/cython/_friso.pyx":175
+  /* "friso/backends/cython/_friso.pyx":212
  * 
  *     cpdef set_text(self, object text):
  *         cdef bytes text_bytes = ensure_bytes(text)             # <<<<<<<<<<<<<<
+ *         self.text_view = text_bytes
  *         cdef fstring text_ptr = <fstring> text_bytes
- *         friso_set_text(self._task, text_ptr)
  */
-  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_ensure_bytes(__pyx_v_text); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 175, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_ensure_bytes(__pyx_v_text); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 212, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_text_bytes = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":176
+  /* "friso/backends/cython/_friso.pyx":213
  *     cpdef set_text(self, object text):
  *         cdef bytes text_bytes = ensure_bytes(text)
+ *         self.text_view = text_bytes             # <<<<<<<<<<<<<<
+ *         cdef fstring text_ptr = <fstring> text_bytes
+ *         friso_set_text(self._task, text_ptr)
+ */
+  __pyx_t_2 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(__pyx_v_text_bytes, 0); if (unlikely(!__pyx_t_2.memview)) __PYX_ERR(1, 213, __pyx_L1_error)
+  __PYX_XDEC_MEMVIEW(&__pyx_v_self->text_view, 0);
+  __pyx_v_self->text_view = __pyx_t_2;
+  __pyx_t_2.memview = NULL;
+  __pyx_t_2.data = NULL;
+
+  /* "friso/backends/cython/_friso.pyx":214
+ *         cdef bytes text_bytes = ensure_bytes(text)
+ *         self.text_view = text_bytes
  *         cdef fstring text_ptr = <fstring> text_bytes             # <<<<<<<<<<<<<<
  *         friso_set_text(self._task, text_ptr)
  * 
  */
   if (unlikely(__pyx_v_text_bytes == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-    __PYX_ERR(1, 176, __pyx_L1_error)
+    __PYX_ERR(1, 214, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_PyBytes_AsWritableString(__pyx_v_text_bytes); if (unlikely((__pyx_t_2 == ((fstring)NULL)) && PyErr_Occurred())) __PYX_ERR(1, 176, __pyx_L1_error)
-  __pyx_v_text_ptr = ((fstring)__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyBytes_AsWritableString(__pyx_v_text_bytes); if (unlikely((__pyx_t_3 == ((fstring)NULL)) && PyErr_Occurred())) __PYX_ERR(1, 214, __pyx_L1_error)
+  __pyx_v_text_ptr = ((fstring)__pyx_t_3);
 
-  /* "friso/backends/cython/_friso.pyx":177
- *         cdef bytes text_bytes = ensure_bytes(text)
+  /* "friso/backends/cython/_friso.pyx":215
+ *         self.text_view = text_bytes
  *         cdef fstring text_ptr = <fstring> text_bytes
  *         friso_set_text(self._task, text_ptr)             # <<<<<<<<<<<<<<
  * 
- *     cpdef set_bytes(self, uint8_t[::1] text):
+ *     cpdef set_bytes(self, const uint8_t[::1] text):
  */
   friso_set_text(__pyx_v_self->_task, __pyx_v_text_ptr);
 
-  /* "friso/backends/cython/_friso.pyx":174
- *         friso_free_task(self._task)
+  /* "friso/backends/cython/_friso.pyx":211
+ *             friso_free_task(self._task)
  * 
  *     cpdef set_text(self, object text):             # <<<<<<<<<<<<<<
  *         cdef bytes text_bytes = ensure_bytes(text)
- *         cdef fstring text_ptr = <fstring> text_bytes
+ *         self.text_view = text_bytes
  */
 
   /* function exit code */
@@ -5058,6 +5904,7 @@ static PyObject *__pyx_f_5friso_8backends_6cython_6_friso_4Task_set_text(struct 
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __PYX_XDEC_MEMVIEW(&__pyx_t_2, 1);
   __Pyx_AddTraceback("friso.backends.cython._friso.Task.set_text", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
@@ -5090,7 +5937,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_4set_text(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_text", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_4Task_set_text(__pyx_v_self, __pyx_v_text, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 174, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_4Task_set_text(__pyx_v_self, __pyx_v_text, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 211, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5107,12 +5954,12 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_4set_text(struc
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":179
+/* "friso/backends/cython/_friso.pyx":217
  *         friso_set_text(self._task, text_ptr)
  * 
- *     cpdef set_bytes(self, uint8_t[::1] text):             # <<<<<<<<<<<<<<
+ *     cpdef set_bytes(self, const uint8_t[::1] text):             # <<<<<<<<<<<<<<
+ *         self.text_view = text
  *         friso_set_text(self._task, <fstring>&text[0])
- * 
  */
 
 static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_4Task_7set_bytes(PyObject *__pyx_v_self, PyObject *__pyx_arg_text); /*proto*/
@@ -5122,22 +5969,33 @@ static PyObject *__pyx_f_5friso_8backends_6cython_6_friso_4Task_set_bytes(struct
   Py_ssize_t __pyx_t_1;
   __Pyx_RefNannySetupContext("set_bytes", 0);
 
-  /* "friso/backends/cython/_friso.pyx":180
+  /* "friso/backends/cython/_friso.pyx":218
  * 
- *     cpdef set_bytes(self, uint8_t[::1] text):
+ *     cpdef set_bytes(self, const uint8_t[::1] text):
+ *         self.text_view = text             # <<<<<<<<<<<<<<
+ *         friso_set_text(self._task, <fstring>&text[0])
+ * 
+ */
+  __PYX_XDEC_MEMVIEW(&__pyx_v_self->text_view, 0);
+  __PYX_INC_MEMVIEW(&__pyx_v_text, 0);
+  __pyx_v_self->text_view = __pyx_v_text;
+
+  /* "friso/backends/cython/_friso.pyx":219
+ *     cpdef set_bytes(self, const uint8_t[::1] text):
+ *         self.text_view = text
  *         friso_set_text(self._task, <fstring>&text[0])             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __pyx_t_1 = 0;
-  friso_set_text(__pyx_v_self->_task, ((fstring)(&(*((uint8_t *) ( /* dim=0 */ ((char *) (((uint8_t *) __pyx_v_text.data) + __pyx_t_1)) ))))));
+  friso_set_text(__pyx_v_self->_task, ((fstring)(&(*((uint8_t const  *) ( /* dim=0 */ ((char *) (((uint8_t const  *) __pyx_v_text.data) + __pyx_t_1)) ))))));
 
-  /* "friso/backends/cython/_friso.pyx":179
+  /* "friso/backends/cython/_friso.pyx":217
  *         friso_set_text(self._task, text_ptr)
  * 
- *     cpdef set_bytes(self, uint8_t[::1] text):             # <<<<<<<<<<<<<<
+ *     cpdef set_bytes(self, const uint8_t[::1] text):             # <<<<<<<<<<<<<<
+ *         self.text_view = text
  *         friso_set_text(self._task, <fstring>&text[0])
- * 
  */
 
   /* function exit code */
@@ -5149,7 +6007,7 @@ static PyObject *__pyx_f_5friso_8backends_6cython_6_friso_4Task_set_bytes(struct
 
 /* Python wrapper */
 static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_4Task_7set_bytes(PyObject *__pyx_v_self, PyObject *__pyx_arg_text); /*proto*/
-static char __pyx_doc_5friso_8backends_6cython_6_friso_4Task_6set_bytes[] = "Task.set_bytes(self, uint8_t[::1] text)";
+static char __pyx_doc_5friso_8backends_6cython_6_friso_4Task_6set_bytes[] = "Task.set_bytes(self, const uint8_t[::1] text)";
 static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_4Task_7set_bytes(PyObject *__pyx_v_self, PyObject *__pyx_arg_text) {
   __Pyx_memviewslice __pyx_v_text = { 0, 0, { 0 }, { 0 }, { 0 } };
   int __pyx_lineno = 0;
@@ -5159,7 +6017,7 @@ static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_4Task_7set_bytes(PyOb
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_bytes (wrapper)", 0);
   assert(__pyx_arg_text); {
-    __pyx_v_text = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t(__pyx_arg_text, PyBUF_WRITABLE); if (unlikely(!__pyx_v_text.memview)) __PYX_ERR(1, 179, __pyx_L3_error)
+    __pyx_v_text = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(__pyx_arg_text, 0); if (unlikely(!__pyx_v_text.memview)) __PYX_ERR(1, 217, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5183,8 +6041,8 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_6set_bytes(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_bytes", 0);
   __Pyx_XDECREF(__pyx_r);
-  if (unlikely(!__pyx_v_text.memview)) { __Pyx_RaiseUnboundLocalError("text"); __PYX_ERR(1, 179, __pyx_L1_error) }
-  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_4Task_set_bytes(__pyx_v_self, __pyx_v_text, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 179, __pyx_L1_error)
+  if (unlikely(!__pyx_v_text.memview)) { __Pyx_RaiseUnboundLocalError("text"); __PYX_ERR(1, 217, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_4Task_set_bytes(__pyx_v_self, __pyx_v_text, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 217, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5202,7 +6060,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_6set_bytes(stru
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":184
+/* "friso/backends/cython/_friso.pyx":223
  * 
  *     @property
  *     def text(self):             # <<<<<<<<<<<<<<
@@ -5233,7 +6091,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_4text___get__(s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":185
+  /* "friso/backends/cython/_friso.pyx":224
  *     @property
  *     def text(self):
  *         return (<bytes>self._task.text).decode()             # <<<<<<<<<<<<<<
@@ -5241,20 +6099,20 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_4text___get__(s
  *     def idx(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBytes_FromString(__pyx_v_self->_task->text); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 185, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBytes_FromString(__pyx_v_self->_task->text); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_t_1 == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "decode");
-    __PYX_ERR(1, 185, __pyx_L1_error)
+    __PYX_ERR(1, 224, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_decode_bytes(((PyObject*)__pyx_t_1), 0, PY_SSIZE_T_MAX, NULL, NULL, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 185, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_decode_bytes(((PyObject*)__pyx_t_1), 0, PY_SSIZE_T_MAX, NULL, NULL, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":184
+  /* "friso/backends/cython/_friso.pyx":223
  * 
  *     @property
  *     def text(self):             # <<<<<<<<<<<<<<
@@ -5274,7 +6132,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_4text___get__(s
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":187
+/* "friso/backends/cython/_friso.pyx":226
  *         return (<bytes>self._task.text).decode()
  *     @property
  *     def idx(self):             # <<<<<<<<<<<<<<
@@ -5304,7 +6162,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_3idx___get__(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":188
+  /* "friso/backends/cython/_friso.pyx":227
  *     @property
  *     def idx(self):
  *         return self._task.idx             # <<<<<<<<<<<<<<
@@ -5312,13 +6170,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_3idx___get__(st
  *     def length(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_uint_t(__pyx_v_self->_task->idx); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 188, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_uint_t(__pyx_v_self->_task->idx); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":187
+  /* "friso/backends/cython/_friso.pyx":226
  *         return (<bytes>self._task.text).decode()
  *     @property
  *     def idx(self):             # <<<<<<<<<<<<<<
@@ -5337,7 +6195,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_3idx___get__(st
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":190
+/* "friso/backends/cython/_friso.pyx":229
  *         return self._task.idx
  *     @property
  *     def length(self):             # <<<<<<<<<<<<<<
@@ -5367,7 +6225,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_6length___get__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":191
+  /* "friso/backends/cython/_friso.pyx":230
  *     @property
  *     def length(self):
  *         return self._task.length             # <<<<<<<<<<<<<<
@@ -5375,13 +6233,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_6length___get__
  *     def bytes(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_uint_t(__pyx_v_self->_task->length); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 191, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_uint_t(__pyx_v_self->_task->length); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":190
+  /* "friso/backends/cython/_friso.pyx":229
  *         return self._task.idx
  *     @property
  *     def length(self):             # <<<<<<<<<<<<<<
@@ -5400,7 +6258,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_6length___get__
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":193
+/* "friso/backends/cython/_friso.pyx":232
  *         return self._task.length
  *     @property
  *     def bytes(self):             # <<<<<<<<<<<<<<
@@ -5430,7 +6288,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_5bytes___get__(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":194
+  /* "friso/backends/cython/_friso.pyx":233
  *     @property
  *     def bytes(self):
  *         return self._task.bytes             # <<<<<<<<<<<<<<
@@ -5438,13 +6296,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_5bytes___get__(
  *     def unicode(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_uint_t(__pyx_v_self->_task->bytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 194, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_uint_t(__pyx_v_self->_task->bytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 233, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":193
+  /* "friso/backends/cython/_friso.pyx":232
  *         return self._task.length
  *     @property
  *     def bytes(self):             # <<<<<<<<<<<<<<
@@ -5463,7 +6321,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_5bytes___get__(
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":196
+/* "friso/backends/cython/_friso.pyx":235
  *         return self._task.bytes
  *     @property
  *     def unicode(self):             # <<<<<<<<<<<<<<
@@ -5493,7 +6351,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_7unicode___get_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":197
+  /* "friso/backends/cython/_friso.pyx":236
  *     @property
  *     def unicode(self):
  *         return self._task.unicode_             # <<<<<<<<<<<<<<
@@ -5501,13 +6359,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_7unicode___get_
  *     def token(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_uint_t(__pyx_v_self->_task->unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 197, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_uint_t(__pyx_v_self->_task->unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 236, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":196
+  /* "friso/backends/cython/_friso.pyx":235
  *         return self._task.bytes
  *     @property
  *     def unicode(self):             # <<<<<<<<<<<<<<
@@ -5526,7 +6384,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_7unicode___get_
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":199
+/* "friso/backends/cython/_friso.pyx":238
  *         return self._task.unicode_
  *     @property
  *     def token(self):             # <<<<<<<<<<<<<<
@@ -5556,7 +6414,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_5token___get__(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":200
+  /* "friso/backends/cython/_friso.pyx":239
  *     @property
  *     def token(self):
  *         return Token.from_ptr(self._task.token)             # <<<<<<<<<<<<<<
@@ -5564,13 +6422,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_5token___get__(
  * @cython.freelist(8)
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_5friso_8backends_6cython_6_friso_5Token_from_ptr(__pyx_v_self->_task->token)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 200, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_5friso_8backends_6cython_6_friso_5Token_from_ptr(__pyx_v_self->_task->token)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":199
+  /* "friso/backends/cython/_friso.pyx":238
  *         return self._task.unicode_
  *     @property
  *     def token(self):             # <<<<<<<<<<<<<<
@@ -5704,7 +6562,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Task_10__setstate_cy
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":210
+/* "friso/backends/cython/_friso.pyx":249
  * 
  *     @staticmethod
  *     cdef inline Token from_ptr(friso_token_t token):             # <<<<<<<<<<<<<<
@@ -5722,19 +6580,19 @@ static CYTHON_INLINE struct __pyx_obj_5friso_8backends_6cython_6_friso_Token *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("from_ptr", 0);
 
-  /* "friso/backends/cython/_friso.pyx":211
+  /* "friso/backends/cython/_friso.pyx":250
  *     @staticmethod
  *     cdef inline Token from_ptr(friso_token_t token):
  *         cdef Token self = Token.__new__(Token)             # <<<<<<<<<<<<<<
  *         self._token = token
  *         return self
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_5friso_8backends_6cython_6_friso_Token(((PyTypeObject *)__pyx_ptype_5friso_8backends_6cython_6_friso_Token), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 211, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_5friso_8backends_6cython_6_friso_Token(((PyTypeObject *)__pyx_ptype_5friso_8backends_6cython_6_friso_Token), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 250, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_self = ((struct __pyx_obj_5friso_8backends_6cython_6_friso_Token *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":212
+  /* "friso/backends/cython/_friso.pyx":251
  *     cdef inline Token from_ptr(friso_token_t token):
  *         cdef Token self = Token.__new__(Token)
  *         self._token = token             # <<<<<<<<<<<<<<
@@ -5743,7 +6601,7 @@ static CYTHON_INLINE struct __pyx_obj_5friso_8backends_6cython_6_friso_Token *__
  */
   __pyx_v_self->_token = __pyx_v_token;
 
-  /* "friso/backends/cython/_friso.pyx":213
+  /* "friso/backends/cython/_friso.pyx":252
  *         cdef Token self = Token.__new__(Token)
  *         self._token = token
  *         return self             # <<<<<<<<<<<<<<
@@ -5755,7 +6613,7 @@ static CYTHON_INLINE struct __pyx_obj_5friso_8backends_6cython_6_friso_Token *__
   __pyx_r = __pyx_v_self;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":210
+  /* "friso/backends/cython/_friso.pyx":249
  * 
  *     @staticmethod
  *     cdef inline Token from_ptr(friso_token_t token):             # <<<<<<<<<<<<<<
@@ -5775,7 +6633,7 @@ static CYTHON_INLINE struct __pyx_obj_5friso_8backends_6cython_6_friso_Token *__
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":216
+/* "friso/backends/cython/_friso.pyx":255
  * 
  *     @property
  *     def type(self):             # <<<<<<<<<<<<<<
@@ -5805,7 +6663,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_4type___get__(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":217
+  /* "friso/backends/cython/_friso.pyx":256
  *     @property
  *     def type(self):
  *         return self._token.type             # <<<<<<<<<<<<<<
@@ -5813,13 +6671,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_4type___get__(
  *     def length(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_uchar_t(__pyx_v_self->_token->type); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 217, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_uchar_t(__pyx_v_self->_token->type); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":216
+  /* "friso/backends/cython/_friso.pyx":255
  * 
  *     @property
  *     def type(self):             # <<<<<<<<<<<<<<
@@ -5838,7 +6696,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_4type___get__(
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":219
+/* "friso/backends/cython/_friso.pyx":258
  *         return self._token.type
  *     @property
  *     def length(self):             # <<<<<<<<<<<<<<
@@ -5868,7 +6726,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_6length___get_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":220
+  /* "friso/backends/cython/_friso.pyx":259
  *     @property
  *     def length(self):
  *         return self._token.length             # <<<<<<<<<<<<<<
@@ -5876,13 +6734,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_6length___get_
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_uchar_t(__pyx_v_self->_token->length); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 220, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_uchar_t(__pyx_v_self->_token->length); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":219
+  /* "friso/backends/cython/_friso.pyx":258
  *         return self._token.type
  *     @property
  *     def length(self):             # <<<<<<<<<<<<<<
@@ -5901,7 +6759,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_6length___get_
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":223
+/* "friso/backends/cython/_friso.pyx":262
  * 
  *     @property
  *     def rlen(self):             # <<<<<<<<<<<<<<
@@ -5931,7 +6789,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_4rlen___get__(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":224
+  /* "friso/backends/cython/_friso.pyx":263
  *     @property
  *     def rlen(self):
  *         return self._token.rlen             # <<<<<<<<<<<<<<
@@ -5939,13 +6797,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_4rlen___get__(
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_uchar_t(__pyx_v_self->_token->rlen); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 224, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_uchar_t(__pyx_v_self->_token->rlen); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":223
+  /* "friso/backends/cython/_friso.pyx":262
  * 
  *     @property
  *     def rlen(self):             # <<<<<<<<<<<<<<
@@ -5964,7 +6822,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_4rlen___get__(
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":227
+/* "friso/backends/cython/_friso.pyx":266
  * 
  *     @property
  *     def pos(self):             # <<<<<<<<<<<<<<
@@ -5994,7 +6852,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_3pos___get__(s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":228
+  /* "friso/backends/cython/_friso.pyx":267
  *     @property
  *     def pos(self):
  *         return self._token.pos             # <<<<<<<<<<<<<<
@@ -6002,13 +6860,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_3pos___get__(s
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_self->_token->pos); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 228, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_self->_token->pos); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":227
+  /* "friso/backends/cython/_friso.pyx":266
  * 
  *     @property
  *     def pos(self):             # <<<<<<<<<<<<<<
@@ -6027,7 +6885,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_3pos___get__(s
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":231
+/* "friso/backends/cython/_friso.pyx":270
  * 
  *     @property
  *     def offset(self):             # <<<<<<<<<<<<<<
@@ -6057,7 +6915,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_6offset___get_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":232
+  /* "friso/backends/cython/_friso.pyx":271
  *     @property
  *     def offset(self):
  *         return self._token.offset             # <<<<<<<<<<<<<<
@@ -6065,13 +6923,13 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_6offset___get_
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_token->offset); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 232, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_token->offset); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 271, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":231
+  /* "friso/backends/cython/_friso.pyx":270
  * 
  *     @property
  *     def offset(self):             # <<<<<<<<<<<<<<
@@ -6090,7 +6948,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_6offset___get_
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":235
+/* "friso/backends/cython/_friso.pyx":274
  * 
  *     @property
  *     def word(self):             # <<<<<<<<<<<<<<
@@ -6120,7 +6978,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_4word___get__(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "friso/backends/cython/_friso.pyx":236
+  /* "friso/backends/cython/_friso.pyx":275
  *     @property
  *     def word(self):
  *         return <bytes>self._token.word             # <<<<<<<<<<<<<<
@@ -6128,14 +6986,14 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_4word___get__(
  * @cython.freelist(8)
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBytes_FromString(__pyx_v_self->_token->word); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 236, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBytes_FromString(__pyx_v_self->_token->word); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 275, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject*)__pyx_t_1));
   __pyx_r = __pyx_t_1;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":235
+  /* "friso/backends/cython/_friso.pyx":274
  * 
  *     @property
  *     def word(self):             # <<<<<<<<<<<<<<
@@ -6269,7 +7127,7 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_5Token_2__setstate_cy
   return __pyx_r;
 }
 
-/* "friso/backends/cython/_friso.pyx":245
+/* "friso/backends/cython/_friso.pyx":283
  *     cdef lex_entry_t _lex
  *     @staticmethod
  *     cdef inline Lex from_ptr(lex_entry_t lex):             # <<<<<<<<<<<<<<
@@ -6287,37 +7145,40 @@ static CYTHON_INLINE struct __pyx_obj_5friso_8backends_6cython_6_friso_Lex *__py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("from_ptr", 0);
 
-  /* "friso/backends/cython/_friso.pyx":246
+  /* "friso/backends/cython/_friso.pyx":284
  *     @staticmethod
  *     cdef inline Lex from_ptr(lex_entry_t lex):
  *         cdef Lex self = Lex.__new__(Lex)             # <<<<<<<<<<<<<<
  *         self._lex = lex
  *         return self
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_5friso_8backends_6cython_6_friso_Lex(((PyTypeObject *)__pyx_ptype_5friso_8backends_6cython_6_friso_Lex), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 246, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_5friso_8backends_6cython_6_friso_Lex(((PyTypeObject *)__pyx_ptype_5friso_8backends_6cython_6_friso_Lex), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 284, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_self = ((struct __pyx_obj_5friso_8backends_6cython_6_friso_Lex *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":247
+  /* "friso/backends/cython/_friso.pyx":285
  *     cdef inline Lex from_ptr(lex_entry_t lex):
  *         cdef Lex self = Lex.__new__(Lex)
  *         self._lex = lex             # <<<<<<<<<<<<<<
  *         return self
+ *     # todo: add more property
  */
   __pyx_v_self->_lex = __pyx_v_lex;
 
-  /* "friso/backends/cython/_friso.pyx":248
+  /* "friso/backends/cython/_friso.pyx":286
  *         cdef Lex self = Lex.__new__(Lex)
  *         self._lex = lex
  *         return self             # <<<<<<<<<<<<<<
+ *     # todo: add more property
+ * 
  */
   __Pyx_XDECREF(((PyObject *)__pyx_r));
   __Pyx_INCREF(((PyObject *)__pyx_v_self));
   __pyx_r = __pyx_v_self;
   goto __pyx_L0;
 
-  /* "friso/backends/cython/_friso.pyx":245
+  /* "friso/backends/cython/_friso.pyx":283
  *     cdef lex_entry_t _lex
  *     @staticmethod
  *     cdef inline Lex from_ptr(lex_entry_t lex):             # <<<<<<<<<<<<<<
@@ -6446,6 +7307,1235 @@ static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_3Lex_2__setstate_cyth
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_AddTraceback("friso.backends.cython._friso.Lex.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "friso/backends/cython/_friso.pyx":301
+ *         const uint8_t[::1] source
+ * 
+ *     def __cinit__(self, const uint8_t[::1] delimiter, const uint8_t[::1] source):             # <<<<<<<<<<<<<<
+ *         self.delimiter = delimiter
+ *         self.source = source
+ */
+
+/* Python wrapper */
+static int __pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  __Pyx_memviewslice __pyx_v_delimiter = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_source = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__cinit__ (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_delimiter,&__pyx_n_s_source,0};
+    PyObject* values[2] = {0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_delimiter)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_source)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, 1); __PYX_ERR(1, 301, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(1, 301, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+    }
+    __pyx_v_delimiter = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(values[0], 0); if (unlikely(!__pyx_v_delimiter.memview)) __PYX_ERR(1, 301, __pyx_L3_error)
+    __pyx_v_source = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(values[1], 0); if (unlikely(!__pyx_v_source.memview)) __PYX_ERR(1, 301, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 301, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("friso.backends.cython._friso.StringSplit.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return -1;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit___cinit__(((struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *)__pyx_v_self), __pyx_v_delimiter, __pyx_v_source);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit___cinit__(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_delimiter, __Pyx_memviewslice __pyx_v_source) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  Py_ssize_t __pyx_t_1;
+  Py_ssize_t __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__cinit__", 0);
+
+  /* "friso/backends/cython/_friso.pyx":302
+ * 
+ *     def __cinit__(self, const uint8_t[::1] delimiter, const uint8_t[::1] source):
+ *         self.delimiter = delimiter             # <<<<<<<<<<<<<<
+ *         self.source = source
+ *         self._split =  new_string_split(<fstring>&delimiter[0],<fstring>&source[0])
+ */
+  __PYX_XDEC_MEMVIEW(&__pyx_v_self->delimiter, 0);
+  __PYX_INC_MEMVIEW(&__pyx_v_delimiter, 0);
+  __pyx_v_self->delimiter = __pyx_v_delimiter;
+
+  /* "friso/backends/cython/_friso.pyx":303
+ *     def __cinit__(self, const uint8_t[::1] delimiter, const uint8_t[::1] source):
+ *         self.delimiter = delimiter
+ *         self.source = source             # <<<<<<<<<<<<<<
+ *         self._split =  new_string_split(<fstring>&delimiter[0],<fstring>&source[0])
+ *         if not self._split:
+ */
+  __PYX_XDEC_MEMVIEW(&__pyx_v_self->source, 0);
+  __PYX_INC_MEMVIEW(&__pyx_v_source, 0);
+  __pyx_v_self->source = __pyx_v_source;
+
+  /* "friso/backends/cython/_friso.pyx":304
+ *         self.delimiter = delimiter
+ *         self.source = source
+ *         self._split =  new_string_split(<fstring>&delimiter[0],<fstring>&source[0])             # <<<<<<<<<<<<<<
+ *         if not self._split:
+ *             raise FrisoException("new string_split_t error")
+ */
+  __pyx_t_1 = 0;
+  __pyx_t_2 = 0;
+  __pyx_v_self->_split = new_string_split(((fstring)(&(*((uint8_t const  *) ( /* dim=0 */ ((char *) (((uint8_t const  *) __pyx_v_delimiter.data) + __pyx_t_1)) ))))), ((fstring)(&(*((uint8_t const  *) ( /* dim=0 */ ((char *) (((uint8_t const  *) __pyx_v_source.data) + __pyx_t_2)) ))))));
+
+  /* "friso/backends/cython/_friso.pyx":305
+ *         self.source = source
+ *         self._split =  new_string_split(<fstring>&delimiter[0],<fstring>&source[0])
+ *         if not self._split:             # <<<<<<<<<<<<<<
+ *             raise FrisoException("new string_split_t error")
+ * 
+ */
+  __pyx_t_3 = ((!(__pyx_v_self->_split != 0)) != 0);
+  if (unlikely(__pyx_t_3)) {
+
+    /* "friso/backends/cython/_friso.pyx":306
+ *         self._split =  new_string_split(<fstring>&delimiter[0],<fstring>&source[0])
+ *         if not self._split:
+ *             raise FrisoException("new string_split_t error")             # <<<<<<<<<<<<<<
+ * 
+ *     def __dealloc__(self):
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_FrisoException); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 306, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_6 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
+      __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_5);
+      if (likely(__pyx_t_6)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+        __Pyx_INCREF(__pyx_t_6);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_5, function);
+      }
+    }
+    __pyx_t_4 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_kp_u_new_string_split_t_error) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_kp_u_new_string_split_t_error);
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 306, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_Raise(__pyx_t_4, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __PYX_ERR(1, 306, __pyx_L1_error)
+
+    /* "friso/backends/cython/_friso.pyx":305
+ *         self.source = source
+ *         self._split =  new_string_split(<fstring>&delimiter[0],<fstring>&source[0])
+ *         if not self._split:             # <<<<<<<<<<<<<<
+ *             raise FrisoException("new string_split_t error")
+ * 
+ */
+  }
+
+  /* "friso/backends/cython/_friso.pyx":301
+ *         const uint8_t[::1] source
+ * 
+ *     def __cinit__(self, const uint8_t[::1] delimiter, const uint8_t[::1] source):             # <<<<<<<<<<<<<<
+ *         self.delimiter = delimiter
+ *         self.source = source
+ */
+
+  /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_AddTraceback("friso.backends.cython._friso.StringSplit.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_delimiter, 1);
+  __PYX_XDEC_MEMVIEW(&__pyx_v_source, 1);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "friso/backends/cython/_friso.pyx":308
+ *             raise FrisoException("new string_split_t error")
+ * 
+ *     def __dealloc__(self):             # <<<<<<<<<<<<<<
+ *         if self._split:
+ *             free_string_split(self._split)
+ */
+
+/* Python wrapper */
+static void __pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_3__dealloc__(PyObject *__pyx_v_self); /*proto*/
+static void __pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_3__dealloc__(PyObject *__pyx_v_self) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__dealloc__ (wrapper)", 0);
+  __pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_2__dealloc__(((struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+static void __pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_2__dealloc__(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self) {
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("__dealloc__", 0);
+
+  /* "friso/backends/cython/_friso.pyx":309
+ * 
+ *     def __dealloc__(self):
+ *         if self._split:             # <<<<<<<<<<<<<<
+ *             free_string_split(self._split)
+ * 
+ */
+  __pyx_t_1 = (__pyx_v_self->_split != 0);
+  if (__pyx_t_1) {
+
+    /* "friso/backends/cython/_friso.pyx":310
+ *     def __dealloc__(self):
+ *         if self._split:
+ *             free_string_split(self._split)             # <<<<<<<<<<<<<<
+ * 
+ *     cpdef inline reset(self, const uint8_t[::1] delimiter, const uint8_t[::1] source):
+ */
+    free_string_split(__pyx_v_self->_split);
+
+    /* "friso/backends/cython/_friso.pyx":309
+ * 
+ *     def __dealloc__(self):
+ *         if self._split:             # <<<<<<<<<<<<<<
+ *             free_string_split(self._split)
+ * 
+ */
+  }
+
+  /* "friso/backends/cython/_friso.pyx":308
+ *             raise FrisoException("new string_split_t error")
+ * 
+ *     def __dealloc__(self):             # <<<<<<<<<<<<<<
+ *         if self._split:
+ *             free_string_split(self._split)
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "friso/backends/cython/_friso.pyx":312
+ *             free_string_split(self._split)
+ * 
+ *     cpdef inline reset(self, const uint8_t[::1] delimiter, const uint8_t[::1] source):             # <<<<<<<<<<<<<<
+ *         self.delimiter = delimiter
+ *         self.source = source
+ */
+
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_5reset(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_reset(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_delimiter, __Pyx_memviewslice __pyx_v_source, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  Py_ssize_t __pyx_t_1;
+  Py_ssize_t __pyx_t_2;
+  __Pyx_RefNannySetupContext("reset", 0);
+
+  /* "friso/backends/cython/_friso.pyx":313
+ * 
+ *     cpdef inline reset(self, const uint8_t[::1] delimiter, const uint8_t[::1] source):
+ *         self.delimiter = delimiter             # <<<<<<<<<<<<<<
+ *         self.source = source
+ *         string_split_reset( self._split, <fstring>&delimiter[0],<fstring>&source[0])
+ */
+  __PYX_XDEC_MEMVIEW(&__pyx_v_self->delimiter, 0);
+  __PYX_INC_MEMVIEW(&__pyx_v_delimiter, 0);
+  __pyx_v_self->delimiter = __pyx_v_delimiter;
+
+  /* "friso/backends/cython/_friso.pyx":314
+ *     cpdef inline reset(self, const uint8_t[::1] delimiter, const uint8_t[::1] source):
+ *         self.delimiter = delimiter
+ *         self.source = source             # <<<<<<<<<<<<<<
+ *         string_split_reset( self._split, <fstring>&delimiter[0],<fstring>&source[0])
+ * 
+ */
+  __PYX_XDEC_MEMVIEW(&__pyx_v_self->source, 0);
+  __PYX_INC_MEMVIEW(&__pyx_v_source, 0);
+  __pyx_v_self->source = __pyx_v_source;
+
+  /* "friso/backends/cython/_friso.pyx":315
+ *         self.delimiter = delimiter
+ *         self.source = source
+ *         string_split_reset( self._split, <fstring>&delimiter[0],<fstring>&source[0])             # <<<<<<<<<<<<<<
+ * 
+ *     cpdef  inline set_source(self,  const uint8_t[::1] source):
+ */
+  __pyx_t_1 = 0;
+  __pyx_t_2 = 0;
+  string_split_reset(__pyx_v_self->_split, ((fstring)(&(*((uint8_t const  *) ( /* dim=0 */ ((char *) (((uint8_t const  *) __pyx_v_delimiter.data) + __pyx_t_1)) ))))), ((fstring)(&(*((uint8_t const  *) ( /* dim=0 */ ((char *) (((uint8_t const  *) __pyx_v_source.data) + __pyx_t_2)) ))))));
+
+  /* "friso/backends/cython/_friso.pyx":312
+ *             free_string_split(self._split)
+ * 
+ *     cpdef inline reset(self, const uint8_t[::1] delimiter, const uint8_t[::1] source):             # <<<<<<<<<<<<<<
+ *         self.delimiter = delimiter
+ *         self.source = source
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_5reset(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_5friso_8backends_6cython_6_friso_11StringSplit_4reset[] = "StringSplit.reset(self, const uint8_t[::1] delimiter, const uint8_t[::1] source)";
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_5reset(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  __Pyx_memviewslice __pyx_v_delimiter = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_source = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("reset (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_delimiter,&__pyx_n_s_source,0};
+    PyObject* values[2] = {0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_delimiter)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_source)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("reset", 1, 2, 2, 1); __PYX_ERR(1, 312, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "reset") < 0)) __PYX_ERR(1, 312, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+    }
+    __pyx_v_delimiter = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(values[0], 0); if (unlikely(!__pyx_v_delimiter.memview)) __PYX_ERR(1, 312, __pyx_L3_error)
+    __pyx_v_source = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(values[1], 0); if (unlikely(!__pyx_v_source.memview)) __PYX_ERR(1, 312, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("reset", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 312, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("friso.backends.cython._friso.StringSplit.reset", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_4reset(((struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *)__pyx_v_self), __pyx_v_delimiter, __pyx_v_source);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_4reset(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_delimiter, __Pyx_memviewslice __pyx_v_source) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("reset", 0);
+  __Pyx_XDECREF(__pyx_r);
+  if (unlikely(!__pyx_v_delimiter.memview)) { __Pyx_RaiseUnboundLocalError("delimiter"); __PYX_ERR(1, 312, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_source.memview)) { __Pyx_RaiseUnboundLocalError("source"); __PYX_ERR(1, 312, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_reset(__pyx_v_self, __pyx_v_delimiter, __pyx_v_source, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 312, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("friso.backends.cython._friso.StringSplit.reset", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_delimiter, 1);
+  __PYX_XDEC_MEMVIEW(&__pyx_v_source, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "friso/backends/cython/_friso.pyx":317
+ *         string_split_reset( self._split, <fstring>&delimiter[0],<fstring>&source[0])
+ * 
+ *     cpdef  inline set_source(self,  const uint8_t[::1] source):             # <<<<<<<<<<<<<<
+ *         self.source = source
+ *         string_split_set_source(self._split, <fstring>&source[0])
+ */
+
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_7set_source(PyObject *__pyx_v_self, PyObject *__pyx_arg_source); /*proto*/
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_set_source(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_source, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  Py_ssize_t __pyx_t_1;
+  __Pyx_RefNannySetupContext("set_source", 0);
+
+  /* "friso/backends/cython/_friso.pyx":318
+ * 
+ *     cpdef  inline set_source(self,  const uint8_t[::1] source):
+ *         self.source = source             # <<<<<<<<<<<<<<
+ *         string_split_set_source(self._split, <fstring>&source[0])
+ * 
+ */
+  __PYX_XDEC_MEMVIEW(&__pyx_v_self->source, 0);
+  __PYX_INC_MEMVIEW(&__pyx_v_source, 0);
+  __pyx_v_self->source = __pyx_v_source;
+
+  /* "friso/backends/cython/_friso.pyx":319
+ *     cpdef  inline set_source(self,  const uint8_t[::1] source):
+ *         self.source = source
+ *         string_split_set_source(self._split, <fstring>&source[0])             # <<<<<<<<<<<<<<
+ * 
+ *     cpdef  inline set_delimiter(self,  const uint8_t[::1] delimiter):
+ */
+  __pyx_t_1 = 0;
+  string_split_set_source(__pyx_v_self->_split, ((fstring)(&(*((uint8_t const  *) ( /* dim=0 */ ((char *) (((uint8_t const  *) __pyx_v_source.data) + __pyx_t_1)) ))))));
+
+  /* "friso/backends/cython/_friso.pyx":317
+ *         string_split_reset( self._split, <fstring>&delimiter[0],<fstring>&source[0])
+ * 
+ *     cpdef  inline set_source(self,  const uint8_t[::1] source):             # <<<<<<<<<<<<<<
+ *         self.source = source
+ *         string_split_set_source(self._split, <fstring>&source[0])
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_7set_source(PyObject *__pyx_v_self, PyObject *__pyx_arg_source); /*proto*/
+static char __pyx_doc_5friso_8backends_6cython_6_friso_11StringSplit_6set_source[] = "StringSplit.set_source(self, const uint8_t[::1] source)";
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_7set_source(PyObject *__pyx_v_self, PyObject *__pyx_arg_source) {
+  __Pyx_memviewslice __pyx_v_source = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_source (wrapper)", 0);
+  assert(__pyx_arg_source); {
+    __pyx_v_source = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(__pyx_arg_source, 0); if (unlikely(!__pyx_v_source.memview)) __PYX_ERR(1, 317, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("friso.backends.cython._friso.StringSplit.set_source", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_6set_source(((struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *)__pyx_v_self), __pyx_v_source);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_6set_source(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_source) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("set_source", 0);
+  __Pyx_XDECREF(__pyx_r);
+  if (unlikely(!__pyx_v_source.memview)) { __Pyx_RaiseUnboundLocalError("source"); __PYX_ERR(1, 317, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_set_source(__pyx_v_self, __pyx_v_source, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 317, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("friso.backends.cython._friso.StringSplit.set_source", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_source, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "friso/backends/cython/_friso.pyx":321
+ *         string_split_set_source(self._split, <fstring>&source[0])
+ * 
+ *     cpdef  inline set_delimiter(self,  const uint8_t[::1] delimiter):             # <<<<<<<<<<<<<<
+ *         self.delimiter = delimiter
+ *         string_split_set_delimiter(self._split, <fstring>&delimiter[0])
+ */
+
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_9set_delimiter(PyObject *__pyx_v_self, PyObject *__pyx_arg_delimiter); /*proto*/
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_set_delimiter(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_delimiter, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  Py_ssize_t __pyx_t_1;
+  __Pyx_RefNannySetupContext("set_delimiter", 0);
+
+  /* "friso/backends/cython/_friso.pyx":322
+ * 
+ *     cpdef  inline set_delimiter(self,  const uint8_t[::1] delimiter):
+ *         self.delimiter = delimiter             # <<<<<<<<<<<<<<
+ *         string_split_set_delimiter(self._split, <fstring>&delimiter[0])
+ * 
+ */
+  __PYX_XDEC_MEMVIEW(&__pyx_v_self->delimiter, 0);
+  __PYX_INC_MEMVIEW(&__pyx_v_delimiter, 0);
+  __pyx_v_self->delimiter = __pyx_v_delimiter;
+
+  /* "friso/backends/cython/_friso.pyx":323
+ *     cpdef  inline set_delimiter(self,  const uint8_t[::1] delimiter):
+ *         self.delimiter = delimiter
+ *         string_split_set_delimiter(self._split, <fstring>&delimiter[0])             # <<<<<<<<<<<<<<
+ * 
+ *     cpdef inline split_next(self, uint8_t[::1] buffer):
+ */
+  __pyx_t_1 = 0;
+  string_split_set_delimiter(__pyx_v_self->_split, ((fstring)(&(*((uint8_t const  *) ( /* dim=0 */ ((char *) (((uint8_t const  *) __pyx_v_delimiter.data) + __pyx_t_1)) ))))));
+
+  /* "friso/backends/cython/_friso.pyx":321
+ *         string_split_set_source(self._split, <fstring>&source[0])
+ * 
+ *     cpdef  inline set_delimiter(self,  const uint8_t[::1] delimiter):             # <<<<<<<<<<<<<<
+ *         self.delimiter = delimiter
+ *         string_split_set_delimiter(self._split, <fstring>&delimiter[0])
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_9set_delimiter(PyObject *__pyx_v_self, PyObject *__pyx_arg_delimiter); /*proto*/
+static char __pyx_doc_5friso_8backends_6cython_6_friso_11StringSplit_8set_delimiter[] = "StringSplit.set_delimiter(self, const uint8_t[::1] delimiter)";
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_9set_delimiter(PyObject *__pyx_v_self, PyObject *__pyx_arg_delimiter) {
+  __Pyx_memviewslice __pyx_v_delimiter = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_delimiter (wrapper)", 0);
+  assert(__pyx_arg_delimiter); {
+    __pyx_v_delimiter = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(__pyx_arg_delimiter, 0); if (unlikely(!__pyx_v_delimiter.memview)) __PYX_ERR(1, 321, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("friso.backends.cython._friso.StringSplit.set_delimiter", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_8set_delimiter(((struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *)__pyx_v_self), __pyx_v_delimiter);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_8set_delimiter(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_delimiter) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("set_delimiter", 0);
+  __Pyx_XDECREF(__pyx_r);
+  if (unlikely(!__pyx_v_delimiter.memview)) { __Pyx_RaiseUnboundLocalError("delimiter"); __PYX_ERR(1, 321, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_set_delimiter(__pyx_v_self, __pyx_v_delimiter, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 321, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("friso.backends.cython._friso.StringSplit.set_delimiter", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_delimiter, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "friso/backends/cython/_friso.pyx":325
+ *         string_split_set_delimiter(self._split, <fstring>&delimiter[0])
+ * 
+ *     cpdef inline split_next(self, uint8_t[::1] buffer):             # <<<<<<<<<<<<<<
+ *         cdef fstring ret = NULL
+ *         with nogil:
+ */
+
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_11split_next(PyObject *__pyx_v_self, PyObject *__pyx_arg_buffer); /*proto*/
+static CYTHON_INLINE PyObject *__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_split_next(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_buffer, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  fstring __pyx_v_ret;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  Py_ssize_t __pyx_t_1;
+  int __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("split_next", 0);
+
+  /* "friso/backends/cython/_friso.pyx":326
+ * 
+ *     cpdef inline split_next(self, uint8_t[::1] buffer):
+ *         cdef fstring ret = NULL             # <<<<<<<<<<<<<<
+ *         with nogil:
+ *             ret =  string_split_next(self._split, <fstring>&buffer[0])
+ */
+  __pyx_v_ret = NULL;
+
+  /* "friso/backends/cython/_friso.pyx":327
+ *     cpdef inline split_next(self, uint8_t[::1] buffer):
+ *         cdef fstring ret = NULL
+ *         with nogil:             # <<<<<<<<<<<<<<
+ *             ret =  string_split_next(self._split, <fstring>&buffer[0])
+ *         if ret:
+ */
+  {
+      #ifdef WITH_THREAD
+      PyThreadState *_save;
+      Py_UNBLOCK_THREADS
+      __Pyx_FastGIL_Remember();
+      #endif
+      /*try:*/ {
+
+        /* "friso/backends/cython/_friso.pyx":328
+ *         cdef fstring ret = NULL
+ *         with nogil:
+ *             ret =  string_split_next(self._split, <fstring>&buffer[0])             # <<<<<<<<<<<<<<
+ *         if ret:
+ *             return <bytes>ret
+ */
+        __pyx_t_1 = 0;
+        __pyx_v_ret = string_split_next(__pyx_v_self->_split, ((fstring)(&(*((uint8_t *) ( /* dim=0 */ ((char *) (((uint8_t *) __pyx_v_buffer.data) + __pyx_t_1)) ))))));
+      }
+
+      /* "friso/backends/cython/_friso.pyx":327
+ *     cpdef inline split_next(self, uint8_t[::1] buffer):
+ *         cdef fstring ret = NULL
+ *         with nogil:             # <<<<<<<<<<<<<<
+ *             ret =  string_split_next(self._split, <fstring>&buffer[0])
+ *         if ret:
+ */
+      /*finally:*/ {
+        /*normal exit:*/{
+          #ifdef WITH_THREAD
+          __Pyx_FastGIL_Forget();
+          Py_BLOCK_THREADS
+          #endif
+          goto __pyx_L5;
+        }
+        __pyx_L5:;
+      }
+  }
+
+  /* "friso/backends/cython/_friso.pyx":329
+ *         with nogil:
+ *             ret =  string_split_next(self._split, <fstring>&buffer[0])
+ *         if ret:             # <<<<<<<<<<<<<<
+ *             return <bytes>ret
+ *         else:
+ */
+  __pyx_t_2 = (__pyx_v_ret != 0);
+  if (__pyx_t_2) {
+
+    /* "friso/backends/cython/_friso.pyx":330
+ *             ret =  string_split_next(self._split, <fstring>&buffer[0])
+ *         if ret:
+ *             return <bytes>ret             # <<<<<<<<<<<<<<
+ *         else:
+ *             return None
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_ret); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 330, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_INCREF(((PyObject*)__pyx_t_3));
+    __pyx_r = __pyx_t_3;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    goto __pyx_L0;
+
+    /* "friso/backends/cython/_friso.pyx":329
+ *         with nogil:
+ *             ret =  string_split_next(self._split, <fstring>&buffer[0])
+ *         if ret:             # <<<<<<<<<<<<<<
+ *             return <bytes>ret
+ *         else:
+ */
+  }
+
+  /* "friso/backends/cython/_friso.pyx":332
+ *             return <bytes>ret
+ *         else:
+ *             return None             # <<<<<<<<<<<<<<
+ * 
+ * @cython.freelist(8)
+ */
+  /*else*/ {
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+    goto __pyx_L0;
+  }
+
+  /* "friso/backends/cython/_friso.pyx":325
+ *         string_split_set_delimiter(self._split, <fstring>&delimiter[0])
+ * 
+ *     cpdef inline split_next(self, uint8_t[::1] buffer):             # <<<<<<<<<<<<<<
+ *         cdef fstring ret = NULL
+ *         with nogil:
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("friso.backends.cython._friso.StringSplit.split_next", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_11split_next(PyObject *__pyx_v_self, PyObject *__pyx_arg_buffer); /*proto*/
+static char __pyx_doc_5friso_8backends_6cython_6_friso_11StringSplit_10split_next[] = "StringSplit.split_next(self, uint8_t[::1] buffer)";
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_11split_next(PyObject *__pyx_v_self, PyObject *__pyx_arg_buffer) {
+  __Pyx_memviewslice __pyx_v_buffer = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("split_next (wrapper)", 0);
+  assert(__pyx_arg_buffer); {
+    __pyx_v_buffer = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t(__pyx_arg_buffer, PyBUF_WRITABLE); if (unlikely(!__pyx_v_buffer.memview)) __PYX_ERR(1, 325, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("friso.backends.cython._friso.StringSplit.split_next", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_10split_next(((struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *)__pyx_v_self), __pyx_v_buffer);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_10split_next(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, __Pyx_memviewslice __pyx_v_buffer) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("split_next", 0);
+  __Pyx_XDECREF(__pyx_r);
+  if (unlikely(!__pyx_v_buffer.memview)) { __Pyx_RaiseUnboundLocalError("buffer"); __PYX_ERR(1, 325, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_split_next(__pyx_v_self, __pyx_v_buffer, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 325, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("friso.backends.cython._friso.StringSplit.split_next", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_buffer, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_13__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_5friso_8backends_6cython_6_friso_11StringSplit_12__reduce_cython__[] = "StringSplit.__reduce_cython__(self)";
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_13__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_12__reduce_cython__(((struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_12__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__reduce_cython__", 0);
+
+  /* "(tree fragment)":2
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __PYX_ERR(0, 2, __pyx_L1_error)
+
+  /* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("friso.backends.cython._friso.StringSplit.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":3
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_15__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static char __pyx_doc_5friso_8backends_6cython_6_friso_11StringSplit_14__setstate_cython__[] = "StringSplit.__setstate_cython__(self, __pyx_state)";
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_15__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_14__setstate_cython__(((struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_11StringSplit_14__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__setstate_cython__", 0);
+
+  /* "(tree fragment)":4
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __PYX_ERR(0, 4, __pyx_L1_error)
+
+  /* "(tree fragment)":3
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("friso.backends.cython._friso.StringSplit.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "friso/backends/cython/_friso.pyx":339
+ * cdef class Dict:
+ *     cdef friso_dic_t _dic
+ *     def __cinit__(self):             # <<<<<<<<<<<<<<
+ *         self._dic = friso_dic_new()
+ *         if not self._dic:
+ */
+
+/* Python wrapper */
+static int __pyx_pw_5friso_8backends_6cython_6_friso_4Dict_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_5friso_8backends_6cython_6_friso_4Dict_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__cinit__ (wrapper)", 0);
+  if (unlikely(PyTuple_GET_SIZE(__pyx_args) > 0)) {
+    __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 0, 0, PyTuple_GET_SIZE(__pyx_args)); return -1;}
+  if (unlikely(__pyx_kwds) && unlikely(PyDict_Size(__pyx_kwds) > 0) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__cinit__", 0))) return -1;
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_4Dict___cinit__(((struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_5friso_8backends_6cython_6_friso_4Dict___cinit__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *__pyx_v_self) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__cinit__", 0);
+
+  /* "friso/backends/cython/_friso.pyx":340
+ *     cdef friso_dic_t _dic
+ *     def __cinit__(self):
+ *         self._dic = friso_dic_new()             # <<<<<<<<<<<<<<
+ *         if not self._dic:
+ *             raise FrisoException("new friso_dic_t error")
+ */
+  __pyx_v_self->_dic = friso_dic_new();
+
+  /* "friso/backends/cython/_friso.pyx":341
+ *     def __cinit__(self):
+ *         self._dic = friso_dic_new()
+ *         if not self._dic:             # <<<<<<<<<<<<<<
+ *             raise FrisoException("new friso_dic_t error")
+ * 
+ */
+  __pyx_t_1 = ((!(__pyx_v_self->_dic != 0)) != 0);
+  if (unlikely(__pyx_t_1)) {
+
+    /* "friso/backends/cython/_friso.pyx":342
+ *         self._dic = friso_dic_new()
+ *         if not self._dic:
+ *             raise FrisoException("new friso_dic_t error")             # <<<<<<<<<<<<<<
+ * 
+ *     def __dealloc__(self):
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_FrisoException); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 342, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_4 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+      __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+      if (likely(__pyx_t_4)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+        __Pyx_INCREF(__pyx_t_4);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_3, function);
+      }
+    }
+    __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_kp_u_new_friso_dic_t_error) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_kp_u_new_friso_dic_t_error);
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 342, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __PYX_ERR(1, 342, __pyx_L1_error)
+
+    /* "friso/backends/cython/_friso.pyx":341
+ *     def __cinit__(self):
+ *         self._dic = friso_dic_new()
+ *         if not self._dic:             # <<<<<<<<<<<<<<
+ *             raise FrisoException("new friso_dic_t error")
+ * 
+ */
+  }
+
+  /* "friso/backends/cython/_friso.pyx":339
+ * cdef class Dict:
+ *     cdef friso_dic_t _dic
+ *     def __cinit__(self):             # <<<<<<<<<<<<<<
+ *         self._dic = friso_dic_new()
+ *         if not self._dic:
+ */
+
+  /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("friso.backends.cython._friso.Dict.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "friso/backends/cython/_friso.pyx":344
+ *             raise FrisoException("new friso_dic_t error")
+ * 
+ *     def __dealloc__(self):             # <<<<<<<<<<<<<<
+ *         if self._dic:
+ *             friso_dic_free(self._dic)
+ */
+
+/* Python wrapper */
+static void __pyx_pw_5friso_8backends_6cython_6_friso_4Dict_3__dealloc__(PyObject *__pyx_v_self); /*proto*/
+static void __pyx_pw_5friso_8backends_6cython_6_friso_4Dict_3__dealloc__(PyObject *__pyx_v_self) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__dealloc__ (wrapper)", 0);
+  __pyx_pf_5friso_8backends_6cython_6_friso_4Dict_2__dealloc__(((struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+static void __pyx_pf_5friso_8backends_6cython_6_friso_4Dict_2__dealloc__(struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *__pyx_v_self) {
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("__dealloc__", 0);
+
+  /* "friso/backends/cython/_friso.pyx":345
+ * 
+ *     def __dealloc__(self):
+ *         if self._dic:             # <<<<<<<<<<<<<<
+ *             friso_dic_free(self._dic)
+ *     #
+ */
+  __pyx_t_1 = (__pyx_v_self->_dic != 0);
+  if (__pyx_t_1) {
+
+    /* "friso/backends/cython/_friso.pyx":346
+ *     def __dealloc__(self):
+ *         if self._dic:
+ *             friso_dic_free(self._dic)             # <<<<<<<<<<<<<<
+ *     #
+ *     # def load_from_ifile(self, object path, int length):
+ */
+    friso_dic_free(__pyx_v_self->_dic);
+
+    /* "friso/backends/cython/_friso.pyx":345
+ * 
+ *     def __dealloc__(self):
+ *         if self._dic:             # <<<<<<<<<<<<<<
+ *             friso_dic_free(self._dic)
+ *     #
+ */
+  }
+
+  /* "friso/backends/cython/_friso.pyx":344
+ *             raise FrisoException("new friso_dic_t error")
+ * 
+ *     def __dealloc__(self):             # <<<<<<<<<<<<<<
+ *         if self._dic:
+ *             friso_dic_free(self._dic)
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_4Dict_5__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_5friso_8backends_6cython_6_friso_4Dict_4__reduce_cython__[] = "Dict.__reduce_cython__(self)";
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_4Dict_5__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_4Dict_4__reduce_cython__(((struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Dict_4__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__reduce_cython__", 0);
+
+  /* "(tree fragment)":2
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __PYX_ERR(0, 2, __pyx_L1_error)
+
+  /* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("friso.backends.cython._friso.Dict.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":3
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_4Dict_7__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static char __pyx_doc_5friso_8backends_6cython_6_friso_4Dict_6__setstate_cython__[] = "Dict.__setstate_cython__(self, __pyx_state)";
+static PyObject *__pyx_pw_5friso_8backends_6cython_6_friso_4Dict_7__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_5friso_8backends_6cython_6_friso_4Dict_6__setstate_cython__(((struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5friso_8backends_6cython_6_friso_4Dict_6__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__setstate_cython__", 0);
+
+  /* "(tree fragment)":4
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __PYX_ERR(0, 4, __pyx_L1_error)
+
+  /* "(tree fragment)":3
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("friso.backends.cython._friso.Dict.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -6655,7 +8745,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __
  * 
  *         if itemsize <= 0:
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -6687,7 +8777,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __
  * 
  *         if not isinstance(format, bytes):
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -6814,7 +8904,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __
  * 
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -7088,7 +9178,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __
  * 
  *             if self.dtype_is_object:
  */
-      __pyx_t_10 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 177, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 177, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_Raise(__pyx_t_10, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
@@ -7332,7 +9422,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(stru
  *         info.buf = self.data
  *         info.len = self.len
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 193, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 193, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -8066,7 +10156,7 @@ static PyObject *__pyx_pf___pyx_array___reduce_cython__(CYTHON_UNUSED struct __p
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -8122,7 +10212,7 @@ static PyObject *__pyx_pf___pyx_array_2__setstate_cython__(CYTHON_UNUSED struct 
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -9851,7 +11941,7 @@ static int __pyx_memoryview___pyx_pf_15View_dot_MemoryView_10memoryview_6__setit
  * 
  *         have_slices, index = _unellipsify(index, self.view.ndim)
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 420, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 420, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -10899,7 +12989,7 @@ static PyObject *__pyx_memoryview_convert_item_to_object(struct __pyx_memoryview
  *         else:
  *             if len(self.view.format) == 1:
  */
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 497, __pyx_L5_except_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 497, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_Raise(__pyx_t_6, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -11261,7 +13351,7 @@ static int __pyx_memoryview___pyx_pf_15View_dot_MemoryView_10memoryview_8__getbu
  * 
  *         if flags & PyBUF_ND:
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 522, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 522, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -11810,7 +13900,7 @@ static PyObject *__pyx_pf_15View_dot_MemoryView_10memoryview_7strides___get__(st
  * 
  *         return tuple([stride for stride in self.view.strides[:self.view.ndim]])
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 572, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__25, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 572, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -11927,7 +14017,7 @@ static PyObject *__pyx_pf_15View_dot_MemoryView_10memoryview_10suboffsets___get_
     __Pyx_XDECREF(__pyx_r);
     __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->view.ndim); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 579, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyNumber_Multiply(__pyx_tuple__22, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 579, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Multiply(__pyx_tuple__26, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 579, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_r = __pyx_t_3;
@@ -12965,7 +15055,7 @@ static PyObject *__pyx_pf___pyx_memoryview___reduce_cython__(CYTHON_UNUSED struc
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__27, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -13021,7 +15111,7 @@ static PyObject *__pyx_pf___pyx_memoryview_2__setstate_cython__(CYTHON_UNUSED st
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__28, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -13378,9 +15468,9 @@ static PyObject *_unellipsify(PyObject *__pyx_v_index, int __pyx_v_ndim) {
         __Pyx_GOTREF(__pyx_t_7);
         { Py_ssize_t __pyx_temp;
           for (__pyx_temp=0; __pyx_temp < ((__pyx_v_ndim - __pyx_t_8) + 1); __pyx_temp++) {
-            __Pyx_INCREF(__pyx_slice__25);
-            __Pyx_GIVEREF(__pyx_slice__25);
-            PyList_SET_ITEM(__pyx_t_7, __pyx_temp, __pyx_slice__25);
+            __Pyx_INCREF(__pyx_slice__29);
+            __Pyx_GIVEREF(__pyx_slice__29);
+            PyList_SET_ITEM(__pyx_t_7, __pyx_temp, __pyx_slice__29);
           }
         }
         __pyx_t_9 = __Pyx_PyList_Extend(__pyx_v_result, __pyx_t_7); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 684, __pyx_L1_error)
@@ -13413,7 +15503,7 @@ static PyObject *_unellipsify(PyObject *__pyx_v_index, int __pyx_v_ndim) {
  *         else:
  */
       /*else*/ {
-        __pyx_t_9 = __Pyx_PyList_Append(__pyx_v_result, __pyx_slice__25); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 687, __pyx_L1_error)
+        __pyx_t_9 = __Pyx_PyList_Append(__pyx_v_result, __pyx_slice__29); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 687, __pyx_L1_error)
       }
       __pyx_L7:;
 
@@ -13553,9 +15643,9 @@ static PyObject *_unellipsify(PyObject *__pyx_v_index, int __pyx_v_ndim) {
     __Pyx_GOTREF(__pyx_t_3);
     { Py_ssize_t __pyx_temp;
       for (__pyx_temp=0; __pyx_temp < __pyx_v_nslices; __pyx_temp++) {
-        __Pyx_INCREF(__pyx_slice__25);
-        __Pyx_GIVEREF(__pyx_slice__25);
-        PyList_SET_ITEM(__pyx_t_3, __pyx_temp, __pyx_slice__25);
+        __Pyx_INCREF(__pyx_slice__29);
+        __Pyx_GIVEREF(__pyx_slice__29);
+        PyList_SET_ITEM(__pyx_t_3, __pyx_temp, __pyx_slice__29);
       }
     }
     __pyx_t_9 = __Pyx_PyList_Extend(__pyx_v_result, __pyx_t_3); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 698, __pyx_L1_error)
@@ -13682,7 +15772,7 @@ static PyObject *assert_direct_dimensions(Py_ssize_t *__pyx_v_suboffsets, int __
  * 
  * 
  */
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__26, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 705, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__30, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 705, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_Raise(__pyx_t_5, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -15866,7 +17956,7 @@ static PyObject *__pyx_pf___pyx_memoryviewslice___reduce_cython__(CYTHON_UNUSED 
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__27, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__31, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -15922,7 +18012,7 @@ static PyObject *__pyx_pf___pyx_memoryviewslice_2__setstate_cython__(CYTHON_UNUS
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__28, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__32, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -19199,7 +21289,7 @@ static PyObject *__pyx_pf_15View_dot_MemoryView___pyx_unpickle_Enum(CYTHON_UNUSE
  */
   __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__29, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__33, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
@@ -19510,6 +21600,7 @@ static PyObject *__pyx_tp_new_5friso_8backends_6cython_6_friso_Friso(PyTypeObjec
   }
   p = ((struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *)o);
   p->__pyx_vtab = __pyx_vtabptr_5friso_8backends_6cython_6_friso_Friso;
+  p->path_bytes = ((PyObject*)Py_None); Py_INCREF(Py_None);
   if (unlikely(__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_1__cinit__(o, __pyx_empty_tuple, NULL) < 0)) goto bad;
   return o;
   bad:
@@ -19518,6 +21609,7 @@ static PyObject *__pyx_tp_new_5friso_8backends_6cython_6_friso_Friso(PyTypeObjec
 }
 
 static void __pyx_tp_dealloc_5friso_8backends_6cython_6_friso_Friso(PyObject *o) {
+  struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *p = (struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *)o;
   {
     PyObject *etype, *eval, *etb;
     PyErr_Fetch(&etype, &eval, &etb);
@@ -19526,6 +21618,7 @@ static void __pyx_tp_dealloc_5friso_8backends_6cython_6_friso_Friso(PyObject *o)
     __Pyx_SET_REFCNT(o, Py_REFCNT(o) - 1);
     PyErr_Restore(etype, eval, etb);
   }
+  Py_CLEAR(p->path_bytes);
   if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_5friso_8backends_6cython_6_friso_Friso < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso)))) {
     __pyx_freelist_5friso_8backends_6cython_6_friso_Friso[__pyx_freecount_5friso_8backends_6cython_6_friso_Friso++] = ((struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *)o);
   } else {
@@ -19535,8 +21628,10 @@ static void __pyx_tp_dealloc_5friso_8backends_6cython_6_friso_Friso(PyObject *o)
 
 static PyMethodDef __pyx_methods_5friso_8backends_6cython_6_friso_Friso[] = {
   {"init_from_ifile", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_5init_from_ifile, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5friso_8backends_6cython_6_friso_5Friso_4init_from_ifile},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_7__reduce_cython__, METH_NOARGS, __pyx_doc_5friso_8backends_6cython_6_friso_5Friso_6__reduce_cython__},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_9__setstate_cython__, METH_O, __pyx_doc_5friso_8backends_6cython_6_friso_5Friso_8__setstate_cython__},
+  {"dic_load", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_7dic_load, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5friso_8backends_6cython_6_friso_5Friso_6dic_load},
+  {"dic_load_from_ifile", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_9dic_load_from_ifile, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5friso_8backends_6cython_6_friso_5Friso_8dic_load_from_ifile},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_11__reduce_cython__, METH_NOARGS, __pyx_doc_5friso_8backends_6cython_6_friso_5Friso_10__reduce_cython__},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_5friso_8backends_6cython_6_friso_5Friso_13__setstate_cython__, METH_O, __pyx_doc_5friso_8backends_6cython_6_friso_5Friso_12__setstate_cython__},
   {0, 0, 0, 0}
 };
 
@@ -19815,6 +21910,8 @@ static PyObject *__pyx_tp_new_5friso_8backends_6cython_6_friso_Task(PyTypeObject
   }
   p = ((struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *)o);
   p->__pyx_vtab = __pyx_vtabptr_5friso_8backends_6cython_6_friso_Task;
+  p->text_view.data = NULL;
+  p->text_view.memview = NULL;
   if (unlikely(__pyx_pw_5friso_8backends_6cython_6_friso_4Task_1__cinit__(o, __pyx_empty_tuple, NULL) < 0)) goto bad;
   return o;
   bad:
@@ -19823,6 +21920,7 @@ static PyObject *__pyx_tp_new_5friso_8backends_6cython_6_friso_Task(PyTypeObject
 }
 
 static void __pyx_tp_dealloc_5friso_8backends_6cython_6_friso_Task(PyObject *o) {
+  struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *p = (struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *)o;
   {
     PyObject *etype, *eval, *etb;
     PyErr_Fetch(&etype, &eval, &etb);
@@ -19831,6 +21929,7 @@ static void __pyx_tp_dealloc_5friso_8backends_6cython_6_friso_Task(PyObject *o) 
     __Pyx_SET_REFCNT(o, Py_REFCNT(o) - 1);
     PyErr_Restore(etype, eval, etb);
   }
+  __PYX_XDEC_MEMVIEW(&p->text_view, 1);
   if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_5friso_8backends_6cython_6_friso_Task < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_5friso_8backends_6cython_6_friso_Task)))) {
     __pyx_freelist_5friso_8backends_6cython_6_friso_Task[__pyx_freecount_5friso_8backends_6cython_6_friso_Task++] = ((struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *)o);
   } else {
@@ -20175,6 +22274,249 @@ static PyTypeObject __pyx_type_5friso_8backends_6cython_6_friso_Lex = {
   0, /*tp_init*/
   0, /*tp_alloc*/
   __pyx_tp_new_5friso_8backends_6cython_6_friso_Lex, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b1 && (!CYTHON_COMPILING_IN_PYPY || PYPY_VERSION_NUM >= 0x07030800)
+  0, /*tp_vectorcall*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4 && PY_VERSION_HEX < 0x03090000
+  0, /*tp_print*/
+  #endif
+  #if CYTHON_COMPILING_IN_PYPY && PY_VERSION_HEX >= 0x03090000
+  0, /*tp_pypy_flags*/
+  #endif
+};
+static struct __pyx_vtabstruct_5friso_8backends_6cython_6_friso_StringSplit __pyx_vtable_5friso_8backends_6cython_6_friso_StringSplit;
+
+static struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *__pyx_freelist_5friso_8backends_6cython_6_friso_StringSplit[8];
+static int __pyx_freecount_5friso_8backends_6cython_6_friso_StringSplit = 0;
+
+static PyObject *__pyx_tp_new_5friso_8backends_6cython_6_friso_StringSplit(PyTypeObject *t, PyObject *a, PyObject *k) {
+  struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *p;
+  PyObject *o;
+  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_5friso_8backends_6cython_6_friso_StringSplit > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit)))) {
+    o = (PyObject*)__pyx_freelist_5friso_8backends_6cython_6_friso_StringSplit[--__pyx_freecount_5friso_8backends_6cython_6_friso_StringSplit];
+    memset(o, 0, sizeof(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit));
+    (void) PyObject_INIT(o, t);
+  } else {
+    o = (*t->tp_alloc)(t, 0);
+    if (unlikely(!o)) return 0;
+  }
+  p = ((struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *)o);
+  p->__pyx_vtab = __pyx_vtabptr_5friso_8backends_6cython_6_friso_StringSplit;
+  p->delimiter.data = NULL;
+  p->delimiter.memview = NULL;
+  p->source.data = NULL;
+  p->source.memview = NULL;
+  if (unlikely(__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_1__cinit__(o, a, k) < 0)) goto bad;
+  return o;
+  bad:
+  Py_DECREF(o); o = 0;
+  return NULL;
+}
+
+static void __pyx_tp_dealloc_5friso_8backends_6cython_6_friso_StringSplit(PyObject *o) {
+  struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *p = (struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *)o;
+  {
+    PyObject *etype, *eval, *etb;
+    PyErr_Fetch(&etype, &eval, &etb);
+    __Pyx_SET_REFCNT(o, Py_REFCNT(o) + 1);
+    __pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_3__dealloc__(o);
+    __Pyx_SET_REFCNT(o, Py_REFCNT(o) - 1);
+    PyErr_Restore(etype, eval, etb);
+  }
+  __PYX_XDEC_MEMVIEW(&p->delimiter, 1);
+  __PYX_XDEC_MEMVIEW(&p->source, 1);
+  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_5friso_8backends_6cython_6_friso_StringSplit < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit)))) {
+    __pyx_freelist_5friso_8backends_6cython_6_friso_StringSplit[__pyx_freecount_5friso_8backends_6cython_6_friso_StringSplit++] = ((struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *)o);
+  } else {
+    (*Py_TYPE(o)->tp_free)(o);
+  }
+}
+
+static PyMethodDef __pyx_methods_5friso_8backends_6cython_6_friso_StringSplit[] = {
+  {"reset", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_5reset, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5friso_8backends_6cython_6_friso_11StringSplit_4reset},
+  {"set_source", (PyCFunction)__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_7set_source, METH_O, __pyx_doc_5friso_8backends_6cython_6_friso_11StringSplit_6set_source},
+  {"set_delimiter", (PyCFunction)__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_9set_delimiter, METH_O, __pyx_doc_5friso_8backends_6cython_6_friso_11StringSplit_8set_delimiter},
+  {"split_next", (PyCFunction)__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_11split_next, METH_O, __pyx_doc_5friso_8backends_6cython_6_friso_11StringSplit_10split_next},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_13__reduce_cython__, METH_NOARGS, __pyx_doc_5friso_8backends_6cython_6_friso_11StringSplit_12__reduce_cython__},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_5friso_8backends_6cython_6_friso_11StringSplit_15__setstate_cython__, METH_O, __pyx_doc_5friso_8backends_6cython_6_friso_11StringSplit_14__setstate_cython__},
+  {0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_5friso_8backends_6cython_6_friso_StringSplit = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "friso.backends.cython._friso.StringSplit", /*tp_name*/
+  sizeof(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_5friso_8backends_6cython_6_friso_StringSplit, /*tp_dealloc*/
+  #if PY_VERSION_HEX < 0x030800b4
+  0, /*tp_print*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4
+  0, /*tp_vectorcall_offset*/
+  #endif
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  0, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER, /*tp_flags*/
+  "\n    Split bytes\n    ", /*tp_doc*/
+  0, /*tp_traverse*/
+  0, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_5friso_8backends_6cython_6_friso_StringSplit, /*tp_methods*/
+  0, /*tp_members*/
+  0, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_5friso_8backends_6cython_6_friso_StringSplit, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b1 && (!CYTHON_COMPILING_IN_PYPY || PYPY_VERSION_NUM >= 0x07030800)
+  0, /*tp_vectorcall*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4 && PY_VERSION_HEX < 0x03090000
+  0, /*tp_print*/
+  #endif
+  #if CYTHON_COMPILING_IN_PYPY && PY_VERSION_HEX >= 0x03090000
+  0, /*tp_pypy_flags*/
+  #endif
+};
+
+static struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *__pyx_freelist_5friso_8backends_6cython_6_friso_Dict[8];
+static int __pyx_freecount_5friso_8backends_6cython_6_friso_Dict = 0;
+
+static PyObject *__pyx_tp_new_5friso_8backends_6cython_6_friso_Dict(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  PyObject *o;
+  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_5friso_8backends_6cython_6_friso_Dict > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict)))) {
+    o = (PyObject*)__pyx_freelist_5friso_8backends_6cython_6_friso_Dict[--__pyx_freecount_5friso_8backends_6cython_6_friso_Dict];
+    memset(o, 0, sizeof(struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict));
+    (void) PyObject_INIT(o, t);
+  } else {
+    o = (*t->tp_alloc)(t, 0);
+    if (unlikely(!o)) return 0;
+  }
+  if (unlikely(__pyx_pw_5friso_8backends_6cython_6_friso_4Dict_1__cinit__(o, __pyx_empty_tuple, NULL) < 0)) goto bad;
+  return o;
+  bad:
+  Py_DECREF(o); o = 0;
+  return NULL;
+}
+
+static void __pyx_tp_dealloc_5friso_8backends_6cython_6_friso_Dict(PyObject *o) {
+  {
+    PyObject *etype, *eval, *etb;
+    PyErr_Fetch(&etype, &eval, &etb);
+    __Pyx_SET_REFCNT(o, Py_REFCNT(o) + 1);
+    __pyx_pw_5friso_8backends_6cython_6_friso_4Dict_3__dealloc__(o);
+    __Pyx_SET_REFCNT(o, Py_REFCNT(o) - 1);
+    PyErr_Restore(etype, eval, etb);
+  }
+  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_5friso_8backends_6cython_6_friso_Dict < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict)))) {
+    __pyx_freelist_5friso_8backends_6cython_6_friso_Dict[__pyx_freecount_5friso_8backends_6cython_6_friso_Dict++] = ((struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict *)o);
+  } else {
+    (*Py_TYPE(o)->tp_free)(o);
+  }
+}
+
+static PyMethodDef __pyx_methods_5friso_8backends_6cython_6_friso_Dict[] = {
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_5friso_8backends_6cython_6_friso_4Dict_5__reduce_cython__, METH_NOARGS, __pyx_doc_5friso_8backends_6cython_6_friso_4Dict_4__reduce_cython__},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_5friso_8backends_6cython_6_friso_4Dict_7__setstate_cython__, METH_O, __pyx_doc_5friso_8backends_6cython_6_friso_4Dict_6__setstate_cython__},
+  {0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_5friso_8backends_6cython_6_friso_Dict = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "friso.backends.cython._friso.Dict", /*tp_name*/
+  sizeof(struct __pyx_obj_5friso_8backends_6cython_6_friso_Dict), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_5friso_8backends_6cython_6_friso_Dict, /*tp_dealloc*/
+  #if PY_VERSION_HEX < 0x030800b4
+  0, /*tp_print*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4
+  0, /*tp_vectorcall_offset*/
+  #endif
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  0, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER, /*tp_flags*/
+  0, /*tp_doc*/
+  0, /*tp_traverse*/
+  0, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_5friso_8backends_6cython_6_friso_Dict, /*tp_methods*/
+  0, /*tp_members*/
+  0, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_5friso_8backends_6cython_6_friso_Dict, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -20978,6 +23320,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Cannot_create_writable_memory_vi, __pyx_k_Cannot_create_writable_memory_vi, sizeof(__pyx_k_Cannot_create_writable_memory_vi), 0, 0, 1, 0},
   {&__pyx_kp_s_Cannot_index_with_type_s, __pyx_k_Cannot_index_with_type_s, sizeof(__pyx_k_Cannot_index_with_type_s), 0, 0, 1, 0},
   {&__pyx_n_s_Config, __pyx_k_Config, sizeof(__pyx_k_Config), 0, 0, 1, 1},
+  {&__pyx_n_s_Dict, __pyx_k_Dict, sizeof(__pyx_k_Dict), 0, 0, 1, 1},
   {&__pyx_n_s_Ellipsis, __pyx_k_Ellipsis, sizeof(__pyx_k_Ellipsis), 0, 0, 1, 1},
   {&__pyx_kp_s_Empty_shape_tuple_for_cython_arr, __pyx_k_Empty_shape_tuple_for_cython_arr, sizeof(__pyx_k_Empty_shape_tuple_for_cython_arr), 0, 0, 1, 0},
   {&__pyx_n_s_Friso, __pyx_k_Friso, sizeof(__pyx_k_Friso), 0, 0, 1, 1},
@@ -21003,6 +23346,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_LEX_PUNC_WORDS, __pyx_k_LEX_PUNC_WORDS, sizeof(__pyx_k_LEX_PUNC_WORDS), 0, 0, 1, 1},
   {&__pyx_n_s_LEX_STOPWORDS, __pyx_k_LEX_STOPWORDS, sizeof(__pyx_k_LEX_STOPWORDS), 0, 0, 1, 1},
   {&__pyx_n_s_LEX_UNKNOW_WORDS, __pyx_k_LEX_UNKNOW_WORDS, sizeof(__pyx_k_LEX_UNKNOW_WORDS), 0, 0, 1, 1},
+  {&__pyx_n_s_Lex, __pyx_k_Lex, sizeof(__pyx_k_Lex), 0, 0, 1, 1},
   {&__pyx_n_s_MODE_COMPLEX, __pyx_k_MODE_COMPLEX, sizeof(__pyx_k_MODE_COMPLEX), 0, 0, 1, 1},
   {&__pyx_n_s_MODE_DETECT, __pyx_k_MODE_DETECT, sizeof(__pyx_k_MODE_DETECT), 0, 0, 1, 1},
   {&__pyx_n_s_MODE_SIMPLE, __pyx_k_MODE_SIMPLE, sizeof(__pyx_k_MODE_SIMPLE), 0, 0, 1, 1},
@@ -21012,6 +23356,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_b_O, __pyx_k_O, sizeof(__pyx_k_O), 0, 0, 0, 1},
   {&__pyx_kp_s_Out_of_bounds_on_buffer_access_a, __pyx_k_Out_of_bounds_on_buffer_access_a, sizeof(__pyx_k_Out_of_bounds_on_buffer_access_a), 0, 0, 1, 0},
   {&__pyx_n_s_PickleError, __pyx_k_PickleError, sizeof(__pyx_k_PickleError), 0, 0, 1, 1},
+  {&__pyx_n_s_StringSplit, __pyx_k_StringSplit, sizeof(__pyx_k_StringSplit), 0, 0, 1, 1},
   {&__pyx_n_s_Task, __pyx_k_Task, sizeof(__pyx_k_Task), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_kp_s_Unable_to_convert_item_to_object, __pyx_k_Unable_to_convert_item_to_object, sizeof(__pyx_k_Unable_to_convert_item_to_object), 0, 0, 1, 0},
@@ -21026,6 +23371,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_config, __pyx_k_config, sizeof(__pyx_k_config), 0, 0, 1, 1},
   {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
   {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
+  {&__pyx_n_s_delimiter, __pyx_k_delimiter, sizeof(__pyx_k_delimiter), 0, 0, 1, 1},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
   {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
   {&__pyx_n_s_dtype_is_object, __pyx_k_dtype_is_object, sizeof(__pyx_k_dtype_is_object), 0, 0, 1, 1},
@@ -21046,6 +23392,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_u_init_error, __pyx_k_init_error, sizeof(__pyx_k_init_error), 0, 1, 0, 0},
   {&__pyx_n_s_itemsize, __pyx_k_itemsize, sizeof(__pyx_k_itemsize), 0, 0, 1, 1},
   {&__pyx_kp_s_itemsize_0_for_cython_array, __pyx_k_itemsize_0_for_cython_array, sizeof(__pyx_k_itemsize_0_for_cython_array), 0, 0, 1, 0},
+  {&__pyx_n_s_length, __pyx_k_length, sizeof(__pyx_k_length), 0, 0, 1, 1},
+  {&__pyx_n_s_lex, __pyx_k_lex, sizeof(__pyx_k_lex), 0, 0, 1, 1},
+  {&__pyx_n_s_lexpath, __pyx_k_lexpath, sizeof(__pyx_k_lexpath), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
   {&__pyx_n_s_metaclass, __pyx_k_metaclass, sizeof(__pyx_k_metaclass), 0, 0, 1, 1},
@@ -21055,6 +23404,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_name_2, __pyx_k_name_2, sizeof(__pyx_k_name_2), 0, 0, 1, 1},
   {&__pyx_n_s_ndim, __pyx_k_ndim, sizeof(__pyx_k_ndim), 0, 0, 1, 1},
   {&__pyx_n_s_new, __pyx_k_new, sizeof(__pyx_k_new), 0, 0, 1, 1},
+  {&__pyx_kp_u_new_friso_config_t_error, __pyx_k_new_friso_config_t_error, sizeof(__pyx_k_new_friso_config_t_error), 0, 1, 0, 0},
+  {&__pyx_kp_u_new_friso_dic_t_error, __pyx_k_new_friso_dic_t_error, sizeof(__pyx_k_new_friso_dic_t_error), 0, 1, 0, 0},
+  {&__pyx_kp_u_new_friso_t_error, __pyx_k_new_friso_t_error, sizeof(__pyx_k_new_friso_t_error), 0, 1, 0, 0},
+  {&__pyx_kp_u_new_friso_task_t_error, __pyx_k_new_friso_task_t_error, sizeof(__pyx_k_new_friso_task_t_error), 0, 1, 0, 0},
+  {&__pyx_kp_u_new_string_split_t_error, __pyx_k_new_string_split_t_error, sizeof(__pyx_k_new_string_split_t_error), 0, 1, 0, 0},
   {&__pyx_kp_s_no_default___reduce___due_to_non, __pyx_k_no_default___reduce___due_to_non, sizeof(__pyx_k_no_default___reduce___due_to_non), 0, 0, 1, 0},
   {&__pyx_n_s_obj, __pyx_k_obj, sizeof(__pyx_k_obj), 0, 0, 1, 1},
   {&__pyx_n_s_pack, __pyx_k_pack, sizeof(__pyx_k_pack), 0, 0, 1, 1},
@@ -21080,6 +23434,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
   {&__pyx_n_s_shape, __pyx_k_shape, sizeof(__pyx_k_shape), 0, 0, 1, 1},
   {&__pyx_n_s_size, __pyx_k_size, sizeof(__pyx_k_size), 0, 0, 1, 1},
+  {&__pyx_n_s_source, __pyx_k_source, sizeof(__pyx_k_source), 0, 0, 1, 1},
   {&__pyx_n_s_start, __pyx_k_start, sizeof(__pyx_k_start), 0, 0, 1, 1},
   {&__pyx_n_s_step, __pyx_k_step, sizeof(__pyx_k_step), 0, 0, 1, 1},
   {&__pyx_n_s_stop, __pyx_k_stop, sizeof(__pyx_k_stop), 0, 0, 1, 1},
@@ -21210,6 +23565,44 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
+  /* "(tree fragment)":2
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
+
+  /* "(tree fragment)":4
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ */
+  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__12);
+  __Pyx_GIVEREF(__pyx_tuple__12);
+
+  /* "(tree fragment)":2
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
+
+  /* "(tree fragment)":4
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ */
+  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__14);
+  __Pyx_GIVEREF(__pyx_tuple__14);
+
   /* "View.MemoryView":134
  * 
  *         if not self.ndim:
@@ -21217,9 +23610,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *         if itemsize <= 0:
  */
-  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_kp_s_Empty_shape_tuple_for_cython_arr); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 134, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__11);
-  __Pyx_GIVEREF(__pyx_tuple__11);
+  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_Empty_shape_tuple_for_cython_arr); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__15);
+  __Pyx_GIVEREF(__pyx_tuple__15);
 
   /* "View.MemoryView":137
  * 
@@ -21228,9 +23621,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *         if not isinstance(format, bytes):
  */
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_s_itemsize_0_for_cython_array); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 137, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__12);
-  __Pyx_GIVEREF(__pyx_tuple__12);
+  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_s_itemsize_0_for_cython_array); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__16);
+  __Pyx_GIVEREF(__pyx_tuple__16);
 
   /* "View.MemoryView":149
  * 
@@ -21239,9 +23632,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_s_unable_to_allocate_shape_and_str); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 149, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__13);
-  __Pyx_GIVEREF(__pyx_tuple__13);
+  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_s_unable_to_allocate_shape_and_str); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__17);
+  __Pyx_GIVEREF(__pyx_tuple__17);
 
   /* "View.MemoryView":177
  *             self.data = <char *>malloc(self.len)
@@ -21250,9 +23643,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *             if self.dtype_is_object:
  */
-  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_s_unable_to_allocate_array_data); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 177, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__14);
-  __Pyx_GIVEREF(__pyx_tuple__14);
+  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_s_unable_to_allocate_array_data); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__18);
+  __Pyx_GIVEREF(__pyx_tuple__18);
 
   /* "View.MemoryView":193
  *             bufmode = PyBUF_F_CONTIGUOUS | PyBUF_ANY_CONTIGUOUS
@@ -21261,9 +23654,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         info.buf = self.data
  *         info.len = self.len
  */
-  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_Can_only_create_a_buffer_that_is); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 193, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__15);
-  __Pyx_GIVEREF(__pyx_tuple__15);
+  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_s_Can_only_create_a_buffer_that_is); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__19);
+  __Pyx_GIVEREF(__pyx_tuple__19);
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
@@ -21271,18 +23664,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__16);
-  __Pyx_GIVEREF(__pyx_tuple__16);
+  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__20);
+  __Pyx_GIVEREF(__pyx_tuple__20);
 
   /* "(tree fragment)":4
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__17);
-  __Pyx_GIVEREF(__pyx_tuple__17);
+  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__21);
+  __Pyx_GIVEREF(__pyx_tuple__21);
 
   /* "View.MemoryView":420
  *     def __setitem__(memoryview self, object index, object value):
@@ -21291,9 +23684,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *         have_slices, index = _unellipsify(index, self.view.ndim)
  */
-  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_s_Cannot_assign_to_read_only_memor); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 420, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__18);
-  __Pyx_GIVEREF(__pyx_tuple__18);
+  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_kp_s_Cannot_assign_to_read_only_memor); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 420, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__22);
+  __Pyx_GIVEREF(__pyx_tuple__22);
 
   /* "View.MemoryView":497
  *             result = struct.unpack(self.view.format, bytesitem)
@@ -21302,9 +23695,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         else:
  *             if len(self.view.format) == 1:
  */
-  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_s_Unable_to_convert_item_to_object); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 497, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__19);
-  __Pyx_GIVEREF(__pyx_tuple__19);
+  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_s_Unable_to_convert_item_to_object); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 497, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__23);
+  __Pyx_GIVEREF(__pyx_tuple__23);
 
   /* "View.MemoryView":522
  *     def __getbuffer__(self, Py_buffer *info, int flags):
@@ -21313,9 +23706,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *         if flags & PyBUF_ND:
  */
-  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_Cannot_create_writable_memory_vi); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 522, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__20);
-  __Pyx_GIVEREF(__pyx_tuple__20);
+  __pyx_tuple__24 = PyTuple_Pack(1, __pyx_kp_s_Cannot_create_writable_memory_vi); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 522, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__24);
+  __Pyx_GIVEREF(__pyx_tuple__24);
 
   /* "View.MemoryView":572
  *         if self.view.strides == NULL:
@@ -21324,9 +23717,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *         return tuple([stride for stride in self.view.strides[:self.view.ndim]])
  */
-  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s_Buffer_view_does_not_expose_stri); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 572, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__21);
-  __Pyx_GIVEREF(__pyx_tuple__21);
+  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_kp_s_Buffer_view_does_not_expose_stri); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 572, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__25);
+  __Pyx_GIVEREF(__pyx_tuple__25);
 
   /* "View.MemoryView":579
  *     def suboffsets(self):
@@ -21335,52 +23728,11 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *         return tuple([suboffset for suboffset in self.view.suboffsets[:self.view.ndim]])
  */
-  __pyx_tuple__22 = PyTuple_New(1); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 579, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__22);
+  __pyx_tuple__26 = PyTuple_New(1); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 579, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__26);
   __Pyx_INCREF(__pyx_int_neg_1);
   __Pyx_GIVEREF(__pyx_int_neg_1);
-  PyTuple_SET_ITEM(__pyx_tuple__22, 0, __pyx_int_neg_1);
-  __Pyx_GIVEREF(__pyx_tuple__22);
-
-  /* "(tree fragment)":2
- * def __reduce_cython__(self):
- *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
- * def __setstate_cython__(self, __pyx_state):
- *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
- */
-  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__23);
-  __Pyx_GIVEREF(__pyx_tuple__23);
-
-  /* "(tree fragment)":4
- *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
- * def __setstate_cython__(self, __pyx_state):
- *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
- */
-  __pyx_tuple__24 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__24);
-  __Pyx_GIVEREF(__pyx_tuple__24);
-
-  /* "View.MemoryView":684
- *         if item is Ellipsis:
- *             if not seen_ellipsis:
- *                 result.extend([slice(None)] * (ndim - len(tup) + 1))             # <<<<<<<<<<<<<<
- *                 seen_ellipsis = True
- *             else:
- */
-  __pyx_slice__25 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__25)) __PYX_ERR(0, 684, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_slice__25);
-  __Pyx_GIVEREF(__pyx_slice__25);
-
-  /* "View.MemoryView":705
- *     for suboffset in suboffsets[:ndim]:
- *         if suboffset >= 0:
- *             raise ValueError("Indirect dimensions not supported")             # <<<<<<<<<<<<<<
- * 
- * 
- */
-  __pyx_tuple__26 = PyTuple_Pack(1, __pyx_kp_s_Indirect_dimensions_not_supporte); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 705, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__26);
+  PyTuple_SET_ITEM(__pyx_tuple__26, 0, __pyx_int_neg_1);
   __Pyx_GIVEREF(__pyx_tuple__26);
 
   /* "(tree fragment)":2
@@ -21401,18 +23753,59 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__28 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__28);
   __Pyx_GIVEREF(__pyx_tuple__28);
-  __pyx_tuple__29 = PyTuple_Pack(3, __pyx_int_184977713, __pyx_int_136983863, __pyx_int_112105877); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__29);
-  __Pyx_GIVEREF(__pyx_tuple__29);
 
-  /* "friso/backends/cython/_friso.pyx":53
+  /* "View.MemoryView":684
+ *         if item is Ellipsis:
+ *             if not seen_ellipsis:
+ *                 result.extend([slice(None)] * (ndim - len(tup) + 1))             # <<<<<<<<<<<<<<
+ *                 seen_ellipsis = True
+ *             else:
+ */
+  __pyx_slice__29 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__29)) __PYX_ERR(0, 684, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_slice__29);
+  __Pyx_GIVEREF(__pyx_slice__29);
+
+  /* "View.MemoryView":705
+ *     for suboffset in suboffsets[:ndim]:
+ *         if suboffset >= 0:
+ *             raise ValueError("Indirect dimensions not supported")             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_tuple__30 = PyTuple_Pack(1, __pyx_kp_s_Indirect_dimensions_not_supporte); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 705, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__30);
+  __Pyx_GIVEREF(__pyx_tuple__30);
+
+  /* "(tree fragment)":2
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+  __pyx_tuple__31 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__31);
+  __Pyx_GIVEREF(__pyx_tuple__31);
+
+  /* "(tree fragment)":4
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ */
+  __pyx_tuple__32 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__32);
+  __Pyx_GIVEREF(__pyx_tuple__32);
+  __pyx_tuple__33 = PyTuple_Pack(3, __pyx_int_184977713, __pyx_int_136983863, __pyx_int_112105877); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__33);
+  __Pyx_GIVEREF(__pyx_tuple__33);
+
+  /* "friso/backends/cython/_friso.pyx":62
  * # ---------------------
  * 
  * def version():             # <<<<<<<<<<<<<<
  *     return (<bytes> friso_version()).decode()
  * 
  */
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_friso_backends_cython__friso_pyx, __pyx_n_s_version, 53, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(1, 53, __pyx_L1_error)
+  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_friso_backends_cython__friso_pyx, __pyx_n_s_version, 62, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(1, 62, __pyx_L1_error)
 
   /* "View.MemoryView":287
  *         return self.name
@@ -21421,9 +23814,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * cdef strided = Enum("<strided and direct>") # default
  * cdef indirect = Enum("<strided and indirect>")
  */
-  __pyx_tuple__31 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct_or_indirect); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 287, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__31);
-  __Pyx_GIVEREF(__pyx_tuple__31);
+  __pyx_tuple__35 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct_or_indirect); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 287, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__35);
+  __Pyx_GIVEREF(__pyx_tuple__35);
 
   /* "View.MemoryView":288
  * 
@@ -21432,9 +23825,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * cdef indirect = Enum("<strided and indirect>")
  * 
  */
-  __pyx_tuple__32 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 288, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__32);
-  __Pyx_GIVEREF(__pyx_tuple__32);
+  __pyx_tuple__36 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 288, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__36);
+  __Pyx_GIVEREF(__pyx_tuple__36);
 
   /* "View.MemoryView":289
  * cdef generic = Enum("<strided and direct or indirect>")
@@ -21443,9 +23836,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__33 = PyTuple_Pack(1, __pyx_kp_s_strided_and_indirect); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 289, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__33);
-  __Pyx_GIVEREF(__pyx_tuple__33);
+  __pyx_tuple__37 = PyTuple_Pack(1, __pyx_kp_s_strided_and_indirect); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__37);
+  __Pyx_GIVEREF(__pyx_tuple__37);
 
   /* "View.MemoryView":292
  * 
@@ -21454,9 +23847,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * cdef indirect_contiguous = Enum("<contiguous and indirect>")
  * 
  */
-  __pyx_tuple__34 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_direct); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 292, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__34);
-  __Pyx_GIVEREF(__pyx_tuple__34);
+  __pyx_tuple__38 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_direct); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 292, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__38);
+  __Pyx_GIVEREF(__pyx_tuple__38);
 
   /* "View.MemoryView":293
  * 
@@ -21465,19 +23858,19 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__35 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_indirect); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 293, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__35);
-  __Pyx_GIVEREF(__pyx_tuple__35);
+  __pyx_tuple__39 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_indirect); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__39);
+  __Pyx_GIVEREF(__pyx_tuple__39);
 
   /* "(tree fragment)":1
  * def __pyx_unpickle_Enum(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
  */
-  __pyx_tuple__36 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__36);
-  __Pyx_GIVEREF(__pyx_tuple__36);
-  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_Enum, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_tuple__40 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__40);
+  __Pyx_GIVEREF(__pyx_tuple__40);
+  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_Enum, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -21544,71 +23937,100 @@ static int __Pyx_modinit_type_init_code(void) {
   /*--- Type init code ---*/
   __pyx_vtabptr_5friso_8backends_6cython_6_friso_Friso = &__pyx_vtable_5friso_8backends_6cython_6_friso_Friso;
   __pyx_vtable_5friso_8backends_6cython_6_friso_Friso.init_from_ifile = (int (*)(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, PyObject *, int __pyx_skip_dispatch))__pyx_f_5friso_8backends_6cython_6_friso_5Friso_init_from_ifile;
-  if (PyType_Ready(&__pyx_type_5friso_8backends_6cython_6_friso_Friso) < 0) __PYX_ERR(1, 72, __pyx_L1_error)
+  __pyx_vtable_5friso_8backends_6cython_6_friso_Friso.dic_load = (PyObject *(*)(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, friso_lex_t, PyObject *, uint_t, int __pyx_skip_dispatch))__pyx_f_5friso_8backends_6cython_6_friso_5Friso_dic_load;
+  __pyx_vtable_5friso_8backends_6cython_6_friso_Friso.dic_load_from_ifile = (PyObject *(*)(struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, PyObject *, uint_t, int __pyx_skip_dispatch))__pyx_f_5friso_8backends_6cython_6_friso_5Friso_dic_load_from_ifile;
+  if (PyType_Ready(&__pyx_type_5friso_8backends_6cython_6_friso_Friso) < 0) __PYX_ERR(1, 81, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_5friso_8backends_6cython_6_friso_Friso.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_5friso_8backends_6cython_6_friso_Friso.tp_dictoffset && __pyx_type_5friso_8backends_6cython_6_friso_Friso.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_5friso_8backends_6cython_6_friso_Friso.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
-  if (__Pyx_SetVtable(__pyx_type_5friso_8backends_6cython_6_friso_Friso.tp_dict, __pyx_vtabptr_5friso_8backends_6cython_6_friso_Friso) < 0) __PYX_ERR(1, 72, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Friso, (PyObject *)&__pyx_type_5friso_8backends_6cython_6_friso_Friso) < 0) __PYX_ERR(1, 72, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_5friso_8backends_6cython_6_friso_Friso) < 0) __PYX_ERR(1, 72, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_5friso_8backends_6cython_6_friso_Friso.tp_dict, __pyx_vtabptr_5friso_8backends_6cython_6_friso_Friso) < 0) __PYX_ERR(1, 81, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Friso, (PyObject *)&__pyx_type_5friso_8backends_6cython_6_friso_Friso) < 0) __PYX_ERR(1, 81, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_5friso_8backends_6cython_6_friso_Friso) < 0) __PYX_ERR(1, 81, __pyx_L1_error)
   __pyx_ptype_5friso_8backends_6cython_6_friso_Friso = &__pyx_type_5friso_8backends_6cython_6_friso_Friso;
   __pyx_vtabptr_5friso_8backends_6cython_6_friso_Config = &__pyx_vtable_5friso_8backends_6cython_6_friso_Config;
   __pyx_vtable_5friso_8backends_6cython_6_friso_Config.init = (PyObject *(*)(struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, int __pyx_skip_dispatch))__pyx_f_5friso_8backends_6cython_6_friso_6Config_init;
   __pyx_vtable_5friso_8backends_6cython_6_friso_Config.set_mode = (PyObject *(*)(struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, friso_mode_t, int __pyx_skip_dispatch))__pyx_f_5friso_8backends_6cython_6_friso_6Config_set_mode;
   __pyx_vtable_5friso_8backends_6cython_6_friso_Config.next_token = (PyObject *(*)(struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *, int __pyx_skip_dispatch))__pyx_f_5friso_8backends_6cython_6_friso_6Config_next_token;
   __pyx_vtable_5friso_8backends_6cython_6_friso_Config.next_cjk = (PyObject *(*)(struct __pyx_obj_5friso_8backends_6cython_6_friso_Config *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Friso *, struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *, int __pyx_skip_dispatch))__pyx_f_5friso_8backends_6cython_6_friso_6Config_next_cjk;
-  if (PyType_Ready(&__pyx_type_5friso_8backends_6cython_6_friso_Config) < 0) __PYX_ERR(1, 93, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_5friso_8backends_6cython_6_friso_Config) < 0) __PYX_ERR(1, 122, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_5friso_8backends_6cython_6_friso_Config.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_5friso_8backends_6cython_6_friso_Config.tp_dictoffset && __pyx_type_5friso_8backends_6cython_6_friso_Config.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_5friso_8backends_6cython_6_friso_Config.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
-  if (__Pyx_SetVtable(__pyx_type_5friso_8backends_6cython_6_friso_Config.tp_dict, __pyx_vtabptr_5friso_8backends_6cython_6_friso_Config) < 0) __PYX_ERR(1, 93, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Config, (PyObject *)&__pyx_type_5friso_8backends_6cython_6_friso_Config) < 0) __PYX_ERR(1, 93, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_5friso_8backends_6cython_6_friso_Config) < 0) __PYX_ERR(1, 93, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_5friso_8backends_6cython_6_friso_Config.tp_dict, __pyx_vtabptr_5friso_8backends_6cython_6_friso_Config) < 0) __PYX_ERR(1, 122, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Config, (PyObject *)&__pyx_type_5friso_8backends_6cython_6_friso_Config) < 0) __PYX_ERR(1, 122, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_5friso_8backends_6cython_6_friso_Config) < 0) __PYX_ERR(1, 122, __pyx_L1_error)
   __pyx_ptype_5friso_8backends_6cython_6_friso_Config = &__pyx_type_5friso_8backends_6cython_6_friso_Config;
   __pyx_vtabptr_5friso_8backends_6cython_6_friso_Task = &__pyx_vtable_5friso_8backends_6cython_6_friso_Task;
   __pyx_vtable_5friso_8backends_6cython_6_friso_Task.set_text = (PyObject *(*)(struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *, PyObject *, int __pyx_skip_dispatch))__pyx_f_5friso_8backends_6cython_6_friso_4Task_set_text;
   __pyx_vtable_5friso_8backends_6cython_6_friso_Task.set_bytes = (PyObject *(*)(struct __pyx_obj_5friso_8backends_6cython_6_friso_Task *, __Pyx_memviewslice, int __pyx_skip_dispatch))__pyx_f_5friso_8backends_6cython_6_friso_4Task_set_bytes;
-  if (PyType_Ready(&__pyx_type_5friso_8backends_6cython_6_friso_Task) < 0) __PYX_ERR(1, 166, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_5friso_8backends_6cython_6_friso_Task) < 0) __PYX_ERR(1, 198, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_5friso_8backends_6cython_6_friso_Task.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_5friso_8backends_6cython_6_friso_Task.tp_dictoffset && __pyx_type_5friso_8backends_6cython_6_friso_Task.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_5friso_8backends_6cython_6_friso_Task.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
-  if (__Pyx_SetVtable(__pyx_type_5friso_8backends_6cython_6_friso_Task.tp_dict, __pyx_vtabptr_5friso_8backends_6cython_6_friso_Task) < 0) __PYX_ERR(1, 166, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Task, (PyObject *)&__pyx_type_5friso_8backends_6cython_6_friso_Task) < 0) __PYX_ERR(1, 166, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_5friso_8backends_6cython_6_friso_Task) < 0) __PYX_ERR(1, 166, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_5friso_8backends_6cython_6_friso_Task.tp_dict, __pyx_vtabptr_5friso_8backends_6cython_6_friso_Task) < 0) __PYX_ERR(1, 198, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Task, (PyObject *)&__pyx_type_5friso_8backends_6cython_6_friso_Task) < 0) __PYX_ERR(1, 198, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_5friso_8backends_6cython_6_friso_Task) < 0) __PYX_ERR(1, 198, __pyx_L1_error)
   __pyx_ptype_5friso_8backends_6cython_6_friso_Task = &__pyx_type_5friso_8backends_6cython_6_friso_Task;
   __pyx_vtabptr_5friso_8backends_6cython_6_friso_Token = &__pyx_vtable_5friso_8backends_6cython_6_friso_Token;
   __pyx_vtable_5friso_8backends_6cython_6_friso_Token.from_ptr = (struct __pyx_obj_5friso_8backends_6cython_6_friso_Token *(*)(friso_token_t))__pyx_f_5friso_8backends_6cython_6_friso_5Token_from_ptr;
-  if (PyType_Ready(&__pyx_type_5friso_8backends_6cython_6_friso_Token) < 0) __PYX_ERR(1, 206, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_5friso_8backends_6cython_6_friso_Token) < 0) __PYX_ERR(1, 245, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_5friso_8backends_6cython_6_friso_Token.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_5friso_8backends_6cython_6_friso_Token.tp_dictoffset && __pyx_type_5friso_8backends_6cython_6_friso_Token.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_5friso_8backends_6cython_6_friso_Token.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
-  if (__Pyx_SetVtable(__pyx_type_5friso_8backends_6cython_6_friso_Token.tp_dict, __pyx_vtabptr_5friso_8backends_6cython_6_friso_Token) < 0) __PYX_ERR(1, 206, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_5friso_8backends_6cython_6_friso_Token) < 0) __PYX_ERR(1, 206, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_5friso_8backends_6cython_6_friso_Token.tp_dict, __pyx_vtabptr_5friso_8backends_6cython_6_friso_Token) < 0) __PYX_ERR(1, 245, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_5friso_8backends_6cython_6_friso_Token) < 0) __PYX_ERR(1, 245, __pyx_L1_error)
   __pyx_ptype_5friso_8backends_6cython_6_friso_Token = &__pyx_type_5friso_8backends_6cython_6_friso_Token;
   __pyx_vtabptr_5friso_8backends_6cython_6_friso_Lex = &__pyx_vtable_5friso_8backends_6cython_6_friso_Lex;
   __pyx_vtable_5friso_8backends_6cython_6_friso_Lex.from_ptr = (struct __pyx_obj_5friso_8backends_6cython_6_friso_Lex *(*)(lex_entry_t))__pyx_f_5friso_8backends_6cython_6_friso_3Lex_from_ptr;
-  if (PyType_Ready(&__pyx_type_5friso_8backends_6cython_6_friso_Lex) < 0) __PYX_ERR(1, 242, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_5friso_8backends_6cython_6_friso_Lex) < 0) __PYX_ERR(1, 280, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_5friso_8backends_6cython_6_friso_Lex.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_5friso_8backends_6cython_6_friso_Lex.tp_dictoffset && __pyx_type_5friso_8backends_6cython_6_friso_Lex.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_5friso_8backends_6cython_6_friso_Lex.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
-  if (__Pyx_SetVtable(__pyx_type_5friso_8backends_6cython_6_friso_Lex.tp_dict, __pyx_vtabptr_5friso_8backends_6cython_6_friso_Lex) < 0) __PYX_ERR(1, 242, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_5friso_8backends_6cython_6_friso_Lex) < 0) __PYX_ERR(1, 242, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_5friso_8backends_6cython_6_friso_Lex.tp_dict, __pyx_vtabptr_5friso_8backends_6cython_6_friso_Lex) < 0) __PYX_ERR(1, 280, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Lex, (PyObject *)&__pyx_type_5friso_8backends_6cython_6_friso_Lex) < 0) __PYX_ERR(1, 280, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_5friso_8backends_6cython_6_friso_Lex) < 0) __PYX_ERR(1, 280, __pyx_L1_error)
   __pyx_ptype_5friso_8backends_6cython_6_friso_Lex = &__pyx_type_5friso_8backends_6cython_6_friso_Lex;
+  __pyx_vtabptr_5friso_8backends_6cython_6_friso_StringSplit = &__pyx_vtable_5friso_8backends_6cython_6_friso_StringSplit;
+  __pyx_vtable_5friso_8backends_6cython_6_friso_StringSplit.reset = (PyObject *(*)(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *, __Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch))__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_reset;
+  __pyx_vtable_5friso_8backends_6cython_6_friso_StringSplit.set_source = (PyObject *(*)(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *, __Pyx_memviewslice, int __pyx_skip_dispatch))__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_set_source;
+  __pyx_vtable_5friso_8backends_6cython_6_friso_StringSplit.set_delimiter = (PyObject *(*)(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *, __Pyx_memviewslice, int __pyx_skip_dispatch))__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_set_delimiter;
+  __pyx_vtable_5friso_8backends_6cython_6_friso_StringSplit.split_next = (PyObject *(*)(struct __pyx_obj_5friso_8backends_6cython_6_friso_StringSplit *, __Pyx_memviewslice, int __pyx_skip_dispatch))__pyx_f_5friso_8backends_6cython_6_friso_11StringSplit_split_next;
+  if (PyType_Ready(&__pyx_type_5friso_8backends_6cython_6_friso_StringSplit) < 0) __PYX_ERR(1, 292, __pyx_L1_error)
+  #if PY_VERSION_HEX < 0x030800B1
+  __pyx_type_5friso_8backends_6cython_6_friso_StringSplit.tp_print = 0;
+  #endif
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_5friso_8backends_6cython_6_friso_StringSplit.tp_dictoffset && __pyx_type_5friso_8backends_6cython_6_friso_StringSplit.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_5friso_8backends_6cython_6_friso_StringSplit.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
+  }
+  if (__Pyx_SetVtable(__pyx_type_5friso_8backends_6cython_6_friso_StringSplit.tp_dict, __pyx_vtabptr_5friso_8backends_6cython_6_friso_StringSplit) < 0) __PYX_ERR(1, 292, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_StringSplit, (PyObject *)&__pyx_type_5friso_8backends_6cython_6_friso_StringSplit) < 0) __PYX_ERR(1, 292, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_5friso_8backends_6cython_6_friso_StringSplit) < 0) __PYX_ERR(1, 292, __pyx_L1_error)
+  __pyx_ptype_5friso_8backends_6cython_6_friso_StringSplit = &__pyx_type_5friso_8backends_6cython_6_friso_StringSplit;
+  if (PyType_Ready(&__pyx_type_5friso_8backends_6cython_6_friso_Dict) < 0) __PYX_ERR(1, 337, __pyx_L1_error)
+  #if PY_VERSION_HEX < 0x030800B1
+  __pyx_type_5friso_8backends_6cython_6_friso_Dict.tp_print = 0;
+  #endif
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_5friso_8backends_6cython_6_friso_Dict.tp_dictoffset && __pyx_type_5friso_8backends_6cython_6_friso_Dict.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_5friso_8backends_6cython_6_friso_Dict.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
+  }
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Dict, (PyObject *)&__pyx_type_5friso_8backends_6cython_6_friso_Dict) < 0) __PYX_ERR(1, 337, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_5friso_8backends_6cython_6_friso_Dict) < 0) __PYX_ERR(1, 337, __pyx_L1_error)
+  __pyx_ptype_5friso_8backends_6cython_6_friso_Dict = &__pyx_type_5friso_8backends_6cython_6_friso_Dict;
   __pyx_vtabptr_array = &__pyx_vtable_array;
   __pyx_vtable_array.get_memview = (PyObject *(*)(struct __pyx_array_obj *))__pyx_array_get_memview;
   if (PyType_Ready(&__pyx_type___pyx_array) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
@@ -21895,265 +24317,265 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
 
-  /* "friso/backends/cython/_friso.pyx":30
+  /* "friso/backends/cython/_friso.pyx":39
  * 
  * # ----------------constants
  * MODE_SIMPLE = __FRISO_SIMPLE_MODE__             # <<<<<<<<<<<<<<
  * MODE_COMPLEX = __FRISO_COMPLEX_MODE__
  * MODE_DETECT = __FRISO_DETECT_MODE__
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_mode_t(__FRISO_SIMPLE_MODE__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 30, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_mode_t(__FRISO_SIMPLE_MODE__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_MODE_SIMPLE, __pyx_t_1) < 0) __PYX_ERR(1, 30, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_MODE_SIMPLE, __pyx_t_1) < 0) __PYX_ERR(1, 39, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":31
+  /* "friso/backends/cython/_friso.pyx":40
  * # ----------------constants
  * MODE_SIMPLE = __FRISO_SIMPLE_MODE__
  * MODE_COMPLEX = __FRISO_COMPLEX_MODE__             # <<<<<<<<<<<<<<
  * MODE_DETECT = __FRISO_DETECT_MODE__
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_mode_t(__FRISO_COMPLEX_MODE__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 31, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_mode_t(__FRISO_COMPLEX_MODE__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_MODE_COMPLEX, __pyx_t_1) < 0) __PYX_ERR(1, 31, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_MODE_COMPLEX, __pyx_t_1) < 0) __PYX_ERR(1, 40, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":32
+  /* "friso/backends/cython/_friso.pyx":41
  * MODE_SIMPLE = __FRISO_SIMPLE_MODE__
  * MODE_COMPLEX = __FRISO_COMPLEX_MODE__
  * MODE_DETECT = __FRISO_DETECT_MODE__             # <<<<<<<<<<<<<<
  * 
  * LEX_CJK_WORDS = __LEX_CJK_WORDS__
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_mode_t(__FRISO_DETECT_MODE__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 32, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_mode_t(__FRISO_DETECT_MODE__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_MODE_DETECT, __pyx_t_1) < 0) __PYX_ERR(1, 32, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_MODE_DETECT, __pyx_t_1) < 0) __PYX_ERR(1, 41, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":34
+  /* "friso/backends/cython/_friso.pyx":43
  * MODE_DETECT = __FRISO_DETECT_MODE__
  * 
  * LEX_CJK_WORDS = __LEX_CJK_WORDS__             # <<<<<<<<<<<<<<
  * LEX_CJK_UNITS = __LEX_CJK_UNITS__
  * LEX_ECM_WORDS = __LEX_ECM_WORDS__    #english and chinese mixed words.
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CJK_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 34, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CJK_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CJK_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CJK_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 43, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":35
+  /* "friso/backends/cython/_friso.pyx":44
  * 
  * LEX_CJK_WORDS = __LEX_CJK_WORDS__
  * LEX_CJK_UNITS = __LEX_CJK_UNITS__             # <<<<<<<<<<<<<<
  * LEX_ECM_WORDS = __LEX_ECM_WORDS__    #english and chinese mixed words.
  * LEX_CEM_WORDS =__LEX_CEM_WORDS__    #chinese and english mixed words.
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CJK_UNITS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 35, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CJK_UNITS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CJK_UNITS, __pyx_t_1) < 0) __PYX_ERR(1, 35, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CJK_UNITS, __pyx_t_1) < 0) __PYX_ERR(1, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":36
+  /* "friso/backends/cython/_friso.pyx":45
  * LEX_CJK_WORDS = __LEX_CJK_WORDS__
  * LEX_CJK_UNITS = __LEX_CJK_UNITS__
  * LEX_ECM_WORDS = __LEX_ECM_WORDS__    #english and chinese mixed words.             # <<<<<<<<<<<<<<
  * LEX_CEM_WORDS =__LEX_CEM_WORDS__    #chinese and english mixed words.
  * LEX_CN_LNAME = __LEX_CN_LNAME__
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_ECM_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 36, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_ECM_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_ECM_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 36, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_ECM_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 45, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":37
+  /* "friso/backends/cython/_friso.pyx":46
  * LEX_CJK_UNITS = __LEX_CJK_UNITS__
  * LEX_ECM_WORDS = __LEX_ECM_WORDS__    #english and chinese mixed words.
  * LEX_CEM_WORDS =__LEX_CEM_WORDS__    #chinese and english mixed words.             # <<<<<<<<<<<<<<
  * LEX_CN_LNAME = __LEX_CN_LNAME__
  * LEX_CN_SNAME = __LEX_CN_SNAME__
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CEM_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 37, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CEM_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CEM_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 37, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CEM_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 46, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":38
+  /* "friso/backends/cython/_friso.pyx":47
  * LEX_ECM_WORDS = __LEX_ECM_WORDS__    #english and chinese mixed words.
  * LEX_CEM_WORDS =__LEX_CEM_WORDS__    #chinese and english mixed words.
  * LEX_CN_LNAME = __LEX_CN_LNAME__             # <<<<<<<<<<<<<<
  * LEX_CN_SNAME = __LEX_CN_SNAME__
  * LEX_CN_DNAME1 = __LEX_CN_DNAME1__
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CN_LNAME__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CN_LNAME__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CN_LNAME, __pyx_t_1) < 0) __PYX_ERR(1, 38, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CN_LNAME, __pyx_t_1) < 0) __PYX_ERR(1, 47, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":39
+  /* "friso/backends/cython/_friso.pyx":48
  * LEX_CEM_WORDS =__LEX_CEM_WORDS__    #chinese and english mixed words.
  * LEX_CN_LNAME = __LEX_CN_LNAME__
  * LEX_CN_SNAME = __LEX_CN_SNAME__             # <<<<<<<<<<<<<<
  * LEX_CN_DNAME1 = __LEX_CN_DNAME1__
  * LEX_CN_DNAME2 =__LEX_CN_DNAME2__
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CN_SNAME__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 39, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CN_SNAME__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CN_SNAME, __pyx_t_1) < 0) __PYX_ERR(1, 39, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CN_SNAME, __pyx_t_1) < 0) __PYX_ERR(1, 48, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":40
+  /* "friso/backends/cython/_friso.pyx":49
  * LEX_CN_LNAME = __LEX_CN_LNAME__
  * LEX_CN_SNAME = __LEX_CN_SNAME__
  * LEX_CN_DNAME1 = __LEX_CN_DNAME1__             # <<<<<<<<<<<<<<
  * LEX_CN_DNAME2 =__LEX_CN_DNAME2__
  * LEX_CN_LNA = __LEX_CN_LNA__
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CN_DNAME1__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 40, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CN_DNAME1__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CN_DNAME1, __pyx_t_1) < 0) __PYX_ERR(1, 40, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CN_DNAME1, __pyx_t_1) < 0) __PYX_ERR(1, 49, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":41
+  /* "friso/backends/cython/_friso.pyx":50
  * LEX_CN_SNAME = __LEX_CN_SNAME__
  * LEX_CN_DNAME1 = __LEX_CN_DNAME1__
  * LEX_CN_DNAME2 =__LEX_CN_DNAME2__             # <<<<<<<<<<<<<<
  * LEX_CN_LNA = __LEX_CN_LNA__
  * LEX_STOPWORDS = __LEX_STOPWORDS__
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CN_DNAME2__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CN_DNAME2__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CN_DNAME2, __pyx_t_1) < 0) __PYX_ERR(1, 41, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CN_DNAME2, __pyx_t_1) < 0) __PYX_ERR(1, 50, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":42
+  /* "friso/backends/cython/_friso.pyx":51
  * LEX_CN_DNAME1 = __LEX_CN_DNAME1__
  * LEX_CN_DNAME2 =__LEX_CN_DNAME2__
  * LEX_CN_LNA = __LEX_CN_LNA__             # <<<<<<<<<<<<<<
  * LEX_STOPWORDS = __LEX_STOPWORDS__
  * LEX_ENPUN_WORDS = __LEX_ENPUN_WORDS__
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CN_LNA__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 42, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_CN_LNA__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CN_LNA, __pyx_t_1) < 0) __PYX_ERR(1, 42, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_CN_LNA, __pyx_t_1) < 0) __PYX_ERR(1, 51, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":43
+  /* "friso/backends/cython/_friso.pyx":52
  * LEX_CN_DNAME2 =__LEX_CN_DNAME2__
  * LEX_CN_LNA = __LEX_CN_LNA__
  * LEX_STOPWORDS = __LEX_STOPWORDS__             # <<<<<<<<<<<<<<
  * LEX_ENPUN_WORDS = __LEX_ENPUN_WORDS__
  * LEX_EN_WORDS = __LEX_EN_WORDS__
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_STOPWORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 43, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_STOPWORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_STOPWORDS, __pyx_t_1) < 0) __PYX_ERR(1, 43, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_STOPWORDS, __pyx_t_1) < 0) __PYX_ERR(1, 52, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":44
+  /* "friso/backends/cython/_friso.pyx":53
  * LEX_CN_LNA = __LEX_CN_LNA__
  * LEX_STOPWORDS = __LEX_STOPWORDS__
  * LEX_ENPUN_WORDS = __LEX_ENPUN_WORDS__             # <<<<<<<<<<<<<<
  * LEX_EN_WORDS = __LEX_EN_WORDS__
  * LEX_OTHER_WORDS = __LEX_OTHER_WORDS__
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_ENPUN_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 44, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_ENPUN_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_ENPUN_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 44, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_ENPUN_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":45
+  /* "friso/backends/cython/_friso.pyx":54
  * LEX_STOPWORDS = __LEX_STOPWORDS__
  * LEX_ENPUN_WORDS = __LEX_ENPUN_WORDS__
  * LEX_EN_WORDS = __LEX_EN_WORDS__             # <<<<<<<<<<<<<<
  * LEX_OTHER_WORDS = __LEX_OTHER_WORDS__
  * LEX_NCSYN_WORDS = __LEX_NCSYN_WORDS__
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_EN_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 45, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_EN_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_EN_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 45, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_EN_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 54, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":46
+  /* "friso/backends/cython/_friso.pyx":55
  * LEX_ENPUN_WORDS = __LEX_ENPUN_WORDS__
  * LEX_EN_WORDS = __LEX_EN_WORDS__
  * LEX_OTHER_WORDS = __LEX_OTHER_WORDS__             # <<<<<<<<<<<<<<
  * LEX_NCSYN_WORDS = __LEX_NCSYN_WORDS__
  * LEX_PUNC_WORDS = __LEX_PUNC_WORDS__      #punctuations
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_OTHER_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 46, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_OTHER_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_OTHER_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 46, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_OTHER_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 55, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":47
+  /* "friso/backends/cython/_friso.pyx":56
  * LEX_EN_WORDS = __LEX_EN_WORDS__
  * LEX_OTHER_WORDS = __LEX_OTHER_WORDS__
  * LEX_NCSYN_WORDS = __LEX_NCSYN_WORDS__             # <<<<<<<<<<<<<<
  * LEX_PUNC_WORDS = __LEX_PUNC_WORDS__      #punctuations
  * LEX_UNKNOW_WORDS = __LEX_UNKNOW_WORDS__      #unrecognized words.
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_NCSYN_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 47, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_NCSYN_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_NCSYN_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 47, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_NCSYN_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 56, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":48
+  /* "friso/backends/cython/_friso.pyx":57
  * LEX_OTHER_WORDS = __LEX_OTHER_WORDS__
  * LEX_NCSYN_WORDS = __LEX_NCSYN_WORDS__
  * LEX_PUNC_WORDS = __LEX_PUNC_WORDS__      #punctuations             # <<<<<<<<<<<<<<
  * LEX_UNKNOW_WORDS = __LEX_UNKNOW_WORDS__      #unrecognized words.
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_PUNC_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 48, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_PUNC_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_PUNC_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 48, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_PUNC_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 57, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":49
+  /* "friso/backends/cython/_friso.pyx":58
  * LEX_NCSYN_WORDS = __LEX_NCSYN_WORDS__
  * LEX_PUNC_WORDS = __LEX_PUNC_WORDS__      #punctuations
  * LEX_UNKNOW_WORDS = __LEX_UNKNOW_WORDS__      #unrecognized words.             # <<<<<<<<<<<<<<
  * 
  * # ---------------------
  */
-  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_UNKNOW_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 49, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_friso_lex_t(__LEX_UNKNOW_WORDS__); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_UNKNOW_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 49, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LEX_UNKNOW_WORDS, __pyx_t_1) < 0) __PYX_ERR(1, 58, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":53
+  /* "friso/backends/cython/_friso.pyx":62
  * # ---------------------
  * 
  * def version():             # <<<<<<<<<<<<<<
  *     return (<bytes> friso_version()).decode()
  * 
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5friso_8backends_6cython_6_friso_1version, NULL, __pyx_n_s_friso_backends_cython__friso); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 53, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5friso_8backends_6cython_6_friso_1version, NULL, __pyx_n_s_friso_backends_cython__friso); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_t_1) < 0) __PYX_ERR(1, 53, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_t_1) < 0) __PYX_ERR(1, 62, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "friso/backends/cython/_friso.pyx":65
+  /* "friso/backends/cython/_friso.pyx":74
  * 
  * 
  * class FrisoException(Exception):             # <<<<<<<<<<<<<<
  *     pass
  * 
  */
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
   __Pyx_GIVEREF(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
-  __pyx_t_2 = __Pyx_CalculateMetaclass(NULL, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CalculateMetaclass(NULL, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_2, __pyx_t_1, __pyx_n_s_FrisoException, __pyx_n_s_FrisoException, (PyObject *) NULL, __pyx_n_s_friso_backends_cython__friso, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_2, __pyx_t_1, __pyx_n_s_FrisoException, __pyx_n_s_FrisoException, (PyObject *) NULL, __pyx_n_s_friso_backends_cython__friso, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_2, __pyx_n_s_FrisoException, __pyx_t_1, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_2, __pyx_n_s_FrisoException, __pyx_t_1, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_FrisoException, __pyx_t_4) < 0) __PYX_ERR(1, 65, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_FrisoException, __pyx_t_4) < 0) __PYX_ERR(1, 74, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -22189,7 +24611,7 @@ if (!__Pyx_RefNanny) {
  * cdef strided = Enum("<strided and direct>") # default
  * cdef indirect = Enum("<strided and indirect>")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__31, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 287, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__35, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 287, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_XGOTREF(generic);
   __Pyx_DECREF_SET(generic, __pyx_t_1);
@@ -22203,7 +24625,7 @@ if (!__Pyx_RefNanny) {
  * cdef indirect = Enum("<strided and indirect>")
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__32, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 288, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__36, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 288, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_XGOTREF(strided);
   __Pyx_DECREF_SET(strided, __pyx_t_1);
@@ -22217,7 +24639,7 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__33, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__37, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 289, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_XGOTREF(indirect);
   __Pyx_DECREF_SET(indirect, __pyx_t_1);
@@ -22231,7 +24653,7 @@ if (!__Pyx_RefNanny) {
  * cdef indirect_contiguous = Enum("<contiguous and indirect>")
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__34, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 292, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__38, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_XGOTREF(contiguous);
   __Pyx_DECREF_SET(contiguous, __pyx_t_1);
@@ -22245,7 +24667,7 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__35, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__39, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_XGOTREF(indirect_contiguous);
   __Pyx_DECREF_SET(indirect_contiguous, __pyx_t_1);
@@ -23142,11 +25564,6 @@ static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *nam
     return 0;
 }
 
-/* None */
-static CYTHON_INLINE void __Pyx_RaiseUnboundLocalError(const char *varname) {
-    PyErr_Format(PyExc_UnboundLocalError, "local variable '%s' referenced before assignment", varname);
-}
-
 /* MemviewSliceInit */
 static int
 __Pyx_init_memviewslice(struct __pyx_memoryview_obj *memview,
@@ -23277,6 +25694,11 @@ static CYTHON_INLINE void __Pyx_XDEC_MEMVIEW(__Pyx_memviewslice *memslice,
     } else {
         memslice->memview = NULL;
     }
+}
+
+/* None */
+static CYTHON_INLINE void __Pyx_RaiseUnboundLocalError(const char *varname) {
+    PyErr_Format(PyExc_UnboundLocalError, "local variable '%s' referenced before assignment", varname);
 }
 
 /* BytesEquals */
@@ -25527,6 +27949,29 @@ no_fail:
 }
 
 /* ObjectToMemviewSlice */
+  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t__const__(PyObject *obj, int writable_flag) {
+    __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
+    __Pyx_BufFmt_StackElem stack[1];
+    int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
+    int retcode;
+    if (obj == Py_None) {
+        result.memview = (struct __pyx_memoryview_obj *) Py_None;
+        return result;
+    }
+    retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
+                                                 (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT) | writable_flag, 1,
+                                                 &__Pyx_TypeInfo_nn_uint8_t__const__, stack,
+                                                 &result, obj);
+    if (unlikely(retcode == -1))
+        goto __pyx_fail;
+    return result;
+__pyx_fail:
+    result.memview = NULL;
+    result.data = NULL;
+    return result;
+}
+
+/* ObjectToMemviewSlice */
   static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn_uint8_t(PyObject *obj, int writable_flag) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
@@ -25690,6 +28135,398 @@ no_fail:
         return _PyLong_FromByteArray(bytes, sizeof(friso_lex_t),
                                      little, !is_unsigned);
     }
+}
+
+/* CIntFromPy */
+  static CYTHON_INLINE friso_lex_t __Pyx_PyInt_As_friso_lex_t(PyObject *x) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const friso_lex_t neg_one = (friso_lex_t) -1, const_zero = (friso_lex_t) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+#if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_Check(x))) {
+        if (sizeof(friso_lex_t) < sizeof(long)) {
+            __PYX_VERIFY_RETURN_INT(friso_lex_t, long, PyInt_AS_LONG(x))
+        } else {
+            long val = PyInt_AS_LONG(x);
+            if (is_unsigned && unlikely(val < 0)) {
+                goto raise_neg_overflow;
+            }
+            return (friso_lex_t) val;
+        }
+    } else
+#endif
+    if (likely(PyLong_Check(x))) {
+        if (is_unsigned) {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (friso_lex_t) 0;
+                case  1: __PYX_VERIFY_RETURN_INT(friso_lex_t, digit, digits[0])
+                case 2:
+                    if (8 * sizeof(friso_lex_t) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(friso_lex_t, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(friso_lex_t) >= 2 * PyLong_SHIFT) {
+                            return (friso_lex_t) (((((friso_lex_t)digits[1]) << PyLong_SHIFT) | (friso_lex_t)digits[0]));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(friso_lex_t) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(friso_lex_t, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(friso_lex_t) >= 3 * PyLong_SHIFT) {
+                            return (friso_lex_t) (((((((friso_lex_t)digits[2]) << PyLong_SHIFT) | (friso_lex_t)digits[1]) << PyLong_SHIFT) | (friso_lex_t)digits[0]));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(friso_lex_t) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(friso_lex_t, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(friso_lex_t) >= 4 * PyLong_SHIFT) {
+                            return (friso_lex_t) (((((((((friso_lex_t)digits[3]) << PyLong_SHIFT) | (friso_lex_t)digits[2]) << PyLong_SHIFT) | (friso_lex_t)digits[1]) << PyLong_SHIFT) | (friso_lex_t)digits[0]));
+                        }
+                    }
+                    break;
+            }
+#endif
+#if CYTHON_COMPILING_IN_CPYTHON
+            if (unlikely(Py_SIZE(x) < 0)) {
+                goto raise_neg_overflow;
+            }
+#else
+            {
+                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
+                if (unlikely(result < 0))
+                    return (friso_lex_t) -1;
+                if (unlikely(result == 1))
+                    goto raise_neg_overflow;
+            }
+#endif
+            if (sizeof(friso_lex_t) <= sizeof(unsigned long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(friso_lex_t, unsigned long, PyLong_AsUnsignedLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(friso_lex_t) <= sizeof(unsigned PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(friso_lex_t, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
+#endif
+            }
+        } else {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (friso_lex_t) 0;
+                case -1: __PYX_VERIFY_RETURN_INT(friso_lex_t, sdigit, (sdigit) (-(sdigit)digits[0]))
+                case  1: __PYX_VERIFY_RETURN_INT(friso_lex_t,  digit, +digits[0])
+                case -2:
+                    if (8 * sizeof(friso_lex_t) - 1 > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(friso_lex_t, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(friso_lex_t) - 1 > 2 * PyLong_SHIFT) {
+                            return (friso_lex_t) (((friso_lex_t)-1)*(((((friso_lex_t)digits[1]) << PyLong_SHIFT) | (friso_lex_t)digits[0])));
+                        }
+                    }
+                    break;
+                case 2:
+                    if (8 * sizeof(friso_lex_t) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(friso_lex_t, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(friso_lex_t) - 1 > 2 * PyLong_SHIFT) {
+                            return (friso_lex_t) ((((((friso_lex_t)digits[1]) << PyLong_SHIFT) | (friso_lex_t)digits[0])));
+                        }
+                    }
+                    break;
+                case -3:
+                    if (8 * sizeof(friso_lex_t) - 1 > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(friso_lex_t, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(friso_lex_t) - 1 > 3 * PyLong_SHIFT) {
+                            return (friso_lex_t) (((friso_lex_t)-1)*(((((((friso_lex_t)digits[2]) << PyLong_SHIFT) | (friso_lex_t)digits[1]) << PyLong_SHIFT) | (friso_lex_t)digits[0])));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(friso_lex_t) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(friso_lex_t, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(friso_lex_t) - 1 > 3 * PyLong_SHIFT) {
+                            return (friso_lex_t) ((((((((friso_lex_t)digits[2]) << PyLong_SHIFT) | (friso_lex_t)digits[1]) << PyLong_SHIFT) | (friso_lex_t)digits[0])));
+                        }
+                    }
+                    break;
+                case -4:
+                    if (8 * sizeof(friso_lex_t) - 1 > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(friso_lex_t, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(friso_lex_t) - 1 > 4 * PyLong_SHIFT) {
+                            return (friso_lex_t) (((friso_lex_t)-1)*(((((((((friso_lex_t)digits[3]) << PyLong_SHIFT) | (friso_lex_t)digits[2]) << PyLong_SHIFT) | (friso_lex_t)digits[1]) << PyLong_SHIFT) | (friso_lex_t)digits[0])));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(friso_lex_t) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(friso_lex_t, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(friso_lex_t) - 1 > 4 * PyLong_SHIFT) {
+                            return (friso_lex_t) ((((((((((friso_lex_t)digits[3]) << PyLong_SHIFT) | (friso_lex_t)digits[2]) << PyLong_SHIFT) | (friso_lex_t)digits[1]) << PyLong_SHIFT) | (friso_lex_t)digits[0])));
+                        }
+                    }
+                    break;
+            }
+#endif
+            if (sizeof(friso_lex_t) <= sizeof(long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(friso_lex_t, long, PyLong_AsLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(friso_lex_t) <= sizeof(PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(friso_lex_t, PY_LONG_LONG, PyLong_AsLongLong(x))
+#endif
+            }
+        }
+        {
+#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
+            PyErr_SetString(PyExc_RuntimeError,
+                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
+#else
+            friso_lex_t val;
+            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
+ #if PY_MAJOR_VERSION < 3
+            if (likely(v) && !PyLong_Check(v)) {
+                PyObject *tmp = v;
+                v = PyNumber_Long(tmp);
+                Py_DECREF(tmp);
+            }
+ #endif
+            if (likely(v)) {
+                int one = 1; int is_little = (int)*(unsigned char *)&one;
+                unsigned char *bytes = (unsigned char *)&val;
+                int ret = _PyLong_AsByteArray((PyLongObject *)v,
+                                              bytes, sizeof(val),
+                                              is_little, !is_unsigned);
+                Py_DECREF(v);
+                if (likely(!ret))
+                    return val;
+            }
+#endif
+            return (friso_lex_t) -1;
+        }
+    } else {
+        friso_lex_t val;
+        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
+        if (!tmp) return (friso_lex_t) -1;
+        val = __Pyx_PyInt_As_friso_lex_t(tmp);
+        Py_DECREF(tmp);
+        return val;
+    }
+raise_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "value too large to convert to friso_lex_t");
+    return (friso_lex_t) -1;
+raise_neg_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "can't convert negative value to friso_lex_t");
+    return (friso_lex_t) -1;
+}
+
+/* CIntFromPy */
+  static CYTHON_INLINE uint_t __Pyx_PyInt_As_uint_t(PyObject *x) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const uint_t neg_one = (uint_t) -1, const_zero = (uint_t) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+#if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_Check(x))) {
+        if (sizeof(uint_t) < sizeof(long)) {
+            __PYX_VERIFY_RETURN_INT(uint_t, long, PyInt_AS_LONG(x))
+        } else {
+            long val = PyInt_AS_LONG(x);
+            if (is_unsigned && unlikely(val < 0)) {
+                goto raise_neg_overflow;
+            }
+            return (uint_t) val;
+        }
+    } else
+#endif
+    if (likely(PyLong_Check(x))) {
+        if (is_unsigned) {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (uint_t) 0;
+                case  1: __PYX_VERIFY_RETURN_INT(uint_t, digit, digits[0])
+                case 2:
+                    if (8 * sizeof(uint_t) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint_t, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint_t) >= 2 * PyLong_SHIFT) {
+                            return (uint_t) (((((uint_t)digits[1]) << PyLong_SHIFT) | (uint_t)digits[0]));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(uint_t) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint_t, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint_t) >= 3 * PyLong_SHIFT) {
+                            return (uint_t) (((((((uint_t)digits[2]) << PyLong_SHIFT) | (uint_t)digits[1]) << PyLong_SHIFT) | (uint_t)digits[0]));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(uint_t) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint_t, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint_t) >= 4 * PyLong_SHIFT) {
+                            return (uint_t) (((((((((uint_t)digits[3]) << PyLong_SHIFT) | (uint_t)digits[2]) << PyLong_SHIFT) | (uint_t)digits[1]) << PyLong_SHIFT) | (uint_t)digits[0]));
+                        }
+                    }
+                    break;
+            }
+#endif
+#if CYTHON_COMPILING_IN_CPYTHON
+            if (unlikely(Py_SIZE(x) < 0)) {
+                goto raise_neg_overflow;
+            }
+#else
+            {
+                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
+                if (unlikely(result < 0))
+                    return (uint_t) -1;
+                if (unlikely(result == 1))
+                    goto raise_neg_overflow;
+            }
+#endif
+            if (sizeof(uint_t) <= sizeof(unsigned long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(uint_t, unsigned long, PyLong_AsUnsignedLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(uint_t) <= sizeof(unsigned PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(uint_t, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
+#endif
+            }
+        } else {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (uint_t) 0;
+                case -1: __PYX_VERIFY_RETURN_INT(uint_t, sdigit, (sdigit) (-(sdigit)digits[0]))
+                case  1: __PYX_VERIFY_RETURN_INT(uint_t,  digit, +digits[0])
+                case -2:
+                    if (8 * sizeof(uint_t) - 1 > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint_t, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint_t) - 1 > 2 * PyLong_SHIFT) {
+                            return (uint_t) (((uint_t)-1)*(((((uint_t)digits[1]) << PyLong_SHIFT) | (uint_t)digits[0])));
+                        }
+                    }
+                    break;
+                case 2:
+                    if (8 * sizeof(uint_t) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint_t, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint_t) - 1 > 2 * PyLong_SHIFT) {
+                            return (uint_t) ((((((uint_t)digits[1]) << PyLong_SHIFT) | (uint_t)digits[0])));
+                        }
+                    }
+                    break;
+                case -3:
+                    if (8 * sizeof(uint_t) - 1 > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint_t, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint_t) - 1 > 3 * PyLong_SHIFT) {
+                            return (uint_t) (((uint_t)-1)*(((((((uint_t)digits[2]) << PyLong_SHIFT) | (uint_t)digits[1]) << PyLong_SHIFT) | (uint_t)digits[0])));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(uint_t) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint_t, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint_t) - 1 > 3 * PyLong_SHIFT) {
+                            return (uint_t) ((((((((uint_t)digits[2]) << PyLong_SHIFT) | (uint_t)digits[1]) << PyLong_SHIFT) | (uint_t)digits[0])));
+                        }
+                    }
+                    break;
+                case -4:
+                    if (8 * sizeof(uint_t) - 1 > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint_t, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint_t) - 1 > 4 * PyLong_SHIFT) {
+                            return (uint_t) (((uint_t)-1)*(((((((((uint_t)digits[3]) << PyLong_SHIFT) | (uint_t)digits[2]) << PyLong_SHIFT) | (uint_t)digits[1]) << PyLong_SHIFT) | (uint_t)digits[0])));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(uint_t) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint_t, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint_t) - 1 > 4 * PyLong_SHIFT) {
+                            return (uint_t) ((((((((((uint_t)digits[3]) << PyLong_SHIFT) | (uint_t)digits[2]) << PyLong_SHIFT) | (uint_t)digits[1]) << PyLong_SHIFT) | (uint_t)digits[0])));
+                        }
+                    }
+                    break;
+            }
+#endif
+            if (sizeof(uint_t) <= sizeof(long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(uint_t, long, PyLong_AsLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(uint_t) <= sizeof(PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(uint_t, PY_LONG_LONG, PyLong_AsLongLong(x))
+#endif
+            }
+        }
+        {
+#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
+            PyErr_SetString(PyExc_RuntimeError,
+                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
+#else
+            uint_t val;
+            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
+ #if PY_MAJOR_VERSION < 3
+            if (likely(v) && !PyLong_Check(v)) {
+                PyObject *tmp = v;
+                v = PyNumber_Long(tmp);
+                Py_DECREF(tmp);
+            }
+ #endif
+            if (likely(v)) {
+                int one = 1; int is_little = (int)*(unsigned char *)&one;
+                unsigned char *bytes = (unsigned char *)&val;
+                int ret = _PyLong_AsByteArray((PyLongObject *)v,
+                                              bytes, sizeof(val),
+                                              is_little, !is_unsigned);
+                Py_DECREF(v);
+                if (likely(!ret))
+                    return val;
+            }
+#endif
+            return (uint_t) -1;
+        }
+    } else {
+        uint_t val;
+        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
+        if (!tmp) return (uint_t) -1;
+        val = __Pyx_PyInt_As_uint_t(tmp);
+        Py_DECREF(tmp);
+        return val;
+    }
+raise_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "value too large to convert to uint_t");
+    return (uint_t) -1;
+raise_neg_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "can't convert negative value to uint_t");
+    return (uint_t) -1;
 }
 
 /* CIntFromPy */

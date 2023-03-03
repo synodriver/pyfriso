@@ -33,6 +33,21 @@ cdef extern from "friso_API.h" nogil:
         uint_t allocs
     ctypedef string_buffer_entry * string_buffer_t
 
+    ctypedef struct string_split_entry:
+        fstring source
+        uint_t srcLen
+        fstring delimiter
+        uint_t delLen
+        uint_t idx
+    ctypedef string_split_entry * string_split_t
+    string_split_t new_string_split( fstring f1, fstring f2)
+    void string_split_reset( string_split_t s, fstring f1, fstring f2)
+    void string_split_set_source( string_split_t s, fstring f)
+    void string_split_set_delimiter( string_split_t s, fstring f)
+    void free_string_split( string_split_t s)
+    fstring string_split_next(string_split_t s, fstring f)
+
+
 cdef extern from "friso.h" nogil:
     fstring friso_version()
     ctypedef enum friso_lex_t:
@@ -64,7 +79,8 @@ cdef extern from "friso.h" nogil:
         __FRISO_DETECT_MODE__
 
     ctypedef struct friso_entry:
-        pass
+        friso_dic_t dic        #friso dictionary
+        friso_charset_t charset   #project charset.
 
     ctypedef friso_entry * friso_t
     ctypedef struct lex_entry_cdt:
@@ -150,7 +166,7 @@ cdef extern from "friso.h" nogil:
     void free_lex_entry_full(lex_entry_t lex)
     void free_lex_entry(lex_entry_t lex)
     void friso_dic_load(friso_t  friso, friso_config_t cfg, friso_lex_t lex, fstring f, uint_t p)
-    void friso_dic_load_from_ifile(friso_t friso, friso_config_t cfg, fstring f, uint_t p)
+    void friso_dic_load_from_ifile(friso_t friso, friso_config_t cfg, fstring path, uint_t length)
     void friso_dic_add(friso_dic_t d, friso_lex_t lex, fstring f, friso_array_t a)
     void friso_dic_add_with_fre(friso_dic_t d, friso_lex_t lex, fstring f, friso_array_t a, uint_t p)
     int friso_dic_match(friso_dic_t d, friso_lex_t lex, fstring f)
