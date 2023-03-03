@@ -330,6 +330,22 @@ cdef class StringSplit:
             return <bytes>ret
         else:
             return None
+    @property
+    def source(self):
+        return <bytes>self._split.source
+    @property
+    def srclen(self):
+        return self._split.srcLen
+    @property
+    def delimiter(self):
+        return <bytes> self._split.delimiter
+    @property
+    def dellen(self):
+        return self._split.delLen
+    @property
+    def idx(self):
+        return self._split.idx
+
 
 @cython.freelist(8)
 @cython.no_gc
